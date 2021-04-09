@@ -1,0 +1,89 @@
+<template>
+	<div>
+		<h1>{{$t("components.types."+component.name+".name")}}{{component.name}}</h1>
+		<h5>{{$t("components.types."+component.name+".description")}}</h5>
+		<su-h-line/>
+		<div>
+			<h2>例子</h2>
+			<examples :name="component.name"></examples>
+		</div>
+		<su-h-line/>
+		<div>
+			<h2>参数列表</h2>
+			<su-table :columns="column" :data="propsList">
+			</su-table>
+		</div>
+	</div>
+</template>
+
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import Examples from './examples/index.vue';
+
+type PropInof={
+	field:string,
+	type:string,
+	default:string,
+	description:string,
+	name:string,
+}
+
+@Options({
+	name:"su-button",
+	components:{
+		Examples
+	},
+	props: {
+		component:{
+			type:Function,
+			required:true
+		}
+	}
+})
+export default class SuButton extends Vue {
+	// eslint-disable-next-line
+	component!:any;
+	public column=[
+		//{name:"名称"},
+		{
+			name:"字段",
+			field:"field"
+		},
+		{
+			name:"名称",
+			field:"name"
+		},
+		{
+			name:"类型",
+			field:"type"
+		},
+		{
+			name:"默认值",
+			field:"default"
+		},
+		{
+			name:"描述",
+			field:"description"
+		},
+	];
+	public get propsList():PropInof[]{
+		// eslint-disable-next-line
+		const props=this.component.__o.props;
+		var list=[];
+		for(const name of Object.keys(props)){
+			const item=props[name];
+			list.push({
+				field:name,
+				type:item.type.name,
+				default:typeof item.default=="function"?item.default():item.default,
+				description:this.$t("components.types."+this.component.name+".props."+name+".description"),
+				name:this.$t("components.types."+this.component.name+".props."+name+".name"),
+			});
+		}
+		return list;
+	}
+}
+</script>
+
+<style scoped>
+</style>

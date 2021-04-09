@@ -1,0 +1,11 @@
+:root{
+	--star-ui-table-head-color:#f8f8f9;
+	--star-ui-line-color:#8Af;
+	--star-ui-line-width:1px;
+	--star-ui-border-radius:5px;
+}
+.star-ui{
+	margin:0;
+	padding: 2px;
+	position: relative;
+}
