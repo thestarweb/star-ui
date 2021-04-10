@@ -19,7 +19,7 @@ export const components={SuButton,SuHLayout,SuVLayout,SuMain,SuTable,SuHLine,SuV
 //export components;
 const registComponents=function(app:App):void{
 	for(const key in components){
-		app.component(components[key].name,components[key]);
+		app.component(components[key].__o.name,components[key]);
 	}
 }
 export default {

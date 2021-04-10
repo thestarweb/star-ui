@@ -5,7 +5,7 @@
       <div @click="handleSel('home')">{{$t("home.title")}}</div>
       <h4>{{$t("components.title")}}</h4>
       <div v-for="item in allComponents" :key="item.name" @click="handleSel(item)">
-        {{$t("components.types."+item.name+".name")}}{{item.name}}
+        {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
       </div>
     </div>
     <su-v-line/>

@@ -10,7 +10,7 @@
 	"components":{
 		"title":"组件",
 		"types":{
-			"SuButton":{
+			"su-button":{
 				"name":"按钮",
 				"description":"按钮组件",
 				"props":{
@@ -20,32 +20,32 @@
 					}
 				}
 			},
-			"SuHLayout":{
+			"su-h-layout":{
 				"name":"横向布局",
 				"description":"横向布局组件",
 				"props":{}
 			},
-			"SuVLayout":{
+			"su-v-layout":{
 				"name":"纵向布局",
 				"description":"纵向布局组件",
 				"props":{}
 			},
-			"SuMain":{
+			"su-main":{
 				"name":"布局主体",
 				"description":"自动填充满布局的剩余空间",
 				"props":{}
 			},
-			"SuHLine":{
+			"su-h-line":{
 				"name":"水平分割线",
 				"description":"",
 				"props":{}
 			},
-			"SuVLine":{
+			"su-v-line":{
 				"name":"纵向分割线",
 				"description":"",
 				"props":{}
 			},
-			"SuTable":{
+			"su-table":{
 				"name":"表格",
 				"description":"表格组件",
 				"props":{
@@ -59,7 +59,7 @@
 					}
 				}
 			},
-			"SuCard":{
+			"su-card":{
 				"name":"卡片",
 				"description":"",
 				"props":{

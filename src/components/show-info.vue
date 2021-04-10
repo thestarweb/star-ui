@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<h1>{{$t("components.types."+component.name+".name")}}{{component.name}}</h1>
-		<h5>{{$t("components.types."+component.name+".description")}}</h5>
+		<h1>{{$t("components.types."+component.__o.name+".name")}}{{component.__o.name}}</h1>
+		<h5>{{$t("components.types."+component.__o.name+".description")}}</h5>
 		<su-h-line/>
 		<div>
 			<h2>例子</h2>
-			<examples :name="component.name"></examples>
+			<examples :name="component.__o.name"></examples>
 		</div>
 		<su-h-line/>
 		<div>
@@ -76,8 +76,8 @@ export default class SuButton extends Vue {
 				field:name,
 				type:item.type.name,
 				default:typeof item.default=="function"?item.default():item.default,
-				description:this.$t("components.types."+this.component.name+".props."+name+".description"),
-				name:this.$t("components.types."+this.component.name+".props."+name+".name"),
+				description:this.$t("components.types."+this.component.__o.name+".props."+name+".description"),
+				name:this.$t("components.types."+this.component.__o.name+".props."+name+".name"),
 			});
 		}
 		return list;

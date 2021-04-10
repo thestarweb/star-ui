@@ -6,5 +6,5 @@ interface ExamplesObj {
 }
 
 export default {
-	SuCard
+	"su-card":SuCard
 }as ExamplesObj;
