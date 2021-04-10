@@ -12,7 +12,10 @@ export default [
 					data:[
 						{
 							isText:false,
-							component:"su-input"
+							component:"su-input",
+							props:{
+								"v-model":"data"
+							}
 						}
 					]
 				}

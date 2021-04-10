@@ -1,21 +1,21 @@
-import SuButton from "./components/button.vue";
+//布局
 import SuHLayout from "./components/layout-h.vue";
 import SuVLayout from "./components/layout-v.vue";
 import SuMain from "./components/layout-main.vue";
 import SuTable from "./components/table.vue";
 import SuHLine from "./components/line-h.vue";
-export const HLine=SuHLine;
 import SuVLine from "./components/line-v.vue";
-export const HVine=SuVLine;
 import SuCard from "./components/card.vue";
-export const Card=SuCard;
+//表单
+import SuInput from "./components/input.vue";
+import SuButton from "./components/button.vue";
 import { App } from 'vue'
 
 declare interface IObj {
 	// eslint-disable-next-line
     [key: string]: any,
 }
-export const components={SuButton,SuHLayout,SuVLayout,SuMain,SuTable,SuHLine,SuVLine,SuCard} as IObj;
+export const components={SuHLayout,SuVLayout,SuMain,SuHLine,SuVLine,SuCard,SuTable,SuButton,SuInput} as IObj;
 //export components;
 const registComponents=function(app:App):void{
 	for(const key in components){

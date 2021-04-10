@@ -10,16 +10,6 @@
 	"components":{
 		"title":"组件",
 		"types":{
-			"su-button":{
-				"name":"按钮",
-				"description":"按钮组件",
-				"props":{
-					"size":{
-						"name":"尺寸",
-						"description":"允许min"
-					}
-				}
-			},
 			"su-h-layout":{
 				"name":"横向布局",
 				"description":"横向布局组件",
@@ -70,6 +60,34 @@
 					"collapsible":{
 						"name":"是否可折叠",
 						"description":"内容较多时建议设置可折叠以便节省空间"
+					}
+				}
+			},
+			"su-button":{
+				"name":"按钮",
+				"description":"按钮组件",
+				"props":{
+					"size":{
+						"name":"尺寸",
+						"description":"按钮的尺寸（详见尺寸）"
+					}
+				}
+			},
+			"su-input":{
+				"name":"输入框",
+				"description":"普通的输入框",
+				"props":{
+					"size":{
+						"name":"尺寸",
+						"description":"输入框的尺寸（详见尺寸）"
+					},
+					"value":{
+						"name":"值",
+						"description":""
+					},
+					"name":{
+						"name":"名称",
+						"description":"原生name属性"
 					}
 				}
 			}

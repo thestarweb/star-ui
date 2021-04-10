@@ -1,6 +1,8 @@
 :root{
 	--star-ui-table-head-color:#f8f8f9;
-	--star-ui-line-color:#8Af;
+	--star-ui-base-color:#8AF;
+	--star-ui-line-color:#8AF;
+	--star-ui-input-border-color:#666;
 	--star-ui-line-width:1px;
 	--star-ui-border-radius:5px;
 }
