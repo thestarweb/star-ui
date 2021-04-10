@@ -75,12 +75,14 @@ export default class RenderComponent extends Vue {
 		const solt:IObj={};
 		if(item.slot){
 			item.slot.forEach((s)=>{
-				solt[s.name]=s.data.map((template)=>{
-					if(template.isText){
-						return template.data;
-					}
-					return this.renderComponent(template);
-				})
+				solt[s.name]=()=>{
+					return s.data.map((template)=>{
+						if(template.isText){
+							return template.data;
+						}
+						return this.renderComponent(template);
+					});
+				};
 			});
 		}
 		return h(item.component,props,solt)
