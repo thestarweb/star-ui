@@ -1,6 +1,6 @@
 <template>
 	<div class="star-ui star-ui-input">
-		<input type="text" ref="input" :value="value" :name="name" class="star-ui star-ui-input--inner" @input="handleInput">
+		<input type="text" ref="input" :value="value" :name="name" class="star-ui star-ui-input--inner" @input.stop="handleInput">
 	</div>
 </template>
 
@@ -31,11 +31,12 @@ export default class SuButton extends Vue {
 		input:HTMLInputElement
 	};
 	size!:string;
-	handleInput(event:InputEvent){
+	handleInput(event:InputEvent):void{
 		if(event.target){
 			var target=event.target as HTMLInputElement;
 			this.$emit("input",target.value)
-			target.value=this.value;
+			//target.value=this.value;
+			this.$nextTick(()=>target.value=this.value);
 		}
 	}
 }

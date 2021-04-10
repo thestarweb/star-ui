@@ -13,6 +13,26 @@ import { template, example } from "./type.d";
 	}
 })
 export default class RenderComponent extends Vue {
+	constructor(...arg:any[]){
+		super(...arg);
+		this.componentThis=new Proxy(this,{
+			get:(obj, prop)=>{
+				if(prop in obj.componentMethods){
+					return obj.componentMethods[prop as string];
+				}else if(prop in obj.componentData){
+					return this.componentData[prop as string];
+				}else if(obj.example.data&&(prop in obj.example.data)){
+					return obj.example.data[prop as string];
+				}else{
+					return undefined;
+				}
+			},
+			set:(obj, prop, value)=>{
+				obj.componentData[prop as string]=value;
+				return true;
+			}
+		}) as IObj;
+	}
 	private example!:example;
 
 	//虚拟组件方法
@@ -22,18 +42,7 @@ export default class RenderComponent extends Vue {
 	//虚拟组件数据
 	public componentData:IObj={};
 	//虚拟组件this指向
-	public componentThis=new Proxy({},{
-		get:(obj, prop)=>{
-			if(prop in this.componentMethods){
-				return this.componentMethods[prop as string];
-			}
-			return this.componentData[prop as string];
-		},
-		set:(obj, prop, value)=>{
-			this.componentData[prop as string]=value;
-			return true;
-		}
-	}) as IObj;
+	public componentThis!:IObj;
 
 	//解析表达式（仅限简单表达式）
 	private analysis(expression:string){
@@ -78,7 +87,7 @@ export default class RenderComponent extends Vue {
 				solt[s.name]=()=>{
 					return s.data.map((template)=>{
 						if(template.isText){
-							return template.data;
+							return template.text;
 						}
 						return this.renderComponent(template);
 					});

@@ -12,7 +12,7 @@ export default [
 					data:[
 						{
 							isText:true,
-							data:"I am a card!"
+							text:"I am a card!"
 						}
 					]
 				}
@@ -30,7 +30,7 @@ export default [
 					data:[
 						{
 							isText:true,
-							data:"I am a card with title!"
+							text:"I am a card with title!"
 						}
 					]
 				}
@@ -51,7 +51,7 @@ export default [
 					data:[
 						{
 							isText:true,
-							data:"This is collapsible data."
+							text:"This is collapsible data."
 						}
 					]
 				}
@@ -84,7 +84,7 @@ export default [
 									data:[
 										{
 											isText:true,
-											data:"emmm"
+											text:"emmm"
 										}
 									]
 								}

@@ -5,9 +5,10 @@ interface slotType{
 export interface template{
 	isText:boolean,
 	component?:class,
-	data?:string,
+	text?:string,
 	slot?:slotType[],
-	props?:IObj
+	props?:IObj,
+	data?:IObj
 }
 export interface example{
 	name:string,

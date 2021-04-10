@@ -15,6 +15,9 @@ export default [
 							component:"su-input",
 							props:{
 								"v-model":"data"
+							},
+							data:{
+								data:"233"
 							}
 						}
 					]
