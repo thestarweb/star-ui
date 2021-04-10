@@ -9,7 +9,7 @@
       </div>
     </div>
     <su-v-line/>
-    <su-main>
+    <su-main class="data">
       <show v-if="sel" :component="sel"></show>
       <component v-else :is="component"></component>
     </su-main>
@@ -60,5 +60,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.data{
+  overflow-y: auto;
 }
 </style>

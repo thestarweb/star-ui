@@ -1,12 +1,11 @@
 import { example } from "../type.d";
-import { components } from "@/../ui/src/main"
 
 export default [
 	{
 		name:"基本用法（base）",
 		template:{
 			isText:false,
-			component:components.SuCard,
+			component:"su-card",
 			slot:[
 				{
 					name:"default",
@@ -24,7 +23,7 @@ export default [
 		name:"带标题",
 		template:{
 			isText:false,
-			component:components.SuCard,
+			component:"su-card",
 			slot:[
 				{
 					name:"default",
@@ -45,7 +44,7 @@ export default [
 		name:"可折叠",
 		template:{
 			isText:false,
-			component:components.SuCard,
+			component:"su-card",
 			slot:[
 				{
 					name:"default",
@@ -67,7 +66,7 @@ export default [
 		name:"可嵌套",
 		template:{
 			isText:false,
-			component:components.SuCard,
+			component:"su-card",
 			slot:[
 				{
 					name:"default",
@@ -78,7 +77,7 @@ export default [
 						},
 						{
 							isText:false,
-							component:components.SuCard,
+							component:"su-card",
 							slot:[
 								{
 									name:"default",

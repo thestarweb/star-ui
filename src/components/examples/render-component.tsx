@@ -1,5 +1,5 @@
 import { Options, Vue } from 'vue-class-component';
-import { VNode, h } from "vue"
+import { VNode, h, resolveComponent } from "vue"
 
 
 import { template, example } from "./type.d";
@@ -85,7 +85,12 @@ export default class RenderComponent extends Vue {
 				};
 			});
 		}
-		return h(item.component,props,solt)
+		let component=item.component;
+		if(typeof component=="string"){
+			component=resolveComponent(component);
+			if(!component) component=item.component
+		}
+		return h(component,props,solt)
 	}
 	public render():VNode{
 		return this.renderComponent(this.example.template);
