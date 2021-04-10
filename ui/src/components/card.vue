@@ -1,10 +1,10 @@
 <template>
 	<div class="star-ui star-ui-card">
-		<div class="star-ui star-ui-card--inner-head">
+		<div v-if="title!=''||collapsible||this.$slots.title" class="star-ui star-ui-card--inner-head">
 			<div class="star-ui star-ui-card--inner-title">{{title}}</div>
 			<button v-if="collapsible" :class="['star-ui','star-ui-card--inner-button-collapsible',isCollaps?'show':'hidden']" @click="collapsChange"></button>
 		</div>
-		<div ref="body" class="star-ui star-ui-card--inner-body">
+		<div ref="body" class="star-ui star-ui-card--inner-body" @transitionend="handleTransitionEnd">
 			<div ref="bodyInner" class="star-ui star-ui-card--inner-body-inner">
 				<slot></slot>
 			</div>
@@ -41,16 +41,24 @@ import SuMain from "./layout-main.vue";
 export default class SuCard extends Vue {
 	$refs!: {
 		body:HTMLDivElement
+		bodyInner:HTMLDivElement
 	};
 	isCollaps=false;
 	collapsChange():void{
+		const realHeight=this.$refs.bodyInner.clientHeight;
 		if(this.isCollaps){
-			this.$refs.body.style.height="100px";
+			this.$refs.body.style.height=realHeight+"px";
 		}else{
-			this.$refs.body.style.height="0";
+			this.$refs.body.style.height=realHeight+"px";//需要先设置一个高度才能应用过渡动画
+			setTimeout(()=>this.$refs.body.style.height="0",0);//0秒定时器用于将两个高度设置都能被浏览器读取
 		}
-		console.log(this.$refs.body.style.height);
 		this.isCollaps=!this.isCollaps;
+	}
+	handleTransitionEnd():void{
+		if(!this.isCollaps){
+			//动画播放完之后取消掉高度限制
+			this.$refs.body.style.height="";
+		}
 	}
 }
 </script>

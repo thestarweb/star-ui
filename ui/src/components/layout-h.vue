@@ -17,8 +17,8 @@ export default class SuHLayout extends Vue {
 }
 </script>
 
-<style scoped>
-div{
+<style>
+.su-h-layout{
 	display: flex;
 	flex-direction: row;
 	width: 100%;
