@@ -1,6 +1,6 @@
 <template>
-	<div class="star-ui star-ui-input">
-		<input type="text" ref="input" :value="value" :name="name" class="star-ui star-ui-input--inner" @input.stop="handleInput">
+	<div :class="['star-ui','star-ui-input',{'is-focus':isFocused}]">
+		<input type="text" ref="input" :value="value" :name="name" class="star-ui star-ui-input--inner" @input.stop="handleInput" @focus="handleFocus" @blur="handleBlur">
 	</div>
 </template>
 
@@ -31,6 +31,7 @@ export default class SuButton extends Vue {
 		input:HTMLInputElement
 	};
 	size!:string;
+	isFocused=false;
 	handleInput(event:InputEvent):void{
 		if(event.target){
 			var target=event.target as HTMLInputElement;
@@ -38,6 +39,12 @@ export default class SuButton extends Vue {
 			//target.value=this.value;
 			this.$nextTick(()=>target.value=this.value);
 		}
+	}
+	handleFocus():void{
+		this.isFocused=true;
+	}
+	handleBlur():void{
+		this.isFocused=false;
 	}
 }
 </script>
@@ -48,7 +55,7 @@ export default class SuButton extends Vue {
 	border: solid 1px var(--star-ui-input-border-color);
 	border-radius: var(--star-ui-border-radius);
 }
-.star-ui-input:focus{
+.star-ui-input:hover,.star-ui-input.is-focus{
 	border: solid 1px var(--star-ui-base-color);
 }
 .star-ui-input--inner,.star-ui-input--inner:hover,.star-ui-input--inner:active,.star-ui-input--inner:focus{

@@ -1,4 +1,6 @@
 # star-ui
+[website](https://ui.thestarweb.cn) | ![workflows](https://github.com/thestarweb/star-ui/workflows/build/badge.svg)
+
 
 ## Project setup
 ```

@@ -32,7 +32,7 @@ export default class HelloWorld extends Vue {
   private allComponents=components;
   private sel=null;
   // eslint-disable-next-line
-  private component:any=null;
+  private component:any=Home;
 
   // eslint-disable-next-line
   private handleSel(sel:any){
