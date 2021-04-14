@@ -38,6 +38,12 @@ jobs:
       - name: build lib
         run: npm run build-lib
 
+      - name: upload lib
+        uses: actions/upload-artifact@v2
+        with:
+          name: lib
+          path: ui/dist/
+
       - name: build doc
         run: npm run build
 
@@ -46,9 +52,3 @@ jobs:
         with:
           name: doc
           path: dist/
-      - name: upload lib
-        uses: actions/upload-artifact@v2
-        with:
-          name: doc
-          path: ui/dist/
-
