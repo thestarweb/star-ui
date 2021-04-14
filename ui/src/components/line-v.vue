@@ -20,6 +20,9 @@ export default class SuVLine extends Vue {
 	background-color:var(--star-ui-line-color);
     /*height:100%;*/
     width:var(--star-ui-line-width);
+    min-width:var(--star-ui-line-width);
+    max-width:var(--star-ui-line-width);
+    flex:0 0 var(--star-ui-line-width);
     padding: 0;
 }
 </style>
