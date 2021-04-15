@@ -8,6 +8,7 @@ import SuVLine from "./components/line-v.vue";
 import SuCard from "./components/card.vue";
 //表单
 import SuInput from "./components/input.vue";
+import SuSelect from "./components/select.vue";
 import SuButton from "./components/button.vue";
 import { App } from 'vue'
 
@@ -15,7 +16,7 @@ declare interface IObj {
 	// eslint-disable-next-line
     [key: string]: any,
 }
-export const components={SuHLayout,SuVLayout,SuMain,SuHLine,SuVLine,SuCard,SuTable,SuButton,SuInput} as IObj;
+export const components={SuHLayout,SuVLayout,SuMain,SuHLine,SuVLine,SuCard,SuTable,SuButton,SuInput,SuSelect} as IObj;
 //export components;
 const registComponents=function(app:App):void{
 	for(const key in components){

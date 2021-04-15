@@ -7,8 +7,7 @@ export interface template{
 	component?:class,
 	text?:string,
 	slot?:slotType[],
-	props?:IObj,
-	data?:IObj
+	props?:IObj
 }
 export interface example{
 	name:string,

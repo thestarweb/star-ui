@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h1>{{$t("components.types."+component.__o.name+".name")}}{{component.__o.name}}</h1>
-		<h5>{{$t("components.types."+component.__o.name+".description")}}</h5>
+		<h5>{{$t("components.types."+component.__o.name+".description","")}}</h5>
 		<su-h-line/>
 		<div>
 			<h2>例子</h2>
@@ -66,6 +66,23 @@ export default class SuButton extends Vue {
 			field:"description"
 		},
 	];
+	// eslint-disable-next-line
+	private getType(type:any):string{
+		if(type==null){
+			return "null";
+		}else if(typeof type=="function"){
+			return type.name;
+		}else if(typeof type=="undefined"){
+			return "-";
+		}else{
+			if(type instanceof Array){
+				// eslint-disable-next-line
+				return type.map((item:any)=>this.getType(item)).join("|")
+			}else{
+				return type.toString();
+			}
+		}
+	}
 	public get propsList():PropInof[]{
 		// eslint-disable-next-line
 		const props=this.component.__o.props;
@@ -74,9 +91,9 @@ export default class SuButton extends Vue {
 			const item=props[name];
 			list.push({
 				field:name,
-				type:item.type.name,
+				type:this.getType(item.type),
 				default:typeof item.default=="function"?item.default():item.default,
-				description:this.$t("components.types."+this.component.__o.name+".props."+name+".description"),
+				description:this.$t("components.types."+this.component.__o.name+".props."+name+".description",""),
 				name:this.$t("components.types."+this.component.__o.name+".props."+name+".name"),
 			});
 		}

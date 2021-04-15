@@ -12,17 +12,22 @@ export default [
 					data:[
 						{
 							isText:false,
-							component:"su-input",
+							component:"su-select",
 							props:{
-								"v-model":"data"
+								"v-model": "data",
+								":options": "options",
 							}
 						}
-					]
+					]	
 				}
 			]
 		},
 		data:{
-			data:"233"
+			options:[
+				{label:"lebal1",value:"1"},
+				{label:"lebal2",value:"2"},
+			],
+			data:"2"
 		}
 	}
 ] as example[];

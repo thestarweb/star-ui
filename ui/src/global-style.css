@@ -8,6 +8,9 @@
 }
 .star-ui{
 	margin:0;
-	padding: 2px;
+	padding: 0;
 	position: relative;
+}
+.star-ui-container{
+	padding: 2px;
 }

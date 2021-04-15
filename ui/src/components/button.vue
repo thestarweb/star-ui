@@ -1,5 +1,5 @@
 <template>
-	<button class="star-ui star-ui-button">
+	<button class="star-ui star-ui-container star-ui-button">
 		<slot></slot>
 	</button>
 </template>

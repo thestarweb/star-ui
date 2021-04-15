@@ -35,6 +35,10 @@ export default class RenderComponent extends Vue {
 	}
 	private example!:example;
 
+	created(){
+		this.componentData=this.example.data||{};
+	}
+
 	//虚拟组件方法
 	public get componentMethods():IObj{
 		return {}
