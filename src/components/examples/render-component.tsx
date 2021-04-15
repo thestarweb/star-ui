@@ -13,8 +13,7 @@ import { template, example } from "./type.d";
 	}
 })
 export default class RenderComponent extends Vue {
-	constructor(...arg:any[]){
-		super(...arg);
+	beforeCreate(){
 		this.componentThis=new Proxy(this,{
 			get:(obj, prop)=>{
 				if(prop in obj.componentMethods){

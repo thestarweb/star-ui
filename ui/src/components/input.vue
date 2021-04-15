@@ -25,7 +25,7 @@ import "../global-style.css";
 		}
 	}
 })
-export default class SuButton extends Vue {
+export default class SuInput extends Vue {
 	value!:string;
 	$refs!:{
 		input:HTMLInputElement

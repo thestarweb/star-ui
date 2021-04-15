@@ -90,6 +90,36 @@
 						"description":"原生name属性"
 					}
 				}
+			},
+			"su-select":{
+				"name":"下拉选择",
+				"description":"普通的下拉选择",
+				"props":{
+					"size":{
+						"name":"尺寸",
+						"description":"输入框的尺寸（详见尺寸）"
+					},
+					"value":{
+						"name":"值",
+						"description":""
+					},
+					"name":{
+						"name":"名称",
+						"description":"原生name属性"
+					},
+					"options":{
+						"name":"选项",
+						"description":"显示内容与值对象的数组"
+					},
+					"labelName":{
+						"name":"选项字段",
+						"description":"options中的显示字段"
+					},
+					"valueName":{
+						"name":"值字段",
+						"description":"options中的绑定值字段"
+					}
+				}
 			}
 		}
 	}
