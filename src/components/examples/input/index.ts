@@ -24,5 +24,30 @@ export default [
 		data:{
 			data:"233"
 		}
+	},
+	{
+		name:"小尺寸",
+		template:{
+			isText:false,
+			component:"div",
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:false,
+							component:"su-input",
+							props:{
+								"v-model":"data",
+								"size":"mini"
+							}
+						}
+					]
+				}
+			]
+		},
+		data:{
+			data:"233"
+		}
 	}
 ] as example[];

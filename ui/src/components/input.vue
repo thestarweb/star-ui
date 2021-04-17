@@ -1,6 +1,6 @@
 <template>
 	<div :class="['star-ui','star-ui-input',{'is-focus':isFocused}]">
-		<input type="text" ref="input" :value="value" :name="name" class="star-ui star-ui-input--inner" @input.stop="handleInput" @focus="handleFocus" @blur="handleBlur">
+		<input type="text" ref="input" :value="value" :name="name" :class="['star-ui','star-ui-input--inner','star-ui-size-'+size]" @input.stop="handleInput" @focus="handleFocus" @blur="handleBlur">
 	</div>
 </template>
 
@@ -21,7 +21,7 @@ import "../global-style.css";
 		},
 		size:{
 			type:String,
-			default:"min"
+			default:"medium"
 		}
 	}
 })
@@ -51,9 +51,12 @@ export default class SuInput extends Vue {
 
 <style>
 .star-ui-input{
-	display: inline-block;
+	display: flex;
 	border: solid 1px var(--star-ui-input-border-color);
 	border-radius: var(--star-ui-border-radius);
+	flex-direction: row;
+	width:var(--star-ui-input-default-width);
+	overflow: hidden;
 }
 .star-ui-input:hover,.star-ui-input.is-focus{
 	border: solid 1px var(--star-ui-base-color);
@@ -62,6 +65,6 @@ export default class SuInput extends Vue {
 	border-width: 0px;
 	outline: none;
 	margin: 0;
-	padding: 0;
+	flex:1;
 }
 </style>

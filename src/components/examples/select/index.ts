@@ -29,5 +29,35 @@ export default [
 			],
 			data:"2"
 		}
+	},
+	{
+		name:"小尺寸",
+		template:{
+			isText:false,
+			component:"div",
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:false,
+							component:"su-select",
+							props:{
+								"v-model": "data",
+								":options": "options",
+								"size":"mini"
+							}
+						}
+					]	
+				}
+			]
+		},
+		data:{
+			options:[
+				{label:"lebal1",value:"1"},
+				{label:"lebal2",value:"2"},
+			],
+			data:"2"
+		}
 	}
 ] as example[];

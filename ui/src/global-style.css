@@ -17,7 +17,9 @@
 	--star-ui-input-medium-font-size:16px;
 	/*小输入框字体大小*/
 	--star-ui-input-mini-font-size:12px;
+	/*输入框默认宽度*/
 	--star-ui-input-default-width:280px;
+	--star-ui-default-padding:5px;
 }
 .dark-mode{
 	--star-ui-backgorund-color:#555;
@@ -30,5 +32,18 @@
 }
 /*内容容器大大小*/
 .star-ui-container{
-	padding: 5px;
+	padding: var(--star-ui-default-padding);
+}
+.star-ui-size-medium{
+	font-size: var(--star-ui-input-medium-font-size);
+	line-height: var(--star-ui-input-medium-font-size);
+	padding: var(--star-ui-default-padding);
+	border-radius: var(--star-ui-border-radius);
+}
+/*小尺寸空间参数*/
+.star-ui-size-mini{
+	font-size: var(--star-ui-input-mini-font-size);
+	line-height: var(--star-ui-input-mini-font-size);
+	padding: calc(var(--star-ui-default-padding) / 2);
+	border-radius: calc(var(--star-ui-border-radius) / 2);
 }
