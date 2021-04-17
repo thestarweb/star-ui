@@ -1,14 +1,14 @@
 <template>
 	<div>
-		<h1>{{$t("components.types."+component.__o.name+".name")}}{{component.__o.name}}</h1>
-		<h5>{{$t("components.types."+component.__o.name+".description","")}}</h5>
+		<h1 class="star-ui-container">{{$t("components.types."+component.__o.name+".name")}}{{component.__o.name}}</h1>
+		<h5 class="star-ui-container">{{$t("components.types."+component.__o.name+".description","")}}</h5>
 		<su-h-line/>
-		<div>
+		<div class="star-ui-container">
 			<h2>例子</h2>
 			<examples :name="component.__o.name"></examples>
 		</div>
 		<su-h-line/>
-		<div>
+		<div class="star-ui-container">
 			<h2>参数列表</h2>
 			<su-table :columns="column" :data="propsList">
 			</su-table>

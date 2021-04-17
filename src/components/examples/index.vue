@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<div v-for="example in list" :key="example.name">
+		<div v-for="example in list" :key="example.name" class="star-ui-container">
 			<h4>{{example.name}}</h4>
-			<div>
+			<div class="star-ui-container">
 				<render-component :example="example"></render-component>
 			</div>
 		</div>
