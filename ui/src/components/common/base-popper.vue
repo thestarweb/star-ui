@@ -47,7 +47,7 @@ export default class SuButton extends Vue {
 	beforeCreate():void{
 		this.div=document.createElement("div");
 		document.body.append(this.div);
-		this.id="star-ui-popper-"+nowId;
+		this.id="star-ui-popper-"+nowId++;
 		this.div.id=this.id;
 		this.div.style.position="fixed";
 	}
