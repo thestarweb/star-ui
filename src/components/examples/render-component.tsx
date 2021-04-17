@@ -13,7 +13,7 @@ import { template, example } from "./type.d";
 	}
 })
 export default class RenderComponent extends Vue {
-	beforeCreate(){
+	beforeCreate():void{
 		this.componentThis=new Proxy(this,{
 			get:(obj, prop)=>{
 				if(prop in obj.componentMethods){
@@ -34,7 +34,7 @@ export default class RenderComponent extends Vue {
 	}
 	private example!:example;
 
-	created(){
+	created():void{
 		this.componentData=this.example.data||{};
 	}
 

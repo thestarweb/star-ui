@@ -1,13 +1,19 @@
 <template>
-	<div :class="['star-ui','star-ui-select',{'is-focus':isFocused}]">
+	<div :class="['star-ui','star-ui-select',{'is-focus':isFocused}]" @click="isFocused=true">
 		<select :name="name" style="display: none"></select>
 		<input v-if="false" type="text" :value="1" class="star-ui star-ui-select--inner">
 		<div class="star-ui star-ui-container">{{this.showValue}}</div>
+		<base-popper :fromItem="$el" :visible="isFocused">
+			<div class="star-ui-select--pooper">
+				<div v-for="item in valueMap" :key="item[0]" class="star-ui-container" @click="handleSelect(item[0])">{{item[1]}}</div>
+			</div>
+		</base-popper>
 	</div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import BasePopper from "./common/base-popper.vue";
 import "../global-style.css";
 
 declare interface IObj {
@@ -17,6 +23,9 @@ declare interface IObj {
 
 @Options({
 	name:"su-select",
+	components:{
+		BasePopper
+	},
 	props: {
 		value:{
 			type:[String,Number,Array],
@@ -73,6 +82,13 @@ export default class SuSelect extends Vue {
 		}
 		return this.value;
 	}
+	mounted():void{
+		this.$forceUpdate();
+	}
+	handleSelect(value:string):void{
+		this.$emit("input",value);
+		this.isFocused=false;
+	}
 }
 </script>
 
@@ -90,5 +106,10 @@ export default class SuSelect extends Vue {
 	outline: none;
 	margin: 0;
 	padding: 0;
+}
+.star-ui-select--pooper{
+	background: #FFF;
+	border: solid 1px var(--star-ui-input-border-color);
+	border-radius: var(--star-ui-border-radius);
 }
 </style>
