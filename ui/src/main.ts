@@ -14,7 +14,7 @@ import { App } from 'vue'
 
 declare interface IObj {
 	// eslint-disable-next-line
-    [key: string]: any,
+	[key: string]: any,
 }
 export const components={SuHLayout,SuVLayout,SuMain,SuHLine,SuVLine,SuCard,SuTable,SuButton,SuInput,SuSelect} as IObj;
 //export components;

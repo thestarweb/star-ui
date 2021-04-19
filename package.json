@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name star-ui --dest ui/dist/ ui/src/main.ts",
+    "build-lib": "cd ./ui&&mv ../node_modules ./node_modules&&npm run build&&mv ./node_modules ../node_modules&&cd ../",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
