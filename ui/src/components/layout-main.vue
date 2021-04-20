@@ -1,5 +1,5 @@
 <template>
-	<div class="su-main">
+	<div class="star-ui su-main">
 		<slot></slot>
 	</div>
 </template>
@@ -17,8 +17,8 @@ export default class SuMain extends Vue {
 }
 </script>
 
-<style scoped>
-div{
+<style>
+.su-main{
 	flex-grow: 1;
 }
 </style>
