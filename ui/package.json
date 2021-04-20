@@ -1,9 +1,10 @@
 {
   "name": "star-web-ui",
-  "version": "0.10.1-test",
+  "version": "0.10.1-test2",
   "description": "A UI lib",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name star-ui --dest dist/ src/main.ts"
+    "build": "vue-cli-service build --target lib --name star-ui --dest dist/ src/main.ts",
+    "tsc": "node ./build-ts/main.js&&tsc ./out/main.ts -declaration -declarationDir ./types -lib DOM,ES2020,DOM.Iterable,ScriptHost --target ES5 --experimentalDecorators"
   },
   "author": "star_ss",
   "bugs": {
@@ -18,13 +19,16 @@
   ],
   "license": "MIT",
   "main": "dist/star-ui.umd.min.js",
+  "types": "types/main.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thestarweb/star-ui.git"
   },
   "files":[
     "src",
-    "dist"
+    "dist",
+    "types",
+    "build-ts"
   ],
   "dependencies": {
     "core-js": "^3.6.5",
