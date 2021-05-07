@@ -1,0 +1,26 @@
+name: build
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ ci-test ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: check 
+        id: check
+        uses: thestarweb/action-check-version
+        with:
+          path: "./ui/"
+      - name: output
+        run: echo "last=$steps.check.outputs.last current=$steps.check.outputs.current change=$steps.check.outputs.change"
