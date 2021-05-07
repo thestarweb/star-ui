@@ -22,5 +22,7 @@ jobs:
         uses: thestarweb/action-check-version@v1-test
         with:
           path: "./ui/"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: output
         run: echo "last=${steps.check.outputs.last} current=${steps.check.outputs.current} change=${steps.check.outputs.change}"
