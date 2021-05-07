@@ -23,4 +23,4 @@ jobs:
         with:
           path: "./ui/"
       - name: output
-        run: echo "last=$steps.check.outputs.last current=$steps.check.outputs.current change=$steps.check.outputs.change"
+        run: echo "last=${steps.check.outputs.last} current=${steps.check.outputs.current} change=${steps.check.outputs.change}"
