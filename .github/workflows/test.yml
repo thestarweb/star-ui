@@ -21,7 +21,7 @@ jobs:
         id: check
         uses: thestarweb/action-check-version@v1-test2
         with:
-          path: "./ui/"
+          path: "./"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: output
