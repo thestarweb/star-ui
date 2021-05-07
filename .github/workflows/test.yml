@@ -19,7 +19,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: check 
         id: check
-        uses: thestarweb/action-check-version
+        uses: thestarweb/action-check-version@v1-test
         with:
           path: "./ui/"
       - name: output
