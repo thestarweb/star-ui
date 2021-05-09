@@ -22,7 +22,7 @@ jobs:
         id: check
         uses: thestarweb/action-check-version@test
         with:
-          path: "ui/package.json"
+          path: "./ui"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: output
