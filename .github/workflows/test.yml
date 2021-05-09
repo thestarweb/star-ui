@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
       - name: check 
         id: check
-        uses: thestarweb/action-check-version@test
+        uses: thestarweb/action-check-version@main
         with:
           path: "./ui"
         env:
