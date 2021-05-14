@@ -80,14 +80,14 @@ jobs:
         with:
           name: lib
           path: ui/dist
-      - name: goto-ui
-        run: cd ui
       - name: install
-        run: npm i
-      - name: Display structure of downloaded files
-        run: ls -R
+        run: |
+          cd ui
+          npm i
       - name: build d.ts
-        run: npm run tsc
+        run: |
+          cd ui
+          npm run tsc
       - name: setup release
         id: create_release
         uses: actions/create-release@v1
@@ -96,7 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: make zip
-        run: zip -q -r lib.zip ./
+        run: zip -q -r lib.zip ./ui
       - name: upload to release
         uses: actions/upload-release-asset@v1
         env:
