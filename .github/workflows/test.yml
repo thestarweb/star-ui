@@ -84,8 +84,6 @@ jobs:
         run: cd ui
       - name: install
         run: npm i
-      - name: install ts
-        run: npm i typescript -g
       - name: build d.ts
         run: npm run tsc
       - name: setup release
