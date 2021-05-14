@@ -73,6 +73,11 @@ jobs:
     needs: [test_build, test_check]
     if: ${{needs.test_check.outputs.change == 1}}
     steps:
-      - name: hhh
-        run: echo 11111
+      - name: download-lib
+        uses: actions/download-artifact@v2
+        with:
+          name: lib
+          path: ./
+      - name: Display structure of downloaded files
+        run: ls -R
   
