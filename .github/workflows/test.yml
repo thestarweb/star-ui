@@ -84,6 +84,8 @@ jobs:
         run: cd ui
       - name: install
         run: npm i
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: build d.ts
         run: npm run tsc
       - name: setup release
