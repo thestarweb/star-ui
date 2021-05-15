@@ -56,6 +56,8 @@ jobs:
     needs: [test_build]
     outputs:
       change: ${{ steps.check.outputs.change }}
+      current: ${{ steps.check.outputs.current }}
+      last: ${{ steps.check.outputs.last }}
     steps:
       - name: checkout 
         uses: actions/checkout@v2
