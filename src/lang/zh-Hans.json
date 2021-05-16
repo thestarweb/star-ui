@@ -120,6 +120,16 @@
 						"description":"options中的绑定值字段"
 					}
 				}
+			},
+			"su-view-control":{
+				"name":"样式控制器",
+				"description":"用于控制包裹组件的显示样式",
+				"props":{
+					"deviceType":{
+						"name":"界面模式",
+						"description":"auto:自动；pc:显示为PC组件；mobile:显示为移动端组件"
+					}
+				}
 			}
 		}
 	}

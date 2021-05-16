@@ -2,6 +2,7 @@ import SuCard from "./card"
 import SuInput from "./input"
 import SuSelect from "./select"
 import SuTable from "./table"
+import SuViewControl from "./view-control"
 import { example } from "./type.d";
 
 interface ExamplesObj {
@@ -13,4 +14,5 @@ export default {
 	"su-input":SuInput,
 	"su-select":SuSelect,
 	"su-table":SuTable,
+	"su-view-control":SuViewControl,
 }as ExamplesObj;
