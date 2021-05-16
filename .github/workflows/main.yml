@@ -52,3 +52,64 @@ jobs:
         with:
           name: doc
           path: dist/
+  check_version:
+    runs-on: ubuntu-latest
+    needs: [build]
+    outputs:
+      change: ${{ steps.check.outputs.change }}
+      current: ${{ steps.check.outputs.current }}
+      last: ${{ steps.check.outputs.last }}
+    steps:
+      - name: checkout 
+        uses: actions/checkout@v2
+      - name: check 
+        id: check
+        uses: thestarweb/action-check-version@main
+        with:
+          path: "./ui"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: output
+        run: echo "last=${{ steps.check.outputs.last }} current=${{ steps.check.outputs.current }} change=${{ steps.check.outputs.change }}"
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build, check_version]
+    if: ${{needs.check_version.outputs.change == 1}}
+    steps:
+      - name: checkout 
+        uses: actions/checkout@v2
+      - name: download-lib
+        uses: actions/download-artifact@v2
+        with:
+          name: lib
+          path: ui/dist
+      - name: install
+        run: |
+          cd ui
+          npm i
+      - name: build d.ts
+        run: |
+          cd ui
+          npm run tsc
+      - name: setup release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{needs.test_check.outputs.current}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: make zip
+        run: zip -q -r lib.zip ./ui
+      - name: upload to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./lib.zip
+          asset_name: lib.zip
+          asset_content_type: application/zip
+      # - name: upload to npm
+      #   run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.npm_token}}
