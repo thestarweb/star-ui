@@ -85,11 +85,11 @@ export default class SuButton extends Vue {
 		if(this.fromItem){
 			let dom=(this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el;
 			const height=dom.clientHeight;
-			let top=dom.offsetTop,left=dom.offsetLeft;
+			let top=0,left=0;
 			while(dom&&dom!=document){
-				top+=-dom.scrollTop;
-				left+=-dom.scrollLeft;
-				dom=dom.parentElement;
+				top+=dom.offsetTop-dom.scrollTop;
+				left+=dom.offsetLeft-dom.scrollLeft;
+				dom=dom.offsetParent;
 			}
 			top+=height;
 			this.div.style.top=top+"px";
