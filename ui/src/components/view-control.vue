@@ -31,6 +31,9 @@ type DeviceType='auto'|'mobile'|'pc';
 	}
 })
 export default class SuViewControl extends Vue {
+	mounted():void{
+		this.$el._vue = this;
+	}
 	deviceType!:DeviceType;
 	checkFunction!:'ua'|'screen-width';
 	private windowWidth = 0;
@@ -39,7 +42,7 @@ export default class SuViewControl extends Vue {
 		this.windowWidth = window.innerWidth;
 		this.windowHeight = window.innerHeight;
 	}
-	public get $_isMobile():boolean{
+	public get $isMobile():boolean{
 		switch (this.deviceType) {
 			case "mobile":
 				return true;

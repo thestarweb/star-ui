@@ -8,6 +8,9 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+// import SuViewControl from '../view-control.vue';
+import { isMobile } from '../../utils';
+
 // import { Vue } from "vue"
 import "../../global-style.css";
 let nowId=0;
@@ -44,6 +47,9 @@ export default class SuButton extends Vue {
 	private id!:string;
 	private updateType!:string;
 	private visible!:boolean;
+	private get isMobile():boolean{
+		return isMobile(this);
+	}
 	beforeCreate():void{
 		this.div=document.createElement("div");
 		document.body.append(this.div);
@@ -84,18 +90,27 @@ export default class SuButton extends Vue {
 	updatePos():void{
 		if(this.fromItem){
 			let dom=(this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el;
-			const height=dom.clientHeight;
-			let top=0,left=0;
-			while(dom&&dom!=document){
-				top+=dom.offsetTop-dom.scrollTop;
-				left+=dom.offsetLeft-dom.scrollLeft;
-				dom=dom.offsetParent;
-			}
-			top+=height;
-			this.div.style.top=top+"px";
-			this.div.style.left=left+"px";
-			if(this.updateType=="v-sync"){
-				this.syncRequestId=requestAnimationFrame(this.updatePos);
+			if(this.isMobile){
+				this.div.style.bottom="0";
+				this.div.style.left="0";
+				this.div.style.width="100%";
+				// this.div.style.height="100%";
+				this.div.className="star-ui su-view-control su-view-control-mobile";
+			}else{
+				this.div.className="star-ui su-view-control su-view-control-pc";
+				const height=dom.clientHeight;
+				let top=0,left=0;
+				while(dom&&dom!=document){
+					top+=dom.offsetTop-dom.scrollTop;
+					left+=dom.offsetLeft-dom.scrollLeft;
+					dom=dom.offsetParent;
+				}
+				top+=height;
+				this.div.style.top=top+"px";
+				this.div.style.left=left+"px";
+				if(this.updateType=="v-sync"){
+					this.syncRequestId=requestAnimationFrame(this.updatePos);
+				}
 			}
 		}
 	}
