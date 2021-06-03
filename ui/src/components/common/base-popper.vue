@@ -8,8 +8,6 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-// import SuViewControl from '../view-control.vue';
-import { isMobile } from '../../utils';
 
 // import { Vue } from "vue"
 import "../../global-style.css";
@@ -39,7 +37,8 @@ let nowId=0;
 		visible(){
 			this._updateVisible();
 		}
-	}
+	},
+	inject: ['$suControl']
 })
 export default class SuButton extends Vue {
 	fromItem!:Vue|HTMLElement;
@@ -48,7 +47,7 @@ export default class SuButton extends Vue {
 	private updateType!:string;
 	private visible!:boolean;
 	private get isMobile():boolean{
-		return isMobile(this);
+		return ((this as any).$suControl||{}).isMobile;
 	}
 	beforeCreate():void{
 		this.div=document.createElement("div");

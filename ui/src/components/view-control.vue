@@ -1,5 +1,5 @@
 <template>
-	<div :class="['star-ui', 'su-view-control', $_isMobile?'su-view-control-mobile':'su-view-control-pc']">
+	<div :class="['star-ui', 'su-view-control', $isMobile?'su-view-control-mobile':'su-view-control-pc']">
 		<slot></slot>
 	</div>
 </template>
@@ -28,11 +28,27 @@ type DeviceType='auto'|'mobile'|'pc';
 				return ['ua','screen-width'].indexOf(value) !== -1
 			}
 		}
+	},
+	watch:{
+		$isMobile(newValue){
+			this.sendData.isMobile = newValue;
+		}
+	},
+	provide() {
+		return {
+			$suControl: this.sendData
+		}
+	},
+	created(){
+		this.sendData.isMobile = this.$isMobile;
 	}
 })
 export default class SuViewControl extends Vue {
 	mounted():void{
 		this.$el._vue = this;
+	}
+	private sendData={
+		isMobile:false
 	}
 	deviceType!:DeviceType;
 	checkFunction!:'ua'|'screen-width';

@@ -11,7 +11,7 @@
 		</div>
 		<!-- 选项弹窗 -->
 		<base-popper :from-item="$el" :visible="isFocused" @out-click="isFocused=false">
-			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:isMobile()?'100%':(width+'px')}">
+			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:($suControl||{}).isMobile?'100%':(width+'px')}">
 				<div v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
 					'star-ui-select--option-sel':item[0]==this.value
 				}]" @click="handleSelect(item[0])">{{item[1]}}</div>
@@ -23,7 +23,6 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import BasePopper from "./common/base-popper.vue";
-import { isMobile } from '../utils';
 import "../global-style.css";
 
 declare interface IObj {
@@ -72,7 +71,8 @@ declare interface IObj {
 				}
 			}
 		}
-	}
+	},
+	inject: ['$suControl']
 })
 export default class SuSelect extends Vue {
 	value!:string;
@@ -84,9 +84,6 @@ export default class SuSelect extends Vue {
 	options!:IObj[];
 	valueName!:string;
 	labelName!:string;
-	private isMobile():boolean{
-		return isMobile(this);
-	}
 	get valueMap():Map<string|number,string>{
 		const map=new Map();
 		this.options.map((item)=>{
