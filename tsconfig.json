@@ -14,7 +14,8 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "@/global.d.ts"
+      "@/global.d.ts",
+      "@/../ui/src/global.d.ts"
     ],
     "paths": {
       "@/*": [

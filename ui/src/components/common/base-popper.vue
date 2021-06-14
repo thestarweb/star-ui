@@ -8,6 +8,8 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Inject } from "vue-property-decorator";
+
 
 // import { Vue } from "vue"
 import "../../global-style.css";
@@ -38,7 +40,7 @@ let nowId=0;
 			this._updateVisible();
 		}
 	},
-	inject: ['$suControl']
+	// inject: ['$suControl']
 })
 export default class SuButton extends Vue {
 	fromItem!:Vue|HTMLElement;
@@ -46,9 +48,7 @@ export default class SuButton extends Vue {
 	private id!:string;
 	private updateType!:string;
 	private visible!:boolean;
-	private get isMobile():boolean{
-		return ((this as any).$suControl||{}).isMobile;
-	}
+	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
 	beforeCreate():void{
 		this.div=document.createElement("div");
 		document.body.append(this.div);
@@ -89,7 +89,7 @@ export default class SuButton extends Vue {
 	updatePos():void{
 		if(this.fromItem){
 			let dom=(this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el;
-			if(this.isMobile){
+			if(this.suControl.isMobile){
 				this.div.style.bottom="0";
 				this.div.style.left="0";
 				this.div.style.width="100%";
