@@ -15,8 +15,7 @@
     "declaration": true,
     "declarationDir": "./types/",
     "types": [
-      "webpack-env",
-      "@/global.d.ts"
+      "webpack-env"
     ],
     "paths": {
       "@/*": [

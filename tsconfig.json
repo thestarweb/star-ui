@@ -13,9 +13,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
-      "@/global.d.ts",
-      "@/../ui/src/global.d.ts"
+      "webpack-env"
     ],
     "paths": {
       "@/*": [

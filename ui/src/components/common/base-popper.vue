@@ -9,6 +9,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Inject } from "vue-property-decorator";
+import { ViewCtrlInfo } from "../../types";
+
 
 
 // import { Vue } from "vue"

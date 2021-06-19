@@ -1,3 +1,0 @@
-interface ViewCtrlInfo {
-	isMobile?:boolean;
-}
