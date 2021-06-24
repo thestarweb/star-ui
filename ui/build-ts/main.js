@@ -17,15 +17,19 @@ while(task.length){
 		if(!importFile.startsWith(".")){
 			return row;
 		}
-		if(importFile.endsWith(".ts")){
-			task.push(path.join(path.dirname(file), importFile));
-			return row;
+		if(importFile.lastIndexOf(".")<=importFile.lastIndexOf("/")){
+			const importFile_ = path.join(path.dirname(file), importFile);
+			const base = path.join(srcDir, importFile_);
+			if(fs.existsSync(base+".ts")){
+				task.push(importFile_+".ts");
+				return row;
+			}else if(fs.existsSync(base+".d.ts")){
+				task.push(importFile_+".d.ts");
+				return row;
+			}
 		}
-		if(importFile.endsWith(".vue")){
-			task.push(path.join(path.dirname(file), importFile));
-			return row;
-		}
-		return "";
+		task.push(path.join(path.dirname(file), importFile));
+		return row;
 	});
 	try{
 		fs.mkdirSync(path.dirname(outfile));

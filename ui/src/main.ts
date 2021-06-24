@@ -11,7 +11,7 @@ import SuInput from "./components/input.vue";
 import SuSelect from "./components/select.vue";
 import SuButton from "./components/button.vue";
 
-import ViewControl from './components/view-control.vue';
+import ViewControl from "./components/view-control.vue";
 
 import { App } from 'vue'
 
