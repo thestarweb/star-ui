@@ -95,7 +95,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{needs.test_check.outputs.current}}
+          tag_name: ${{needs.check_version.outputs.current}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: make zip
