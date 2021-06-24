@@ -1,3 +1,16 @@
-# 警告！这是一个测试的包，引入方式及相关接口可能会有大幅变动
+# star-ui
+[website](https://ui.thestarweb.cn)
+ | ![workflows](https://github.com/thestarweb/star-ui/workflows/build/badge.svg)
+ | ![npm](https://img.shields.io/npm/v/@thestarweb/ui.svg) 
 
-等待正式发布时版本号将会时1.0.0或更高，请勿将0.开头的包用在正是项目中
+```
+npm i @thestarweb/ui
+```
+
+```typescript
+import { createApp } from 'vue'
+import App from './App.vue'
+import StarUi from "@thestarweb/ui";
+
+createApp(App).use(StarUi).mount('#app');
+ ```
