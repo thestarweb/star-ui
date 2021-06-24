@@ -1,6 +1,6 @@
 {
-  "name": "star-web-ui",
-  "version": "0.10.1-test6",
+  "name": "@thestarweb/ui",
+  "version": "1.0.0",
   "description": "A UI lib",
   "scripts": {
     "build": "vue-cli-service build --target lib --name star-ui --dest dist/ src/main.ts",
@@ -15,7 +15,7 @@
     "UI",
     "Vue",
     "Vue3",
-    "typescript"
+    "TypeScript"
   ],
   "license": "MIT",
   "main": "dist/star-ui.umd.min.js",
