@@ -1,10 +1,10 @@
 <template>
   <su-h-layout>
-    <div style="width:200px;">
+    <div class="menu">
       <h4>{{$t("menu.base")}}</h4>
-      <div @click="handleSel('home')">{{$t("home.title")}}</div>
+      <div @click="handleSel('home')" :class="{select:sel==null}">{{$t("home.title")}}</div>
       <h4>{{$t("components.title")}}</h4>
-      <div v-for="item in allComponents" :key="item.name" @click="handleSel(item)">
+      <div v-for="item in allComponents" :key="item.name" @click="handleSel(item)" :class="{select:sel==item}">
         {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
       </div>
     </div>
@@ -47,19 +47,30 @@ export default class HelloWorld extends Vue {
 </script>
 
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.menu{
+  width:280px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.menu>h4{
+  padding: 2px 10px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.menu>div{
+  padding: 5px 10px;
+  padding-left: 20px;
+  cursor: pointer;
+  position: relative;
 }
-a {
-  color: #42b983;
+.menu .select{
+  color: #08F;
+  background: #DEF;
+}
+.menu .select:before{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 5px;
+  top: 0;
+  left: 0;
+  background: #08F;
 }
 .data{
   overflow-y: auto;
