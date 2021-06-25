@@ -52,6 +52,7 @@ export default class SuButton extends Vue {
 	private visible!:boolean;
 	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
 	beforeCreate():void{
+		console.log(this.suControl);
 		this.div=document.createElement("div");
 		document.body.append(this.div);
 		this.id="star-ui-popper-"+nowId++;

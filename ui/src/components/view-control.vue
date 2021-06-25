@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 
 type DeviceType='auto'|'mobile'|'pc';
@@ -36,7 +37,7 @@ type DeviceType='auto'|'mobile'|'pc';
 	},
 	provide() {
 		return {
-			$suControl: this.sendData
+			viewCtrlInfo: this.sendData
 		}
 	},
 	created(){
@@ -47,7 +48,7 @@ export default class SuViewControl extends Vue {
 	mounted():void{
 		this.$el._vue = this;
 	}
-	private sendData={
+	private sendData:ViewCtrlInfo={
 		isMobile:false
 	}
 	deviceType!:DeviceType;
