@@ -83,6 +83,11 @@ jobs:
         with:
           name: lib
           path: ui/dist
+      - name: setnpm
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
       - name: install
         run: |
           cd ui
