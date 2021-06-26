@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-for="example in list" :key="example.name" class="star-ui-container">
+		<div v-for="example in list" :key="name+example.name" class="star-ui-container">
 			<h4>{{example.name}}</h4>
 			<su-v-layout class="example-main">
 				<div class="star-ui-container">
