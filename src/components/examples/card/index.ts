@@ -73,7 +73,7 @@ export default [
 					data:[
 						{
 							isText:true,
-							data:"I am in card++"
+							text:"I am in card++"
 						},
 						{
 							isText:false,

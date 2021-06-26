@@ -2,9 +2,14 @@
 	<div>
 		<div v-for="example in list" :key="example.name" class="star-ui-container">
 			<h4>{{example.name}}</h4>
-			<div class="star-ui-container">
-				<render-component :example="example"></render-component>
-			</div>
+			<su-v-layout class="example-main">
+				<div class="star-ui-container">
+					<render-component :example="example"></render-component>
+				</div>
+				<div>
+					<show-code :example="example"></show-code>
+				</div>
+			</su-v-layout>
 		</div>
 	</div>
 </template>
@@ -13,13 +18,15 @@
 import { Options, Vue } from 'vue-class-component';
 import showData from "./datas";
 import RenderComponent from "./render-component"
+import ShowCode from "./show-code.vue"
 
 import { example } from "./type.d";
 
 
 @Options({
 	components:{
-		RenderComponent
+		RenderComponent,
+		ShowCode
 	},
 	props: {
 		name:{
@@ -28,7 +35,7 @@ import { example } from "./type.d";
 		},
 	}
 })
-export default class SuButton extends Vue {
+export default class Examples extends Vue {
 	name!:string;
 	get list():example[]{
 		if(this.name in showData){
@@ -38,3 +45,9 @@ export default class SuButton extends Vue {
 	}
 }
 </script>
+<style scoped>
+	.example-main{
+		border-radius: 5px;
+		border: 1px solid #AAA;
+	}
+</style>
