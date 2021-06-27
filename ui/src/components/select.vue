@@ -11,10 +11,13 @@
 		</div>
 		<!-- 选项弹窗 -->
 		<base-popper :from-item="$el" :visible="isFocused" @out-click="isFocused=false">
-			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:(suControl||{}).isMobile?'100%':(width+'px')}">
-				<div v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
-					'star-ui-select--option-sel':item[0]==this.value
-				}]" @click="handleSelect(item[0])">{{item[1]}}</div>
+			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:suControl.isMobile?'100%':(width+'px')}">
+				<div class="star-ui star-ui-select--pooper-title" v-if="suControl.isMobile">请选择</div>
+				<div>
+					<div v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
+						'star-ui-select--option-sel':item[0]==this.value
+					}]" @click="handleSelect(item[0])">{{item[1]}}</div>
+				</div>
 			</div>
 		</base-popper>
 	</div>
@@ -145,6 +148,9 @@ export default class SuSelect extends Vue {
 	border: solid 1px var(--star-ui-input-border-color);
 	border-radius: var(--star-ui-border-radius);
 }
+.star-ui-select--option{
+	cursor: pointer;
+}
 /*选中选项样式*/
 .star-ui-select--option-sel{
 	background: var(--star-ui-base-color);
@@ -152,7 +158,29 @@ export default class SuSelect extends Vue {
 }
 
 /*移动样式*/
+.star-ui-select--pooper-title{
+	text-align: center;
+	line-height: 2;
+	font-weight: bold;
+	padding: var(--star-ui-default-padding);
+}
 .su-view-control-mobile .star-ui-select--pooper{
 	width: 100%;
+}
+.su-view-control.su-view-control-mobile .star-ui-select--pooper{
+	border-radius: 0;
+	border-width: 0;
+}
+.su-view-control.su-view-control-mobile .star-ui-select--option{
+	border-radius: 0;
+	padding-left: 10px;
+	border-left: 5px solid transparent;
+	border-top: 1px solid var(--star-ui-input-border-color);
+	line-height: 1.5;
+}
+.su-view-control.su-view-control-mobile .star-ui-select--option-sel{
+	background: initial;
+	color: var(--star-ui-base-color);
+	border-left: 5px solid var(--star-ui-base-color);
 }
 </style>

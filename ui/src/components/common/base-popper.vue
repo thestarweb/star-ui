@@ -1,7 +1,8 @@
 <template>
 	<teleport :to="'#'+id">
 		<div>
-		<slot></slot>
+			<div class="star-ui-popper-background" v-if="suControl.isMobile" @click="$emit('out-click')"></div>
+			<slot></slot>
 		</div>
 	</teleport>
 </template>
@@ -120,5 +121,12 @@ export default class SuButton extends Vue {
 </script>
 
 <style>
-
+.star-ui-popper-background{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0,0,0,0.1);
+}
 </style>
