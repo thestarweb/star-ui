@@ -13,7 +13,7 @@
 		<base-popper :from-item="$el" :visible="isFocused" @out-click="isFocused=false">
 			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:suControl.isMobile?'100%':(width+'px')}">
 				<div class="star-ui star-ui-select--pooper-title" v-if="suControl.isMobile">请选择</div>
-				<div>
+				<div :class="['star-ui','star-ui-select--pooper-item-list','star-ui-size-'+size]">
 					<div v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
 						'star-ui-select--option-sel':item[0]==this.modelValue
 					}]" @click="handleSelect(item[0])">{{item[1]}}</div>
@@ -156,6 +156,15 @@ export default class SuSelect extends Vue {
 	background: var(--star-ui-base-color);
 	color:var(--star-ui-backgorund-color);
 }
+/*选项的最大高度限制*/
+.star-ui-select--pooper-item-list{
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding: 0;
+}
+.star-ui-select--pooper-item-list.star-ui-size-medium{
+	max-height: calc(var(--star-ui-input-medium-font-size) * 15);
+}
 
 /*移动样式*/
 .star-ui-select--pooper-title{
@@ -182,5 +191,8 @@ export default class SuSelect extends Vue {
 	background: initial;
 	color: var(--star-ui-base-color);
 	border-left: 5px solid var(--star-ui-base-color);
+}
+.su-view-control-mobile .star-ui-select--pooper-item-list.star-ui-size-medium{
+	max-height: 50vh;
 }
 </style>

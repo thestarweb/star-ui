@@ -19,6 +19,6 @@ export default class SuMain extends Vue {
 
 <style>
 .su-main{
-	flex-grow: 1;
+	flex: 1;
 }
 </style>

@@ -49,6 +49,7 @@ export default class HelloWorld extends Vue {
 <style scoped>
 .menu{
   width:280px;
+  overflow-y: auto;
 }
 .menu>h4{
   padding: 2px 10px;
