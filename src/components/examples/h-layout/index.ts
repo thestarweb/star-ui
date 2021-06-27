@@ -1,0 +1,49 @@
+import { example } from "../type.d";
+
+export default [
+	{
+		name:"基本用法（base）",
+		template:{
+			isText:false,
+			component:"su-h-layout",
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:false,
+							component:"div",
+							props:{
+								style:"width:100px;height:100%;background-color:#08F"
+							}
+						},
+						{
+							isText:false,
+							component:"div",
+							props:{
+								style:"width:100px;height:100%;background-color:#FF0"
+							}
+						},
+						{
+							isText:false,
+							component:"div",
+							props:{
+								style:"width:100px;height:100%;background-color:#F80"
+							}
+						},
+						{
+							isText:false,
+							component:"div",
+							props:{
+								style:"width:100px;height:100%;background-color:#F0F"
+							}
+						}
+					]
+				}
+			],
+			props:{
+				style:"height:100px;"
+			}
+		}
+	},
+]

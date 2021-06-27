@@ -81,7 +81,7 @@
 						"name":"尺寸",
 						"description":"输入框的尺寸（详见尺寸）"
 					},
-					"value":{
+					"modelValue":{
 						"name":"值",
 						"description":""
 					},
@@ -99,7 +99,7 @@
 						"name":"尺寸",
 						"description":"输入框的尺寸（详见尺寸）"
 					},
-					"value":{
+					"modelValue":{
 						"name":"值",
 						"description":""
 					},
@@ -128,6 +128,10 @@
 					"deviceType":{
 						"name":"界面模式",
 						"description":"auto:自动；pc:显示为PC组件；mobile:显示为移动端组件"
+					},
+					"checkFunction":{
+						"name":"检查是否是移动端的方案",
+						"description":""
 					}
 				}
 			}

@@ -1,0 +1,20 @@
+export default [
+	{
+		name:"基本用法（base）",
+		template:{
+			isText:false,
+			component:"su-button",
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:true,
+							text:"按钮"
+						}
+					]
+				}
+			]
+		}
+	},
+]
