@@ -1,19 +1,26 @@
 <template>
-  <su-h-layout>
-    <div class="menu">
-      <h4>{{$t("menu.base")}}</h4>
-      <div @click="handleSel('home')" :class="{select:sel==null}">{{$t("home.title")}}</div>
-      <h4>{{$t("components.title")}}</h4>
-      <div v-for="item in allComponents" :key="item.name" @click="handleSel(item)" :class="{select:sel==item}">
-        {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
-      </div>
-    </div>
-    <su-v-line/>
-    <su-main class="data">
-      <show v-if="sel" :component="sel"></show>
-      <component v-else :is="component"></component>
-    </su-main>
-  </su-h-layout>
+  <su-view-control>
+    <su-v-layout>
+      <header @click="isOpenMenu=!isOpenMenu">star-ui</header>
+      <su-main>
+        <su-h-layout>
+          <div :class="['menu',{open:isOpenMenu}]">
+            <h4>{{$t("menu.base")}}</h4>
+            <div @click="handleSel('home')" :class="{select:sel==null}">{{$t("home.title")}}</div>
+            <h4>{{$t("components.title")}}</h4>
+            <div v-for="item in allComponents" :key="item.name" @click="handleSel(item)" :class="{select:sel==item}">
+              {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
+            </div>
+          </div>
+          <su-v-line :class="{hiddenOnMobile:!isOpenMenu}"/>
+          <su-main class="data" @click="isOpenMenu=false">
+            <show v-if="sel" :component="sel"></show>
+            <component v-else :is="component"></component>
+          </su-main>
+        </su-h-layout>
+      </su-main>
+    </su-v-layout>
+  </su-view-control>
 </template>
 
 <script lang="ts">
@@ -33,7 +40,7 @@ export default class HelloWorld extends Vue {
   private sel=null;
   // eslint-disable-next-line
   private component:any=Home;
-
+  private isOpenMenu=false;
   // eslint-disable-next-line
   private handleSel(sel:any){
     if(typeof sel=="string"){
@@ -47,6 +54,14 @@ export default class HelloWorld extends Vue {
 </script>
 
 <style scoped>
+.su-view-control,.su-v-layout{
+  overflow: hidden;
+  height: 100%;
+}
+header{
+  background-color: #000;
+  color: #FFF;
+}
 .menu{
   width:280px;
   overflow-y: auto;
@@ -75,5 +90,21 @@ export default class HelloWorld extends Vue {
 }
 .data{
   overflow-y: auto;
+}
+
+/*移动样式*/
+.su-view-control.su-view-control-mobile .su-main.data{
+  width: 100vw;
+  flex: 0 0 100vw;
+}
+.su-view-control.su-view-control-mobile .menu{
+  width: 0;
+  transition: width 0.2s;
+}
+.su-view-control.su-view-control-mobile .menu.open{
+  width: 90vw;
+}
+.su-view-control.su-view-control-mobile .hiddenOnMobile{
+  display: none;
 }
 </style>
