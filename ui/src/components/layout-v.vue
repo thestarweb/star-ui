@@ -29,4 +29,7 @@ export default class SuVLayout extends Vue {
 .su-v-layout>*{
 	flex:0 0 auto;
 }
+.su-v-layout>.su-main{
+	height: 0;
+}
 </style>
