@@ -26,4 +26,7 @@ export default class SuHLayout extends Vue {
 	padding: 0;
 	overflow: hidden;
 }
+.su-h-layout>*{
+	flex:0 0 auto;
+}
 </style>

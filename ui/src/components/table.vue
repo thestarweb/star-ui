@@ -1,6 +1,6 @@
 <template>
 	<div class="star-ui su-table">
-		<table class="star-ui su-table--inner">
+		<table class="star-ui su-table--inner" rules="none" frame="void">
 			<thead class="star-ui su-table--inner-thead">
 				<tr class="star-ui su-table--inner-tr">
 					<th v-for="item in columns" :key="item.name+item.key" class="star-ui star-ui-container su-table--inner-th">{{item.name}}</th>

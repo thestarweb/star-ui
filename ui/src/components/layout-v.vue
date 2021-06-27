@@ -26,4 +26,7 @@ export default class SuVLayout extends Vue {
 	padding: 0;
 	overflow: hidden;
 }
+.su-v-layout>*{
+	flex:0 0 auto;
+}
 </style>
