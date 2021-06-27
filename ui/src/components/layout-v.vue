@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui">
+	<div class="star-ui su-v-layout">
 		<slot></slot>
 	</div>
 </template>
