@@ -1,6 +1,6 @@
 <template>
 	<div :class="['star-ui','star-ui-input',{'is-focus':isFocused}]">
-		<input type="text" ref="input" :value="value" :name="name" :class="['star-ui','star-ui-input--inner','star-ui-size-'+size]" @input.stop="handleInput" @focus="handleFocus" @blur="handleBlur">
+		<input type="text" ref="input" :value="modelValue" :name="name" :class="['star-ui','star-ui-input--inner','star-ui-size-'+size]" @input.stop="handleInput" @focus="handleFocus" @blur="handleBlur">
 	</div>
 </template>
 
@@ -11,7 +11,7 @@ import "../global-style.css";
 @Options({
 	name:"su-input",
 	props: {
-		value:{
+		modelValue:{
 			type:String,
 			default:""
 		},
@@ -26,7 +26,7 @@ import "../global-style.css";
 	}
 })
 export default class SuInput extends Vue {
-	value!:string;
+	modelValue!:string;
 	$refs!:{
 		input:HTMLInputElement
 	};
@@ -35,9 +35,8 @@ export default class SuInput extends Vue {
 	handleInput(event:InputEvent):void{
 		if(event.target){
 			var target=event.target as HTMLInputElement;
-			this.$emit("input",target.value)
-			//target.value=this.value;
-			this.$nextTick(()=>target.value=this.value);
+			this.$emit("update:modelValue",target.value);
+			this.$nextTick(()=>target.value=this.modelValue);
 		}
 	}
 	handleFocus():void{

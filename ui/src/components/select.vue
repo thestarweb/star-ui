@@ -15,7 +15,7 @@
 				<div class="star-ui star-ui-select--pooper-title" v-if="suControl.isMobile">请选择</div>
 				<div>
 					<div v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
-						'star-ui-select--option-sel':item[0]==this.value
+						'star-ui-select--option-sel':item[0]==this.modelValue
 					}]" @click="handleSelect(item[0])">{{item[1]}}</div>
 				</div>
 			</div>
@@ -41,7 +41,7 @@ declare interface IObj {
 		BasePopper
 	},
 	props: {
-		value:{
+		modelValue:{
 			type:[String,Number,Array],
 			default:""
 		},
@@ -79,7 +79,7 @@ declare interface IObj {
 	}
 })
 export default class SuSelect extends Vue {
-	value!:string;
+	modelValue!:string;
 	$refs!:{
 		// input:HTMLInputElement
 	};
@@ -101,14 +101,14 @@ export default class SuSelect extends Vue {
 		return map;
 	}
 	get showValue():string{
-		if(this.valueMap.has(this.value)){
-			return this.valueMap.get(this.value) as string;
+		if(this.valueMap.has(this.modelValue)){
+			return this.valueMap.get(this.modelValue) as string;
 		}
-		return this.value;
+		return this.modelValue;
 	}
 	private width=280;
 	handleSelect(value:string):void{
-		this.$emit("input",value);
+		this.$emit("update:modelValue",value);
 		this.isFocused=false;
 	}
 }

@@ -68,9 +68,9 @@ export default class RenderComponent extends Vue {
 				}else if(key.startsWith("@")||key.startsWith("v-on:")){
 					//
 				}else if(key=="v-model"){
-					key="value";
+					key="modelValue";
 					// eslint-disable-next-line
-					props["onInput"]=(function(this:RenderComponent,value:string,inputValue:any){
+					props["onUpdate:modelValue"]=(function(this:RenderComponent,value:string,inputValue:any){
 											let data=this.componentData;
 											const path=value.split(".");
 											const last=path.pop();
