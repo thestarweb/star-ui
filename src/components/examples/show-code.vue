@@ -70,6 +70,7 @@ export default class Example extends Vue {\n`;
 div{
 	padding: 10px;
 	background: rgba(0,0,0,0.1);
+	overflow: auto;
 }
 pre{
 	margin: 0;
