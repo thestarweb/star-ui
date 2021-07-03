@@ -1,7 +1,7 @@
 <template>
   <su-view-control>
     <su-v-layout>
-      <header @click="isOpenMenu=!isOpenMenu">star-ui</header>
+      <header><div class="menu-button" @click="isOpenMenu=!isOpenMenu"></div> star-ui</header>
       <su-main>
         <su-h-layout>
           <div :class="['menu',{open:isOpenMenu}]">
@@ -61,6 +61,11 @@ export default class HelloWorld extends Vue {
 header{
   background-color: #000;
   color: #FFF;
+  padding: 5px;
+  font-size: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .menu{
   width:280px;
@@ -93,6 +98,30 @@ header{
 }
 
 /*移动样式*/
+.su-view-control.su-view-control-pc .menu-button{
+  display: none;
+}
+.menu-button{
+  width: 32px;
+  height: 22px;
+  border: 2px solid #FFF;
+  border-radius: 5px;
+  margin: 0 10px;
+  display: inline-block;
+  padding: 5px 5px;
+  position: relative;
+  box-sizing: border-box;
+}
+.menu-button::before,.menu-button::after{
+  content: "";
+  position: absolute;
+  width: 17px;
+  height: 2px;
+  background-color: #FFF;
+}
+.menu-button::after{
+  bottom: 5px;
+}
 .su-view-control.su-view-control-mobile .su-main.data{
   width: 100vw;
   flex: 0 0 100vw;

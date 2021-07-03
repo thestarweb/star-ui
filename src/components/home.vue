@@ -30,4 +30,7 @@ export default class Home extends Vue {
 		animation:color-change 20s infinite;
 		margin-top: calc(40vh - 5vw);
 	}
+	.info{
+		padding: 20px;
+	}
 </style>
