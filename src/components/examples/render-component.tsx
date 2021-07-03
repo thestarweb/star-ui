@@ -4,6 +4,8 @@ import { VNode, h, resolveComponent } from "vue"
 
 import { template, example } from "./type.d";
 
+const HTMLEL = ["div","span","p"];
+
 @Options({
 	props: {
 		example:{
@@ -65,8 +67,10 @@ export default class RenderComponent extends Vue {
 					if(typeof value == "string"){
 						value=this.analysis(value);
 					}
-				}else if(key.startsWith("@")||key.startsWith("v-on:")){
-					//
+				}else if(key.startsWith("@")){
+					props["on-"+key.substr(1)]=value;
+				}else if(key.startsWith("v-on:")){
+					props["on-"+key.substr(5)]=value;
 				}else if(key=="v-model"){
 					key="modelValue";
 					// eslint-disable-next-line
@@ -98,7 +102,7 @@ export default class RenderComponent extends Vue {
 			});
 		}
 		let component=item.component;
-		if(typeof component=="string"){
+		if(typeof component=="string" && HTMLEL.indexOf(component)==-1){
 			component=resolveComponent(component);
 			if(!component) component=item.component
 		}

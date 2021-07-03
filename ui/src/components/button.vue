@@ -6,6 +6,8 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Emit } from '../reg'
+
 import "../global-style.css";
 
 @Options({
@@ -16,8 +18,7 @@ import "../global-style.css";
 			type:String,
 			default:()=>{
 				return "min"
-			},
-			required: true
+			}
 		}
 	}
 })

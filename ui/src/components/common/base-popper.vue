@@ -10,6 +10,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Inject } from "vue-property-decorator";
+import { Emit } from "../../reg";
+
 import { ViewCtrlInfo } from "../../types";
 
 
@@ -22,8 +24,7 @@ let nowId=0;
 	name:"su-base-popper",
 	props: {
 		fromItem:{
-			type:Object,
-			required:true
+			type:Object
 		},
 		style:{
 			type:Object,
@@ -53,7 +54,6 @@ export default class SuButton extends Vue {
 	private visible!:boolean;
 	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
 	beforeCreate():void{
-		console.log(this.suControl);
 		this.div=document.createElement("div");
 		document.body.append(this.div);
 		this.id="star-ui-popper-"+nowId++;
@@ -70,15 +70,16 @@ export default class SuButton extends Vue {
 	beforeUnmount():void{
 		window.removeEventListener("click",this._clickCheck);
 	}
-	_clickCheck(ev:MouseEvent):void{
+	@Emit("out-click", (res:boolean)=>res)
+	_clickCheck(ev:MouseEvent):boolean{
 		var dom=ev.target;
 		while(dom&&dom!=document){
 			if(dom==this.div||(this.fromItem&&dom==((this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el))){
-				return;
+				return false;
 			}
 			dom=(dom as HTMLElement).parentElement;
 		}
-		this.$emit("out-click");
+		return true;
 	}
 	private syncRequestId!:number;
 	_updateVisible():void{
