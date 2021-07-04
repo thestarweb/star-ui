@@ -49,3 +49,11 @@ export function Emit(event?:string, shouldEmit?:(res:any)=>boolean):VueDecorator
 		};
 	});
 }
+export function Prop(a:any){
+	// return createDecorator(()=>{const s=0;})
+	return function(cla:any, name:string, data:any){
+		console.log(cla,name,data);
+		return data;
+		// return createDecorator(()=>{const s=0;})(cla,name,data);
+	}
+}

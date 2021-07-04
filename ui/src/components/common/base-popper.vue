@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Inject } from "vue-property-decorator";
-import { Emit } from "../../reg";
+import { Emit, Prop } from "../../reg";
 
 import { ViewCtrlInfo } from "../../types";
 
@@ -47,6 +47,7 @@ let nowId=0;
 	// inject: ['$suControl']
 })
 export default class SuButton extends Vue {
+	@Prop("")
 	fromItem!:Vue|HTMLElement;
 	private div!:HTMLDivElement;
 	private id!:string;

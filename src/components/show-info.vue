@@ -87,15 +87,17 @@ export default class SuButton extends Vue {
 		// eslint-disable-next-line
 		const props=this.component.__o.props;
 		var list=[];
-		for(const name of Object.keys(props)){
-			const item=props[name];
-			list.push({
-				field:name,
-				type:this.getType(item.type),
-				default:typeof item.default=="function"?item.default():item.default,
-				description:this.$t("components.types."+this.component.__o.name+".props."+name+".description",""),
-				name:this.$t("components.types."+this.component.__o.name+".props."+name+".name"),
-			});
+		if(props){
+			for(const name of Object.keys(props)){
+				const item=props[name];
+				list.push({
+					field:name,
+					type:this.getType(item.type),
+					default:typeof item.default=="function"?item.default():item.default,
+					description:this.$t("components.types."+this.component.__o.name+".props."+name+".description",""),
+					name:this.$t("components.types."+this.component.__o.name+".props."+name+".name"),
+				});
+			}
 		}
 		return list;
 	}
