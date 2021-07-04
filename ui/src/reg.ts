@@ -51,9 +51,10 @@ export function Emit(event?:string, shouldEmit?:(res:any)=>boolean):VueDecorator
 }
 export function Prop(a:any){
 	// return createDecorator(()=>{const s=0;})
-	return function(cla:any, name:string, data:any){
+	// return ((cla:any, name:string, data:any)=>createDecorator(()=>{const s=0;})(cla,name,data)) as VueDecorator;
+	return ((cla:any, name:string, data:any)=>{
 		console.log(cla,name,data);
-		return data;
-		// return createDecorator(()=>{const s=0;})(cla,name,data);
-	}
+		// return data;
+		return createDecorator((componentOptions, propertyKey)=>{console.log(componentOptions, propertyKey)})(cla,name,data);
+	}) as VueDecorator;
 }
