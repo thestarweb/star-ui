@@ -66,7 +66,7 @@ export function Prop(propOptions:PropOptions):VueDecorator{
 			// eslint-disable-next-line
 			(data[componentOptions.name].props!)[key] = propOptions;
 		}
-		componentOptions.props ||= Object.create(null)
+		if(!componentOptions.props) componentOptions.props={};
 		componentOptions.props[key] = propOptions;
 	});
 }
