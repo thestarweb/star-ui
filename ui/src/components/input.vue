@@ -6,38 +6,45 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Prop, Emit } from "../reg";
 import "../global-style.css";
 
 @Options({
-	name:"su-input",
-	props: {
-		modelValue:{
-			type:String,
-			default:""
-		},
-		name:{
-			type:String,
-			default:""
-		},
-		size:{
-			type:String,
-			default:"medium"
-		}
-	}
+	name:"su-input"
 })
 export default class SuInput extends Vue {
+	@Prop({
+		type:String,
+		default:""
+	})
 	modelValue!:string;
 	$refs!:{
 		input:HTMLInputElement
 	};
+	@Prop({
+		type:String,
+		default:""
+	})
+	name!:string;
+	@Prop({
+		type:String,
+		default:"medium"
+	})
 	size!:string;
 	isFocused=false;
+	@Emit("update:modelValue")
+	emitInput(data:string):string{
+		return data;
+	}
 	handleInput(event:InputEvent):void{
 		if(event.target){
 			var target=event.target as HTMLInputElement;
 			this.$emit("update:modelValue",target.value);
+			this.emitInput(target.value)
 			this.$nextTick(()=>target.value=this.modelValue);
+			// return target.value;
 		}
+		// return "";
 	}
 	handleFocus():void{
 		this.isFocused=true;

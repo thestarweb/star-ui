@@ -6,22 +6,20 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Emit } from '../reg'
+import { Prop } from "../reg";
 
 import "../global-style.css";
 
 @Options({
-	name:"su-button",
-	props: {
-		size:{
-			type:String,
-			default:()=>{
-				return "min"
-			}
-		}
-	}
+	name:"su-button"
 })
 export default class SuButton extends Vue {
+	@Prop({
+		type:String,
+		default:()=>{
+			return "min"
+		}
+	})
 	size!:string;
 }
 </script>

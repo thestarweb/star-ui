@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Prop } from "../reg";
 import "../global-style.css";
 
 
@@ -27,14 +28,21 @@ import "../global-style.css";
 		data:{
 			type:Array,
 			default:()=>[]
-		},
-		columns:{
-			type:Array,
-			default:()=>[]
 		}
 	}
 })
 export default class SuTable extends Vue {
+	// @Prop({
+	// 	type:Array,
+	// 	default:()=>[]
+	// })
+	// data!:any[];
+	@Prop({
+		type:Array,
+		default:()=>[]
+	})
+	// eslint-disable-next-line
+	columns!:any[];
 }
 </script>
 

@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Prop } from "../reg";
 import "../global-style.css";
 import VLayout from "./layout-v.vue";
 import HLayout from "./layout-h.vue";
@@ -26,16 +27,6 @@ import SuMain from "./layout-main.vue";
 		VLayout,
 		HLayout,
 		SuMain
-	},
-	props: {
-		title:{
-			type:String,
-			default:""
-		},
-		collapsible:{
-			type:Boolean,
-			default:false
-		}
 	}
 })
 export default class SuCard extends Vue {
@@ -43,6 +34,16 @@ export default class SuCard extends Vue {
 		body:HTMLDivElement
 		bodyInner:HTMLDivElement
 	};
+	@Prop({
+		type:String,
+		default:""
+	})
+	readonly title!:string;
+	@Prop({
+		type:Boolean,
+		default:false
+	})
+	readonly collapsible!:boolean;
 	isCollaps=false;
 	collapsChange():void{
 		const realHeight=this.$refs.bodyInner.clientHeight;
