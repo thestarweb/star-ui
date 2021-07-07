@@ -1,5 +1,5 @@
 <template>
-	<button class="star-ui star-ui-container star-ui-button">
+	<button :class="['star-ui', 'star-ui-container', 'star-ui-button','star-ui-size-'+size]">
 		<slot></slot>
 	</button>
 </template>
@@ -17,7 +17,7 @@ export default class SuButton extends Vue {
 	@Prop({
 		type:String,
 		default:()=>{
-			return "min"
+			return "medium"
 		}
 	})
 	size!:string;
@@ -25,5 +25,7 @@ export default class SuButton extends Vue {
 </script>
 
 <style>
-
+.star-ui-button.star-ui-size-mini{
+	border-radius:2px;
+}
 </style>

@@ -15,6 +15,27 @@ export default [
 					]
 				}
 			]
-		}
+		},
+	},
+	{
+		name:"小尺寸",
+		template:{
+			isText:false,
+			component:"su-button",
+			props:{
+				"size":"mini"
+			},
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:true,
+							text:"按钮"
+						}
+					]
+				}
+			]
+		},
 	},
 ]
