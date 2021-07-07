@@ -47,7 +47,9 @@ let nowId=0;
 	// inject: ['$suControl']
 })
 export default class SuButton extends Vue {
-	@Prop("")
+	@Prop({
+		type:Object
+	})
 	fromItem!:Vue|HTMLElement;
 	private div!:HTMLDivElement;
 	private id!:string;

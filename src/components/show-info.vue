@@ -19,6 +19,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Examples from './examples/index.vue';
+import { data } from "@/../ui/src/reg"
+
 
 type PropInof={
 	field:string,
@@ -85,7 +87,10 @@ export default class SuButton extends Vue {
 	}
 	public get propsList():PropInof[]{
 		// eslint-disable-next-line
-		const props=this.component.__o.props;
+		const props = {
+			...this.component.__o.props,
+			...data[this.component.__o.name]
+		};
 		var list=[];
 		if(props){
 			for(const name of Object.keys(props)){

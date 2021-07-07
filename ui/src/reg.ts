@@ -1,5 +1,12 @@
-import { VueDecorator, createDecorator } from 'vue-class-component';
+import { VueDecorator, PropOptions, createDecorator } from 'vue-class-component';
 
+export const data = {
+	//
+} as {[key:string]: {
+	props?:{
+		[key:string]: PropOptions
+	}
+}}
 
 const hyphenate = (str:string) => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 // eslint-disable-next-line
@@ -49,12 +56,15 @@ export function Emit(event?:string, shouldEmit?:(res:any)=>boolean):VueDecorator
 		};
 	});
 }
-export function Prop(a:any){
-	// return createDecorator(()=>{const s=0;})
-	// return ((cla:any, name:string, data:any)=>createDecorator(()=>{const s=0;})(cla,name,data)) as VueDecorator;
-	return ((cla:any, name:string, data:any)=>{
-		console.log(cla,name,data);
-		// return data;
-		return createDecorator((componentOptions, propertyKey)=>{console.log(componentOptions, propertyKey)})(cla,name,data);
-	}) as VueDecorator;
+
+export function Prop(propOptions:PropOptions):VueDecorator{
+	return createDecorator((componentOptions, key) => {
+		if(componentOptions.name){
+			// console.log(componentOptions.name);
+			if(!data[componentOptions.name]) data[componentOptions.name] = {};
+			data[componentOptions.name].props = componentOptions;
+		}
+		componentOptions.props ||= Object.create(null)
+		componentOptions.props[key] = propOptions;
+	});
 }

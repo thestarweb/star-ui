@@ -80,7 +80,7 @@ export default class SuSelect extends Vue {
 	readonly valueName!:string;
 	@Prop({
 		type:String,
-		default:"value"
+		default:"label"
 	})
 	readonly labelName!:string;
 	isFocused=false;
