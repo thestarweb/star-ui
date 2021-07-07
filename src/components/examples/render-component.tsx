@@ -37,7 +37,9 @@ export default class RenderComponent extends Vue {
 	private example!:example;
 
 	created():void{
-		this.componentData=this.example.data||{};
+		if(this.example.data){
+			this.componentData=JSON.parse(JSON.stringify(this.example.data));
+		}
 	}
 
 	//虚拟组件方法
