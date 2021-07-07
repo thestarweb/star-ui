@@ -6,6 +6,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Prop } from "vue-property-decorator";
 import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 
@@ -14,22 +15,6 @@ type DeviceType='auto'|'mobile'|'pc';
 
 @Options({
 	name:"su-view-control",
-	props: {
-		deviceType:{
-			type: String,
-			default: "auto",
-			validator: function(value:string) {
-				return ['mobile', 'pc', 'auto'].indexOf(value) !== -1
-			}
-		},
-		checkFunction:{
-			type: String,
-			default: "ua",
-			validator: function(value:string) {
-				return ['ua','screen-width'].indexOf(value) !== -1
-			}
-		}
-	},
 	watch:{
 		$isMobile(newValue){
 			this.sendData.isMobile = newValue;
@@ -51,7 +36,21 @@ export default class SuViewControl extends Vue {
 	private sendData:ViewCtrlInfo={
 		isMobile:false
 	}
+	@Prop({
+		type: String,
+		default: "auto",
+		validator: function(value:string) {
+			return ['mobile', 'pc', 'auto'].indexOf(value) !== -1
+		}
+	})
 	deviceType!:DeviceType;
+	@Prop({
+		type: String,
+		default: "ua",
+		validator: function(value:string) {
+			return ['ua','screen-width'].indexOf(value) !== -1
+		}
+	})
 	checkFunction!:'ua'|'screen-width';
 	private windowWidth = 0;
 	private windowHeight = 0;

@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import BasePopper from "./common/base-popper.vue";
-import { Inject } from "vue-property-decorator";
+import { Inject, Prop } from "vue-property-decorator";
 import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 
@@ -39,32 +39,6 @@ declare interface IObj {
 	name:"su-select",
 	components:{
 		BasePopper
-	},
-	props: {
-		modelValue:{
-			type:[String,Number,Array],
-			default:""
-		},
-		name:{
-			type:String,
-			default:""
-		},
-		size:{
-			type:String,
-			default:"medium"
-		},
-		options:{
-			type:Array,
-			default:function(){return [];}
-		},
-		labelName:{
-			type:String,
-			default:"label"
-		},
-		valueName:{
-			type:String,
-			default:"value"
-		},
 	},
 	watch:{
 		isFocused(v){
@@ -79,15 +53,37 @@ declare interface IObj {
 	}
 })
 export default class SuSelect extends Vue {
-	modelValue!:string;
-	$refs!:{
-		// input:HTMLInputElement
-	};
-	size!:string;
+	@Prop({
+		type:[String,Number,Array],
+		default:""
+	})
+	readonly modelValue!:string;
+	@Prop({
+		type:String,
+		default:""
+	})
+	readonly name!:string;
+	@Prop({
+		type:String,
+		default:"medium"
+	})
+	private size!:string;
+	@Prop({
+		type:Array,
+		default:function(){return [];}
+	})
+	readonly options!:IObj[];
+	@Prop({
+		type:String,
+		default:"value"
+	})
+	readonly valueName!:string;
+	@Prop({
+		type:String,
+		default:"label"
+	})
+	readonly labelName!:string;
 	isFocused=false;
-	options!:IObj[];
-	valueName!:string;
-	labelName!:string;
 	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
 	get valueMap():Map<string|number,string>{
 		const map=new Map();

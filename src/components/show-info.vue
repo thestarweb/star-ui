@@ -19,6 +19,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Examples from './examples/index.vue';
+import { data } from "@/../ui/src/reg"
+
 
 type PropInof={
 	field:string,
@@ -85,17 +87,22 @@ export default class SuButton extends Vue {
 	}
 	public get propsList():PropInof[]{
 		// eslint-disable-next-line
-		const props=this.component.__o.props;
+		const props = {
+			...this.component.__o.props,
+			...data[this.component.__o.name]
+		};
 		var list=[];
-		for(const name of Object.keys(props)){
-			const item=props[name];
-			list.push({
-				field:name,
-				type:this.getType(item.type),
-				default:typeof item.default=="function"?item.default():item.default,
-				description:this.$t("components.types."+this.component.__o.name+".props."+name+".description",""),
-				name:this.$t("components.types."+this.component.__o.name+".props."+name+".name"),
-			});
+		if(props){
+			for(const name of Object.keys(props)){
+				const item=props[name];
+				list.push({
+					field:name,
+					type:this.getType(item.type),
+					default:typeof item.default=="function"?item.default():item.default,
+					description:this.$t("components.types."+this.component.__o.name+".props."+name+".description",""),
+					name:this.$t("components.types."+this.component.__o.name+".props."+name+".name"),
+				});
+			}
 		}
 		return list;
 	}
