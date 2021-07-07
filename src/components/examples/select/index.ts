@@ -24,21 +24,21 @@ export default [
 		},
 		data:{
 			options:[
-				{label:"lebal1",value:"1"},
-				{label:"lebal2",value:"2"},
-				{label:"lebal3",value:"3"},
-				{label:"lebal4",value:"4"},
-				{label:"lebal5",value:"5"},
-				{label:"lebal6",value:"6"},
-				{label:"lebal7",value:"7"},
-				{label:"lebal8",value:"8"},
-				{label:"lebal9",value:"9"},
-				{label:"lebal10",value:"10"},
-				{label:"lebal11",value:"11"},
-				{label:"lebal12",value:"12"},
-				{label:"lebal13",value:"13"},
-				{label:"lebal14",value:"14"},
-				{label:"lebal15",value:"15"},
+				{label:"label1",value:"1"},
+				{label:"label2",value:"2"},
+				{label:"label3",value:"3"},
+				{label:"label4",value:"4"},
+				{label:"label5",value:"5"},
+				{label:"label6",value:"6"},
+				{label:"label7",value:"7"},
+				{label:"label8",value:"8"},
+				{label:"label9",value:"9"},
+				{label:"label10",value:"10"},
+				{label:"label11",value:"11"},
+				{label:"label12",value:"12"},
+				{label:"label13",value:"13"},
+				{label:"label14",value:"14"},
+				{label:"label15",value:"15"},
 			],
 			data:"2"
 		}
@@ -67,8 +67,8 @@ export default [
 		},
 		data:{
 			options:[
-				{label:"lebal1",value:"1"},
-				{label:"lebal2",value:"2"},
+				{label:"label1",value:"1"},
+				{label:"label2",value:"2"},
 			],
 			data:"2"
 		}
