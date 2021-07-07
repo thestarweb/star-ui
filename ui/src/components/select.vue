@@ -26,7 +26,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import BasePopper from "./common/base-popper.vue";
-import { Inject, Prop } from "vue-property-decorator";
+import { Inject } from "vue-property-decorator";
+import { Emit, Prop } from "../reg";
 import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 
@@ -103,9 +104,11 @@ export default class SuSelect extends Vue {
 		return this.modelValue;
 	}
 	private width=280;
-	handleSelect(value:string):void{
-		this.$emit("update:modelValue",value);
+	@Emit("update:modelValue")
+	handleSelect(value:string):string{
+		//this.$emit("update:modelValue",value);
 		this.isFocused=false;
+		return value;
 	}
 }
 </script>

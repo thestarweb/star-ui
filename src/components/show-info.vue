@@ -89,7 +89,7 @@ export default class SuButton extends Vue {
 		// eslint-disable-next-line
 		const props = {
 			...this.component.__o.props,
-			...data[this.component.__o.name]
+			...(data[this.component.__o.name]||{}).props
 		};
 		var list=[];
 		if(props){

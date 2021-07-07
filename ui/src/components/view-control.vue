@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Prop } from "vue-property-decorator";
+import { Prop } from "../reg";
 import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 

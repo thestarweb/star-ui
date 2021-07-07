@@ -62,7 +62,8 @@ export function Prop(propOptions:PropOptions):VueDecorator{
 		if(componentOptions.name){
 			// console.log(componentOptions.name);
 			if(!data[componentOptions.name]) data[componentOptions.name] = {};
-			data[componentOptions.name].props = componentOptions;
+			if(!data[componentOptions.name].props) data[componentOptions.name].props={};
+			(data[componentOptions.name].props!)[key] = propOptions;
 		}
 		componentOptions.props ||= Object.create(null)
 		componentOptions.props[key] = propOptions;

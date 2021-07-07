@@ -14,7 +14,6 @@ import "../global-style.css";
 	name:"su-button",
 	props: {
 		size:{
-			
 			type:String,
 			default:()=>{
 				return "min"
