@@ -121,6 +121,24 @@
 					}
 				}
 			},
+			"su-switch":{
+				"name":"开关",
+				"description":"布尔类型表单控件",
+				"props":{
+					"size":{
+						"name":"尺寸",
+						"description":"输入框的尺寸（详见尺寸）"
+					},
+					"modelValue":{
+						"name":"值",
+						"description":""
+					},
+					"name":{
+						"name":"名称",
+						"description":"原生name属性"
+					}
+				}
+			},
 			"su-view-control":{
 				"name":"样式控制器",
 				"description":"用于控制包裹组件的显示样式",

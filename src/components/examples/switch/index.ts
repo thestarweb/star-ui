@@ -1,0 +1,53 @@
+import { example } from "../type.d";
+
+export default [
+	{
+		name:"基本用法（base）",
+		template:{
+			isText:false,
+			component:"div",
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:false,
+							component:"su-switch",
+							props:{
+								"v-model":"checked"
+							}
+						}
+					]
+				}
+			]
+		},
+		data:{
+			checked:false
+		}
+	},
+	{
+		name:"小尺寸",
+		template:{
+			isText:false,
+			component:"div",
+			slot:[
+				{
+					name:"default",
+					data:[
+						{
+							isText:false,
+							component:"su-switch",
+							props:{
+								"v-model":"checked",
+								"size":"mini"
+							}
+						}
+					]
+				}
+			]
+		},
+		data:{
+			checked:true
+		}
+	}
+] as example[];
