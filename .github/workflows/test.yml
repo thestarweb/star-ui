@@ -21,4 +21,4 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: checkout 
-        run: echo ${{ github.event_path }}
+        run: cat ${{ github.event_path }}
