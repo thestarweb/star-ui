@@ -14,7 +14,9 @@
 			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:suControl.isMobile?'100%':(width+'px')}">
 				<div class="star-ui star-ui-select--pooper-title" v-if="suControl.isMobile">请选择</div>
 				<div :class="['star-ui','star-ui-select--pooper-item-list','star-ui-size-'+size]">
-					<div v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
+
+					<su-tree v-if="showAsTree" ref="tree" highlight-current :size="size" :treeData="options" :label="labelName" :value="valueName" :children="children" @node-click="haandleNodeClick"></su-tree>
+					<div v-else v-for="item in valueMap" :key="item[0]" :class="['star-ui','star-ui-select--option','star-ui-size-'+size,'star-ui-container',{
 						'star-ui-select--option-sel':item[0]==this.modelValue
 					}]" @click="handleSelect(item[0])">{{item[1]}}</div>
 				</div>
@@ -84,17 +86,53 @@ export default class SuSelect extends Vue {
 		default:"label"
 	})
 	readonly labelName!:string;
+	@Prop({
+		type:[String,Function],
+		default:()=>{
+			return "children"
+		}
+	})
+	children!:string|((item:Record<string, unknown>)=>Record<string, unknown>[]);
+	@Prop({
+		type:Boolean,
+		default:false
+	})
+	readonly showAsTree!:boolean;
 	isFocused=false;
 	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
 	get valueMap():Map<string|number,string>{
 		const map=new Map();
-		this.options.map((item)=>{
-			if(this.valueName in item){
-				const value=item[this.valueName];
-				const label=(this.labelName in item)?item[this.labelName]:value
-				map.set(value,label);
+		if(this.showAsTree){
+			let task:Record<string, unknown>[] = [];
+			task.push(...this.options);
+			while(task.length){
+				const item = task.pop() as Record<string, unknown>;
+				let itemValue:string|number|undefined;
+				if(typeof this.valueName == "string"){
+					itemValue = (item[this.valueName]) as string|number|undefined;
+				// }else{
+				// 	itemValue = this.value(this.current);
+				}
+				if(itemValue!=undefined){
+					map.set(itemValue,(this.labelName in item)?item[this.labelName]:itemValue);
+				}
+				let children:Record<string, unknown>[]|undefined;
+				if(typeof this.children == "string"){
+					children = (item[this.children]) as Record<string, unknown>[]|undefined;
+				}else{
+					children = this.children(item);
+				}
+				children&&task.push(...children);
 			}
-		});
+		}else{
+			this.options.map((item)=>{
+				if(this.valueName in item){
+					const value=item[this.valueName];
+					const label=(this.labelName in item)?item[this.labelName]:value
+					map.set(value,label);
+				}
+			});
+		}
 		return map;
 	}
 	get showValue():string{
@@ -107,6 +145,11 @@ export default class SuSelect extends Vue {
 	@Emit("update:modelValue")
 	handleSelect(value:string):string{
 		//this.$emit("update:modelValue",value);
+		this.isFocused=false;
+		return value;
+	}
+	@Emit("update:modelValue")
+	haandleNodeClick(item:Record<string, unknown>,value:string|number|undefined){
 		this.isFocused=false;
 		return value;
 	}
@@ -163,6 +206,9 @@ export default class SuSelect extends Vue {
 }
 .star-ui-select--pooper-item-list.star-ui-size-medium{
 	max-height: calc(var(--star-ui-input-medium-font-size) * 15);
+}
+.star-ui-select--pooper-item-list.star-ui-size-mini{
+	max-height: calc(var(--star-ui-input-mini-font-size) * 15);
 }
 
 /*移动样式*/

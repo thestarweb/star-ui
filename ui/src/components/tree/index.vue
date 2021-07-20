@@ -1,6 +1,6 @@
 <template>
 	<div :class="['star-ui', 'star-ui-tree']">
-		<tree-item v-for="(item, index) in treeData" :key="index" :item="item" :label="label" :value="value" :children="children"></tree-item>
+		<tree-item v-for="(item, index) in treeData" :key="index" :size="size" :item="item" :label="label" :value="value" :children="children" :current="current" current-value="currentValue" @node-click="haandleChildNodeClick"></tree-item>
 	</div>
 </template>
 
@@ -25,35 +25,82 @@ export default class SuTree extends Vue {
 			return "medium"
 		}
 	})
-	size!:string;
+	readonly size!:string;
 	@Prop({
 		type:Array,
 		default:()=>{
 			return []
 		}
 	})
-	treeData!:Record<string, unknown>[];
+	readonly treeData!:Record<string, unknown>[];
 	@Prop({
 		type:[String,Function],
 		default:()=>{
 			return "label"
 		}
 	})
-	label!:string|((item:Record<string, unknown>)=>string);
+	readonly label!:string|((item:Record<string, unknown>)=>string);
 	@Prop({
 		type:[String,Function],
 		default:()=>{
 			return "value"
 		}
 	})
-	value!:string|((item:Record<string, unknown>)=>string|number);
+	readonly value!:string|((item:Record<string, unknown>)=>string|number);
 	@Prop({
 		type:[String,Function],
 		default:()=>{
 			return "children"
 		}
 	})
-	children!:string|((item:Record<string, unknown>)=>Record<string, unknown>[]);
+	readonly children!:string|((item:Record<string, unknown>)=>Record<string, unknown>[]);
+	@Prop({
+		type:Boolean,
+		default:()=>{
+			return false
+		}
+	})
+	readonly highlightCurrent!:boolean;
+
+	private current:Record<string, unknown>={};
+	private get currentValue():string|number|undefined{
+		if(typeof this.value == "string"){
+			return (this.current[this.value]) as string|number|undefined;
+		}
+		return this.value(this.current);
+	}
+	public setCurrent(current:Record<string, unknown>):void{
+		this.current=current;
+	}
+	public setCurrentByValue(value:string|number):Record<string, unknown>|null{
+		let task:Record<string, unknown>[] = [];
+		task.push(...this.treeData);
+		while(task.length){
+			const item = task.pop() as Record<string, unknown>;
+			let itemValue:string|number|undefined;
+			if(typeof this.value == "string"){
+				itemValue = (this.current[this.value]) as string|number|undefined;
+			}else{
+				itemValue = this.value(this.current);
+			}
+			if(value == itemValue){
+				this.current = item;
+				return item;
+			}
+			let children:Record<string, unknown>[]|undefined;
+			if(typeof this.children == "string"){
+				children = (this.current[this.children]) as Record<string, unknown>[]|undefined;
+			}else{
+				children = this.children(this.current);
+			}
+			children&&task.push(...children);
+		}
+		return null;
+	}
+	haandleChildNodeClick(item:Record<string, unknown>,value:string|number|undefined,node:Record<string, unknown>):void{
+		this.current=item;
+		this.$emit("node-click",item,value,node);
+	}
 }
 </script>
 
