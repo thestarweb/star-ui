@@ -2,9 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const srcDir="./src";
 const outDir="./out";
-var task = ["/main.ts"]
+var did = [];
+var task = ["/main.ts"];
 while(task.length){
 	const file=task.pop();
+	if(did.indexOf(file) != -1) continue;
 	let fileData = fs.readFileSync(path.join(srcDir, file), "utf8");
 	let outfile=path.join(outDir, file);
 	if(file.endsWith(".vue")){
@@ -17,18 +19,16 @@ while(task.length){
 		if(!importFile.startsWith(".")){
 			return row;
 		}
+		let importFile_ = path.join(path.dirname(file), importFile);
 		if(importFile.lastIndexOf(".")<=importFile.lastIndexOf("/")){
-			const importFile_ = path.join(path.dirname(file), importFile);
 			const base = path.join(srcDir, importFile_);
 			if(fs.existsSync(base+".ts")){
-				task.push(importFile_+".ts");
-				return row;
+				importFile_+=".ts";
 			}else if(fs.existsSync(base+".d.ts")){
-				task.push(importFile_+".d.ts");
-				return row;
+				importFile_+=".d.ts";
 			}
 		}
-		task.push(path.join(path.dirname(file), importFile));
+		task.push(importFile_);
 		return row;
 	});
 	try{
@@ -36,5 +36,6 @@ while(task.length){
 	}catch(e){
 		//nothin to do
 	}
+	did.push(file);
 	fs.writeFileSync(outfile, fileData, {flag: "w+"});
 }
