@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const srcDir="./src";
 const outDir="./out";
-var did = [];
+var down = [];
 var task = ["/main.ts"];
 while(task.length){
 	const file=task.pop();
-	if(did.indexOf(file) != -1) continue;
+	if(down.indexOf(file) != -1) continue;
 	let fileData = fs.readFileSync(path.join(srcDir, file), "utf8");
 	let outfile=path.join(outDir, file);
 	if(file.endsWith(".vue")){
@@ -36,6 +36,6 @@ while(task.length){
 	}catch(e){
 		//nothin to do
 	}
-	did.push(file);
+	down.push(file);
 	fs.writeFileSync(outfile, fileData, {flag: "w+"});
 }
