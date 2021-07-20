@@ -1,6 +1,6 @@
 {
   "name": "@thestarweb/ui",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A UI lib",
   "scripts": {
     "build": "vue-cli-service build --target lib --name star-ui --dest dist/ src/main.ts",

@@ -9,6 +9,7 @@ import SuSelect from "./select";
 import SuSwitch from "./switch";
 import SuButton from "./button";
 import SuTable from "./table";
+import SuTree from "./tree";
 import SuViewControl from "./view-control";
 import { example } from "./type.d";
 
@@ -28,5 +29,6 @@ export default {
 	"su-button":SuButton,
 	"su-switch":SuSwitch,
 	"su-table":SuTable,
+	"su-tree":SuTree,
 	"su-view-control":SuViewControl,
 }as ExamplesObj;

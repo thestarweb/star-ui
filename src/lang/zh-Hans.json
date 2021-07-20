@@ -63,6 +63,32 @@
 					}
 				}
 			},
+			"su-tree":{
+				"name":"树",
+				"description":"用清晰的层级结构展示信息，可展开或折叠",
+				"props":{
+					"size":{
+						"name":"尺寸",
+						"description":"尺寸（详见尺寸）"
+					},
+					"treeData":{
+						"name":"树的数据",
+						"description":"展示数据"
+					},
+					"label":{
+						"name":"选项字段",
+						"description":"指定节点标签为节点对象的某个属性显示值"
+					},
+					"value":{
+						"name":"值字段",
+						"description":"指定节点标签为节点对象的某个属性值"
+					},
+					"children":{
+						"name":"子节点字段",
+						"description":"指定子树为节点对象的某个属性值"
+					}
+				}
+			},
 			"su-button":{
 				"name":"按钮",
 				"description":"按钮组件",
