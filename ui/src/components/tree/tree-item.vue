@@ -112,7 +112,11 @@ export default class SuTreeItem extends Vue {
 		}
 		return this.children(this.item);
 	}
-	private handleClick():void{
+	private handleClick(ev:MouseEvent):void{
+		var classList = (ev.target as HTMLElement).className.split(" ");
+		if(classList.indexOf("star-ui-icon-arrow-down")!=-1 || classList.indexOf("star-ui-icon-arrow-right")!=-1){
+			return;
+		}
 		this.$emit("node-click",this.item,this.valueData,this);
 	}
 	haandleChildNodeClick(item:Record<string, unknown>,value:string|number|undefined,node:Record<string, unknown>):void{
