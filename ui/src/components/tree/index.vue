@@ -79,9 +79,9 @@ export default class SuTree extends Vue {
 			const item = task.pop() as Record<string, unknown>;
 			let itemValue:string|number|undefined;
 			if(typeof this.value == "string"){
-				itemValue = (this.current[this.value]) as string|number|undefined;
+				itemValue = (item[this.value]) as string|number|undefined;
 			}else{
-				itemValue = this.value(this.current);
+				itemValue = this.value(item);
 			}
 			if(value == itemValue){
 				this.current = item;
@@ -89,12 +89,13 @@ export default class SuTree extends Vue {
 			}
 			let children:Record<string, unknown>[]|undefined;
 			if(typeof this.children == "string"){
-				children = (this.current[this.children]) as Record<string, unknown>[]|undefined;
+				children = (item[this.children]) as Record<string, unknown>[]|undefined;
 			}else{
-				children = this.children(this.current);
+				children = this.children(item);
 			}
 			children&&task.push(...children);
 		}
+		this.current={};
 		return null;
 	}
 	haandleChildNodeClick(item:Record<string, unknown>,value:string|number|undefined,node:Record<string, unknown>):void{

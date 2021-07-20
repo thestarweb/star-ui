@@ -31,6 +31,8 @@ import BasePopper from "./common/base-popper.vue";
 import { Inject } from "vue-property-decorator";
 import { Emit, Prop } from "../reg";
 import { ViewCtrlInfo } from "../types";
+import SuTree from "./tree/index.vue"
+
 import "../global-style.css";
 
 declare interface IObj {
@@ -41,7 +43,8 @@ declare interface IObj {
 @Options({
 	name:"su-select",
 	components:{
-		BasePopper
+		BasePopper,
+		SuTree
 	},
 	watch:{
 		isFocused(v){
@@ -52,10 +55,16 @@ declare interface IObj {
 					}
 				}
 			}
+		},
+		modelValue(v){
+			this.updateTree();
 		}
 	}
 })
 export default class SuSelect extends Vue {
+	declare $refs:{
+		tree:SuTree
+	};
 	@Prop({
 		type:[String,Number,Array],
 		default:""
@@ -142,6 +151,11 @@ export default class SuSelect extends Vue {
 		return this.modelValue;
 	}
 	private width=280;
+	private updateTree(){
+		if(this.modelValue&&this.showAsTree){
+			this.$refs.tree.setCurrentByValue(this.modelValue);
+		}
+	}
 	@Emit("update:modelValue")
 	handleSelect(value:string):string{
 		//this.$emit("update:modelValue",value);
@@ -149,8 +163,9 @@ export default class SuSelect extends Vue {
 		return value;
 	}
 	@Emit("update:modelValue")
-	haandleNodeClick(item:Record<string, unknown>,value:string|number|undefined){
+	haandleNodeClick(item:Record<string, unknown>,value:string|number|undefined):string|number|undefined{
 		this.isFocused=false;
+		this.$refs.tree.setCurrentByValue(this.modelValue);
 		return value;
 	}
 }
