@@ -86,6 +86,10 @@
 					"children":{
 						"name":"子节点字段",
 						"description":"指定子树为节点对象的某个属性值"
+					},
+					"highlightCurrent":{
+						"name":"是否高亮显示选中节点",
+						"description":""
 					}
 				}
 			},
@@ -144,6 +148,14 @@
 					"valueName":{
 						"name":"值字段",
 						"description":"options中的绑定值字段"
+					},
+					"showAsTree":{
+						"name":"是否显示成树",
+						"description":""
+					},
+					"children":{
+						"name":"子树字段",
+						"description":""
 					}
 				}
 			},

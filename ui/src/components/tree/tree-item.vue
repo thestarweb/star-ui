@@ -30,7 +30,7 @@ import treeItem from "./tree-item.vue"
 import "../../global-style.css";
 
 @Options({
-	name:"su-button",
+	name:"su-tree-item",
 	components:{
 		treeItem
 	}
