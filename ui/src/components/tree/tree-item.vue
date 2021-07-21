@@ -129,7 +129,7 @@ export default class SuTreeItem extends Vue {
 .star-ui-tree-item-label{
 	cursor: pointer;
 }
-.star-ui-tree-current{
+.star-ui-tree-highlight-current .star-ui-tree-current{
 	background: var(--star-ui-base-color);
     color: var(--star-ui-backgorund-color);
 }

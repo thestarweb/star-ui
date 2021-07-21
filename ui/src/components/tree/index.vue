@@ -1,5 +1,11 @@
 <template>
-	<div :class="['star-ui', 'star-ui-tree']">
+	<div :class="[
+		'star-ui',
+		'star-ui-tree',
+		{
+			'star-ui-tree-highlight-current':highlightCurrent
+		}
+	]">
 		<tree-item v-for="(item, index) in treeData" :key="index" :size="size" :item="item" :label="label" :value="value" :children="children" :current="current" current-value="currentValue" @node-click="haandleChildNodeClick"></tree-item>
 	</div>
 </template>

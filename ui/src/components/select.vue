@@ -62,6 +62,9 @@ declare interface IObj {
 	}
 })
 export default class SuSelect extends Vue {
+	mounted(){
+		this.updateTree();
+	}
 	declare $refs:{
 		tree:SuTree
 	};
