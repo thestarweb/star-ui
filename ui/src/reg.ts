@@ -1,12 +1,14 @@
 import { VueDecorator, PropOptions, createDecorator } from 'vue-class-component';
+import { reactive } from 'vue';
 
-export const data = {
+
+export const data = reactive({
 	//
 } as {[key:string]: {
 	props?:{
 		[key:string]: PropOptions
 	}
-}}
+}});
 
 const hyphenate = (str:string) => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 // eslint-disable-next-line
