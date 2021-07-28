@@ -57,7 +57,7 @@ export default class SuInput extends Vue {
 
 <style>
 .star-ui-input{
-	display: flex;
+	display: inline-flex;
 	border: solid 1px var(--star-ui-input-border-color);
 	border-radius: var(--star-ui-border-radius);
 	flex-direction: row;

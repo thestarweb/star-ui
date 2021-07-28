@@ -177,10 +177,9 @@ export default class SuSelect extends Vue {
 <style>
 /*基本样式*/
 .star-ui-select{
-	display: inline-block;
 	border: solid 1px var(--star-ui-input-border-color);
 	border-radius: var(--star-ui-border-radius);
-	display: flex;
+	display: inline-flex;
 	flex-direction: row;
 	width:var(--star-ui-input-default-width);
 }
