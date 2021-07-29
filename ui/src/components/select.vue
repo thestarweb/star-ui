@@ -31,7 +31,9 @@ import BasePopper from "./common/base-popper.vue";
 import { Inject } from "vue-property-decorator";
 import { Emit, Prop } from "../reg";
 import { ViewCtrlInfo } from "../types";
-import SuTree from "./tree/index.vue"
+import SuTree from "./tree/index.vue";
+import ViewControl from "./view-control.vue";
+
 
 import "../global-style.css";
 
@@ -111,7 +113,10 @@ export default class SuSelect extends Vue {
 	})
 	readonly showAsTree!:boolean;
 	isFocused=false;
-	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
+	@Inject({from:ViewControl.injectSymbol,default:{}}) readonly _suControl!: ViewCtrlInfo;
+	get suControl(): ViewCtrlInfo{
+		return this._suControl || {};
+	}
 	get valueMap():Map<string|number,string>{
 		const map=new Map();
 		if(this.showAsTree){
@@ -182,6 +187,7 @@ export default class SuSelect extends Vue {
 	display: inline-flex;
 	flex-direction: row;
 	width:var(--star-ui-input-default-width);
+	cursor: pointer;
 }
 /*选中时样式*/
 .star-ui-select:hover,.star-ui-select.is-focus{

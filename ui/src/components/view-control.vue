@@ -6,7 +6,11 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { InjectionKey } from 'vue';
+
 import { Prop } from "../reg";
+import { Provide } from "vue-property-decorator";
+
 import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 
@@ -30,9 +34,11 @@ type DeviceType='auto'|'mobile'|'pc';
 	}
 })
 export default class SuViewControl extends Vue {
+	public static readonly injectSymbol=Symbol();
 	mounted():void{
 		this.$el._vue = this;
 	}
+	@Provide({to:SuViewControl.injectSymbol})
 	private sendData:ViewCtrlInfo={
 		isMobile:false
 	}
