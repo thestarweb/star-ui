@@ -13,15 +13,15 @@ module.exports = {
 			});
 			// config.externals.vue="Vue";
 			config.plugins.forEach((val) => {
-	            if (val instanceof HtmlWebpackPlugin) {
-	                // console.log(val)
-	                //let _ = val.options.templateParameters;
+				if (val instanceof HtmlWebpackPlugin) {
+					// console.log(val)
+					//let _ = val.options.templateParameters;
 					// val.options.cdn={
 					// 	Vue:"https://unpkg.com/vue@next"
 					// };
 					val.options.cdn=CDNURLs;
-	            }
-	        });
+				}
+			});
 		}
 	}
 }

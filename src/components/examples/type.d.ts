@@ -12,5 +12,5 @@ export interface template{
 export interface example{
 	name:string,
 	template:template,
-	data?:any
+	data?:Record<string, unknown>
 }

@@ -37,11 +37,6 @@ import ViewControl from "./view-control.vue";
 
 import "../global-style.css";
 
-declare interface IObj {
-	// eslint-disable-next-line
-    [key: string]: any,
-}
-
 @Options({
 	name:"su-select",
 	components:{
@@ -58,13 +53,13 @@ declare interface IObj {
 				}
 			}
 		},
-		modelValue(v){
+		modelValue(){
 			this.updateTree();
 		}
 	}
 })
 export default class SuSelect extends Vue {
-	mounted(){
+	mounted():void{
 		this.updateTree();
 	}
 	declare $refs:{
@@ -89,7 +84,7 @@ export default class SuSelect extends Vue {
 		type:Array,
 		default:function(){return [];}
 	})
-	readonly options!:IObj[];
+	readonly options!:Record<string, unknown>[];
 	@Prop({
 		type:String,
 		default:"value"
@@ -113,10 +108,7 @@ export default class SuSelect extends Vue {
 	})
 	readonly showAsTree!:boolean;
 	isFocused=false;
-	@Inject({from:ViewControl.injectSymbol,default:{}}) readonly _suControl!: ViewCtrlInfo;
-	get suControl(): ViewCtrlInfo{
-		return this._suControl || {};
-	}
+	@Inject({from:ViewControl.injectSymbol,default:{}}) readonly suControl!: ViewCtrlInfo;
 	get valueMap():Map<string|number,string>{
 		const map=new Map();
 		if(this.showAsTree){
