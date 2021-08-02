@@ -63,6 +63,8 @@ export default class SuInput extends Vue {
 	flex-direction: row;
 	width:var(--star-ui-input-default-width);
 	overflow: hidden;
+	color: var(--star-ui-regular-text-color);
+	background: var(--star-ui-backgorund-color);
 }
 .star-ui-input:hover,.star-ui-input.is-focus{
 	border: solid 1px var(--star-ui-base-color);
@@ -72,7 +74,7 @@ export default class SuInput extends Vue {
 	outline: none;
 	margin: 0;
 	flex:1;
-	color: var(--star-ui-regular-text-color);
-	background: var(--star-ui-backgorund-color);
+	color: unset;
+	background: unset;
 }
 </style>

@@ -156,6 +156,10 @@
 					"children":{
 						"name":"子树字段",
 						"description":""
+					},
+					"pooperClass":{
+						"name":"弹层类名",
+						"description":""
 					}
 				}
 			},
@@ -187,6 +191,20 @@
 					},
 					"checkFunction":{
 						"name":"检查是否是移动端的方案",
+						"description":""
+					}
+				}
+			},
+			"su-calendar":{
+				"name":"日历",
+				"description":"显示日期",
+				"props":{
+					"displayMonth":{
+						"name":"显示的月份",
+						"description":""
+					},
+					"weekName":{
+						"name":"周的显示",
 						"description":""
 					}
 				}

@@ -10,6 +10,8 @@ import SuSwitch from "./switch";
 import SuButton from "./button";
 import SuTable from "./table";
 import SuTree from "./tree";
+import SuCalendar from "./calendar";
+
 import SuViewControl from "./view-control";
 import { example } from "./type.d";
 
@@ -30,5 +32,6 @@ export default {
 	"su-switch":SuSwitch,
 	"su-table":SuTable,
 	"su-tree":SuTree,
+	"su-calendar":SuCalendar,
 	"su-view-control":SuViewControl,
 }as ExamplesObj;
