@@ -14,10 +14,10 @@ import "../global-style.css";
 })
 export default class SuInput extends Vue {
 	@Prop({
-		type:String,
+		type:[String,Number],
 		default:""
 	})
-	modelValue!:string;
+	modelValue!:string|number;
 	$refs!:{
 		input:HTMLInputElement
 	};
@@ -41,7 +41,7 @@ export default class SuInput extends Vue {
 			var target=event.target as HTMLInputElement;
 			this.$emit("update:modelValue",target.value);
 			this.emitInput(target.value)
-			this.$nextTick(()=>target.value=this.modelValue);
+			this.$nextTick(()=>target.value=(this.modelValue as string));//数字会自动转换成字符串
 			// return target.value;
 		}
 		// return "";
@@ -72,5 +72,7 @@ export default class SuInput extends Vue {
 	outline: none;
 	margin: 0;
 	flex:1;
+	color: var(--star-ui-regular-text-color);
+	background: var(--star-ui-backgorund-color);
 }
 </style>

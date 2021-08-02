@@ -11,7 +11,7 @@
 		</div>
 		<!-- 选项弹窗 -->
 		<base-popper :from-item="$el" :visible="isFocused" @out-click="isFocused=false">
-			<div :class="['star-ui','star-ui-select--pooper']" :style="{width:suControl.isMobile?'100%':(width+'px')}">
+			<div :class="['star-ui','star-ui-select--pooper',pooperClass]" :style="{width:suControl.isMobile?'100%':(width+'px')}">
 				<div class="star-ui star-ui-select--pooper-title" v-if="suControl.isMobile">请选择</div>
 				<div :class="['star-ui','star-ui-select--pooper-item-list','star-ui-size-'+size]">
 
@@ -107,6 +107,11 @@ export default class SuSelect extends Vue {
 		default:false
 	})
 	readonly showAsTree!:boolean;
+	@Prop({
+		type:String,
+		default:""
+	})
+	readonly pooperClass!:string;
 	isFocused=false;
 	@Inject({from:ViewControl.injectSymbol,default:{}}) readonly suControl!: ViewCtrlInfo;
 	get valueMap():Map<string|number,string>{
@@ -180,6 +185,8 @@ export default class SuSelect extends Vue {
 	flex-direction: row;
 	width:var(--star-ui-input-default-width);
 	cursor: pointer;
+	color: var(--star-ui-regular-text-color);
+	background: var(--star-ui-backgorund-color);
 }
 /*选中时样式*/
 .star-ui-select:hover,.star-ui-select.is-focus{
@@ -191,6 +198,7 @@ export default class SuSelect extends Vue {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	text-align: left;
 }
 /*清除原生输入框的样式*/
 .star-ui-select--inner,.star-ui-select--inner:hover,.star-ui-select--inner:active,.star-ui-select--inner:focus{
@@ -204,6 +212,7 @@ export default class SuSelect extends Vue {
 	background: var(--star-ui-backgorund-color);
 	border: solid 1px var(--star-ui-input-border-color);
 	border-radius: var(--star-ui-border-radius);
+	color: var(--star-ui-regular-text-color);
 }
 .star-ui-select--option{
 	cursor: pointer;
