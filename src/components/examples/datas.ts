@@ -5,6 +5,8 @@ import SuHLine from "./h-line";
 import SuVLine from "./v-line";
 import SuCard from "./card";
 import SuInput from "./input";
+import SuSlider from "./slider"
+
 import SuSelect from "./select";
 import SuSwitch from "./switch";
 import SuButton from "./button";
@@ -27,6 +29,7 @@ export default {
 	"su-v-line":SuVLine,
 	"su-card":SuCard,
 	"su-input":SuInput,
+	"su-slider":SuSlider,
 	"su-select":SuSelect,
 	"su-button":SuButton,
 	"su-switch":SuSwitch,
