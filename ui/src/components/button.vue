@@ -25,6 +25,9 @@ export default class SuButton extends Vue {
 </script>
 
 <style>
+.star-ui-button{
+	border-width: 1px;
+}
 .star-ui-button.star-ui-size-mini{
 	border-radius:2px;
 }

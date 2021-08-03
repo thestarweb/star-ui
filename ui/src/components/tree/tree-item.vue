@@ -136,15 +136,21 @@ export default class SuTreeItem extends Vue {
 .star-ui-tree-deep-nbsp{
 	display: inline-block;
 	height: 100%;
-	width: 20px;
+	width: var(--star-ui-input-medium-font-size);
+}
+.star-ui-size-mini .star-ui-tree-deep-nbsp{
+	width: var(--star-ui-input-mini-font-size);
 }
 .star-ui-tree-expand-button{
 	font-size: inherit;
 }
 .star-ui-tree-expand-button{
-	width: 16px;
+	width: var(--star-ui-input-medium-font-size);
 	height: 100%;
 	display: inline-block;
 	cursor: pointer;
+}
+.star-ui-size-mini .star-ui-tree-expand-button{
+	width: var(--star-ui-input-mini-font-size);
 }
 </style>
