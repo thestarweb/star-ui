@@ -6,16 +6,22 @@
         <su-h-layout>
           <div :class="['menu',{open:isOpenMenu}]">
             <h4>{{$t("menu.base")}}</h4>
-            <div @click="handleSel('home')" :class="{select:sel==null}">{{$t("home.title")}}</div>
+            <div @click="handleSel('home')" :class="{select:sel==null}">
+              <router-link :to="{name:'home'}">{{$t("home.title")}}</router-link>
+            </div>
+
             <h4>{{$t("components.title")}}</h4>
-            <div v-for="item in allComponents" :key="item.name" @click="handleSel(item)" :class="{select:sel==item}">
-              {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
+            <div v-for="item in allComponents" :key="item.name" :class="{select:sel==item}">
+              <router-link :to="{name:'show-component',params:{name:item.__o.name}}">
+                {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
+              </router-link>
             </div>
           </div>
           <su-v-line :class="{hiddenOnMobile:!isOpenMenu}"/>
           <su-main class="data" @click="isOpenMenu=false">
-            <show v-if="sel" :component="sel"></show>
-            <component v-else :is="component"></component>
+            <!-- <show v-if="sel" :component="sel"></show>
+            <component v-else :is="component"></component> -->
+            <router-view/>
           </su-main>
         </su-h-layout>
       </su-main>
@@ -27,29 +33,15 @@
 import { Options, Vue } from 'vue-class-component';
 
 import {components} from "@/../ui/src/main";
-import Home from "@/components/home.vue";
-import Show from "@/components/show-info.vue";
 
 @Options({
   components:{
-    Show
   }
 })
 export default class HelloWorld extends Vue {
   private allComponents=components;
-  private sel=null;
   // eslint-disable-next-line
-  private component:any=Home;
   private isOpenMenu=false;
-  // eslint-disable-next-line
-  private handleSel(sel:any){
-    if(typeof sel=="string"){
-      this.component=Home;
-      this.sel=null;
-    }else{
-      this.sel=sel;
-    }
-  }
 }
 </script>
 
@@ -74,17 +66,20 @@ header{
 .menu>h4{
   padding: 2px 10px;
 }
-.menu>div{
+.menu>div>a{
+  display: block;
   padding: 5px 10px;
   padding-left: 20px;
   cursor: pointer;
   position: relative;
+  color: #000;
+  text-decoration: none;
 }
-.menu .select{
+.menu .router-link-active{
   color: #08F;
   background: #DEF;
 }
-.menu .select:before{
+.menu .router-link-active:before{
   content: "";
   position: absolute;
   height: 100%;

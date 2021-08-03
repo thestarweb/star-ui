@@ -19,7 +19,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import Examples from './examples/index.vue';
-import { data } from "@/../ui/src/reg"
+import { data } from "@/../ui/src/reg";
+import {components} from "@/../ui/src/main";
 
 
 type PropInof={
@@ -34,17 +35,20 @@ type PropInof={
 	name:"su-button",
 	components:{
 		Examples
-	},
-	props: {
-		component:{
-			type:Function,
-			required:true
-		}
 	}
 })
 export default class SuButton extends Vue {
 	// eslint-disable-next-line
-	component!:any;
+	public get component():any{
+		for(let i in components){
+			if(components[i].__o.name==this.$route.params.name){
+				return components[i];
+			}
+		}
+		return {
+			__o:{}
+		}
+	}
 	public column=[
 		//{name:"名称"},
 		{
