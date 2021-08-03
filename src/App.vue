@@ -6,12 +6,12 @@
         <su-h-layout>
           <div :class="['menu',{open:isOpenMenu}]">
             <h4>{{$t("menu.base")}}</h4>
-            <div @click="handleSel('home')" :class="{select:sel==null}">
+            <div>
               <router-link :to="{name:'home'}">{{$t("home.title")}}</router-link>
             </div>
 
             <h4>{{$t("components.title")}}</h4>
-            <div v-for="item in allComponents" :key="item.name" :class="{select:sel==item}">
+            <div v-for="item in allComponents" :key="item.name">
               <router-link :to="{name:'show-component',params:{name:item.__o.name}}">
                 {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
               </router-link>

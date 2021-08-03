@@ -208,6 +208,28 @@
 						"description":""
 					}
 				}
+			},
+			"su-slider":{
+				"name":"滑块",
+				"description":"通过拖动滑块在一个固定区间内进行选择",
+				"props":{
+					"size":{
+						"name":"尺寸",
+						"description":""
+					},
+					"modelValue":{
+						"name":"绑定的值",
+						"description":""
+					},
+					"max":{
+						"name":"最大值",
+						"description":""
+					},
+					"min":{
+						"name":"最小值",
+						"description":""
+					}
+				}
 			}
 		}
 	}
