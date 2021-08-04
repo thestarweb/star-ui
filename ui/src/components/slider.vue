@@ -51,11 +51,20 @@ export default class SuSlider extends Vue {
 	})
 	public readonly max!:number;
 
+	@Prop({
+		type:Number,
+		default:0
+	})
+	public readonly setp!:number;
+
 	private moveStartValue=0;
 	private get displayValue():number{
 		let res=this.modelValue;
 		if(this.refBar && this.dx){
 			res=this.moveStartValue+this.dx/this.refBar.clientWidth*(this.max-this.min);
+		}
+		if(this.setp&&this.setp>0){
+			res= Math.round((res-this.min)/this.setp)*this.setp;
 		}
 		if(res>this.max) res=this.max;
 		else if(res<this.min) res=this.min;
@@ -63,12 +72,6 @@ export default class SuSlider extends Vue {
 	}
 	private get positionLeft():number{
 		return (this.displayValue-this.min)*100/(this.max-this.min);
-		// if(this.refBar){
-		// 	res+=this.dx*100/this.refBar.clientWidth;
-		// }
-		// if(res>100)res=100;
-		// else if(res<0) res=0;
-		// return res;
 	}
 	@Emit("update:modelValue")
 	private updateEvent(value:number):number{
@@ -91,7 +94,7 @@ export default class SuSlider extends Vue {
 
 		this.updateEvent(this.displayValue);
 	}
-	private handleMouseUp(ev:MouseEvent):void{
+	private handleMouseUp():void{
 		this.updateEvent(this.displayValue);
 		this.dx=0;
 		this.removeEvent();
