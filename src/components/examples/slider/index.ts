@@ -18,11 +18,8 @@ export default [
 							}
 						},
 						{
-							isText:false,
-							component:"su-input",
-							props:{
-								":modelValue":"value"
-							}
+							isText:true,
+							text:"{{value}}"
 						}
 					]
 				}

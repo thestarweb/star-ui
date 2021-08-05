@@ -53,7 +53,8 @@ export default class RenderComponent extends Vue {
 
 	//解析表达式（仅限简单表达式）
 	private analysis(expression:string){
-		let data=this.componentThis;
+		// eslint-disable-next-line
+		let data=this.componentThis as any;
 		expression.split(".").forEach((itemKey)=>{
 			data=data[itemKey];
 		})
@@ -96,7 +97,7 @@ export default class RenderComponent extends Vue {
 				solt[s.name]=()=>{
 					return s.data.map((template)=>{
 						if(template.isText){
-							return template.text;
+							return (template.text as string).replace(/\{\{(.+?)\}\}/g,(data,v)=>this.analysis(v));
 						}
 						return this.renderComponent(template);
 					});

@@ -228,6 +228,10 @@
 					"min":{
 						"name":"最小值",
 						"description":""
+					},
+					"setp":{
+						"name":"步长",
+						"description":""
 					}
 				}
 			}
