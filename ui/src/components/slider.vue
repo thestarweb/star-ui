@@ -1,7 +1,7 @@
 <template>
 	<div :class="['star-ui','su-slider','star-ui-size-'+size]">
 		<div ref="bar" class="su-slider--inner-runway">
-			<div class="su-slider--inner-button-wrapper" :style="{left:positionLeft+'%'}" @mousedown="handleMouseDown"></div>
+			<div class="su-slider--inner-button-wrapper" :style="{left:positionLeft+'%'}" @mousedown="handleMouseDown" @touchstart="handleTouchStart"></div>
 		</div>
 	</div>
 </template>
@@ -85,14 +85,34 @@ export default class SuSlider extends Vue {
 		window.addEventListener("mouseup",this.handleMouseUp);
 		this.moveStartValue=this.modelValue;
 	}
+	private touchstartPoint:Touch|null=null;
+	private handleTouchStart(ev:TouchEvent):void{
+		window.addEventListener("touchmove",this.handleTouchMove,{ passive: false });
+		window.addEventListener("touchend",this.handleMouseUp,{ passive: false });
+		this.touchstartPoint=ev.changedTouches[0];
+		this.moveStartValue=this.modelValue;
+	}
 	private removeEvent():void{
 		window.removeEventListener("mousemove",this.handleMouseMove);
 		window.removeEventListener("mouseup",this.handleMouseUp);
+		window.removeEventListener("touchmove",this.handleTouchMove);
+		window.removeEventListener("touchend",this.handleMouseUp);
 	}
 	private handleMouseMove(ev:MouseEvent):void{
 		this.dx+=ev.movementX;
-
 		this.updateEvent(this.displayValue);
+	}
+	private handleTouchMove(ev:TouchEvent):void{
+		if(!this.touchstartPoint) return;
+		ev.preventDefault();
+		for(let i=0;i<ev.changedTouches.length;i++){
+			if(ev.changedTouches[i].identifier==this.touchstartPoint.identifier){
+				this.dx=ev.changedTouches[i].pageX-this.touchstartPoint.pageX;
+				this.updateEvent(this.displayValue);
+				break;
+			}
+		}
+		// this.dx+=ev.movementX;
 	}
 	private handleMouseUp():void{
 		this.updateEvent(this.displayValue);
