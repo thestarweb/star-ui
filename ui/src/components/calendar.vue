@@ -1,17 +1,28 @@
 <template>
-	<table class="star-ui-calendar" cellspacing="0" cellpadding="0">
-		<tr class="su-calendar--inner-head">
-			<th class="" v-for="(name,index) in displayHead" :key="index">{{name}}</th>
-		</tr>
-		<tr v-for="(row,index) in displayData" :key="index">
-			<td v-for="(day,index) in row" :key="index" class="su-calendar--inner-cell">{{day}}</td>
-		</tr>
-	</table>
+	<div class="star-ui-calendar">
+		<div class="star-ui-calendar--ctrl">
+			<div @click="dYear--">&lt;&lt;</div>
+			<div @click="dMonth--">&lt;</div>
+			<div class="star-ui-calendar--display-month">{{displayMonthStartDate.format("YYYY-MM")}}</div>
+			<div @click="dMonth++">&gt;</div>
+			<div @click="dYear++">&gt;&gt;</div>
+		</div>
+		<table cellspacing="0" cellpadding="0">
+			<tr class="su-calendar--inner-head">
+				<th class="" v-for="(name,index) in displayHead" :key="index">{{name}}</th>
+			</tr>
+			<tr v-for="(row,index) in displayData" :key="index">
+				<td v-for="(day,index) in row" :key="index" class="su-calendar--inner-cell">{{day}}</td>
+			</tr>
+		</table>
+	</div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { Prop } from "../reg";
+import moment from "moment";
+
 
 import "../global-style.css";
 
@@ -20,16 +31,18 @@ import "../global-style.css";
 })
 export default class SuCalendar extends Vue {
 	@Prop({
-		type:Date,
+		type:[Date,String],
 		default:()=>{
 			return new Date();
 		}
 	})
-	public readonly displayMonth!:Date;
-	private get displayMonthStartDate():Date{
-		let date=new Date(this.displayMonth);
-		date.setMonth(-1);
-		date.setDate(1);
+	public readonly displayMonth!:Date|string;
+	private dYear=0;
+	private dMonth=0;
+	private get displayMonthStartDate():moment.Moment{
+		let date=moment(this.displayMonth);
+		date.add(this.dYear,"y").add(this.dMonth,"M");
+		date.date(1);
 		return date;
 	}
 	@Prop({
@@ -56,9 +69,9 @@ export default class SuCalendar extends Vue {
 	private get displayData():number[][]{
 		let res:number[][]=[[]];
 		let now=res[0];
-		let month=this.displayMonthStartDate.getMonth();
-		let year=this.displayMonthStartDate.getFullYear()
-		let lastMonthDay=this.displayMonthStartDate.getDay();
+		let month=this.displayMonthStartDate.month();
+		let year=this.displayMonthStartDate.year()
+		let lastMonthDay=this.displayMonthStartDate.day();
 		//计算上个月开始的位置
 		let lastMonthStart=this.getMonthDate(month==1?12:month-1,year)-lastMonthDay;
 		for(let i=0;i<lastMonthDay;i++){
@@ -84,6 +97,20 @@ export default class SuCalendar extends Vue {
 <style>
 .star-ui-calendar{
 	text-align: center;
+	display: inline-block;
+	border: 1px solid #e8eaec;
+}
+.star-ui-calendar--ctrl{
+	display: flex;
+	flex-direction: row;
+}
+.star-ui-calendar--ctrl>*{
+	padding: 5px;
+	cursor: pointer;
+}
+.star-ui-calendar--display-month{
+	flex: 1 0 auto;
+	cursor: default;
 }
 .star-ui-calendar th,.star-ui-calendar td{
 	padding: 5px 0;
