@@ -1,13 +1,17 @@
 <template>
-	<div class="star-ui-calendar">
-		<div class="star-ui-calendar--ctrl">
+	<div class="star-ui star-ui-calendar">
+		<div class="star-ui-calendar--ctrl" :style="{opacity: showSelYear||showSelMonth?0:1}">
 			<div @click="dYear--">&lt;&lt;</div>
 			<div @click="dMonth--">&lt;</div>
-			<div class="star-ui-calendar--display-month">{{displayMonthStartDate.format("YYYY-MM")}}</div>
+			<div class="star-ui-calendar--display-month">
+				<span @click="showSelYear=true">{{displayMonthStartDate.format("YYYY")}}</span>
+				-
+				<span @click="showSelMonth=true">{{displayMonthStartDate.format("MM")}}</span>
+			</div>
 			<div @click="dMonth++">&gt;</div>
 			<div @click="dYear++">&gt;&gt;</div>
 		</div>
-		<table cellspacing="0" cellpadding="0">
+		<table cellspacing="0" cellpadding="0" :style="{opacity: showSelYear||showSelMonth?0:1}">
 			<tr class="su-calendar--inner-head">
 				<th class="" v-for="(name,index) in displayHead" :key="index">{{name}}</th>
 			</tr>
@@ -15,6 +19,30 @@
 				<td v-for="(day,index) in row" :key="index" class="su-calendar--inner-cell">{{day}}</td>
 			</tr>
 		</table>
+		<div v-if="showSelYear" class="star-ui-calendar--select">
+			<div class="star-ui-calendar--select-ctrl">
+				<div @click="dShowSelYear--">&lt;&lt;</div>
+				<div></div>
+				<div @click="dShowSelYear++">&gt;&gt;</div>
+			</div>
+			<div class="star-ui-calendar--select-body">
+				<div v-for="i in 12" :key="i" :class="{'now-sel':i==6&&dShowSelYear==0}" @click="dYear+=i-6+dShowSelYear*12;showSelYear=false;dShowSelYear=0;">
+					{{displayMonthStartDate.year()+i-6+dShowSelYear*12}}
+				</div>
+			</div>
+		</div>
+		<div v-if="showSelMonth" class="star-ui-calendar--select">
+			<!-- <div class="star-ui-calendar--select-ctrl">
+				<div @click="dShowSelYear--">&lt;&lt;</div>
+				<div></div>
+				<div @click="dShowSelYear++">&gt;&gt;</div>
+			</div> -->
+			<div class="star-ui-calendar--select-body">
+				<div v-for="i in 12" :key="i" :class="{'now-sel':i==6&&dShowSelYear==0}" @click="showSelMonth=false;dShowSelYear=0;">
+					{{i}}
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -91,6 +119,10 @@ export default class SuCalendar extends Vue {
 		}
 		return res;
 	}
+
+	private showSelYear=false;
+	private dShowSelYear=0;
+	private showSelMonth=false;
 }
 </script>
 
@@ -112,6 +144,9 @@ export default class SuCalendar extends Vue {
 	flex: 1 0 auto;
 	cursor: default;
 }
+.star-ui-calendar--display-month>span{
+	cursor: pointer;
+}
 .star-ui-calendar th,.star-ui-calendar td{
 	padding: 5px 0;
 }
@@ -121,5 +156,44 @@ export default class SuCalendar extends Vue {
 .su-calendar--inner-cell{
 	border: 1px solid #e8eaec;
 	width: 42px
+}
+
+.star-ui-calendar--select{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: inherit;
+}
+.star-ui-calendar--select-body{
+	flex-grow: 1;
+	display: grid;
+	grid-template-rows: repeat(3, 1fr);
+	grid-template-columns: repeat(4, 1fr);
+	align-items: center;
+}
+.star-ui-calendar--select-body>*{
+	cursor: pointer;
+}
+.star-ui-calendar--select-body>*:hover{
+	color: var(--star-ui-base-color);
+}
+.star-ui-calendar--select-ctrl{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
+	height: 20%;
+	align-items: center;
+}
+.star-ui-calendar--select-ctrl>*{
+	padding: 0 15px;
+	cursor: pointer;
+}
+.star-ui-calendar .now-sel{
+	color: var(--star-ui-base-color);
+	font-weight: bold;
 }
 </style>
