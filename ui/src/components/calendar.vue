@@ -4,19 +4,19 @@
 			<div @click="dYear--">&lt;&lt;</div>
 			<div @click="dMonth--">&lt;</div>
 			<div class="star-ui-calendar--display-month">
-				<span @click="showSelYear=true">{{displayMonthStartDate.format("YYYY")}}</span>
+				<span @click="showSelYear=true">{{displayMonthDate.format("YYYY")}}</span>
 				-
-				<span @click="showSelMonth=true">{{displayMonthStartDate.format("MM")}}</span>
+				<span @click="showSelMonth=true">{{displayMonthDate.format("MM")}}</span>
 			</div>
 			<div @click="dMonth++">&gt;</div>
 			<div @click="dYear++">&gt;&gt;</div>
 		</div>
 		<table cellspacing="0" cellpadding="0" :style="{opacity: showSelYear||showSelMonth?0:1}">
 			<tr class="su-calendar--inner-head">
-				<th class="" v-for="(name,index) in displayHead" :key="index">{{name}}</th>
+				<th :class="`su-calendar--${item.week}`" v-for="(item,index) in displayHead" :key="index">{{item.display}}</th>
 			</tr>
 			<tr v-for="(row,index) in displayData" :key="index">
-				<td v-for="(day,index) in row" :key="index" class="su-calendar--inner-cell">{{day}}</td>
+				<td v-for="(day,index) in row" :key="index" :class="['su-calendar--inner-cell',`su-calendar--${day.week}`,{'su-calendar--previous':day.isPrevious,'su-calendar--next':day.isNext}]">{{day.display}}</td>
 			</tr>
 		</table>
 		<div v-if="showSelYear" class="star-ui-calendar--select">
@@ -27,7 +27,7 @@
 			</div>
 			<div class="star-ui-calendar--select-body">
 				<div v-for="i in 12" :key="i" :class="{'now-sel':i==6&&dShowSelYear==0}" @click="dYear+=i-6+dShowSelYear*12;showSelYear=false;dShowSelYear=0;">
-					{{displayMonthStartDate.year()+i-6+dShowSelYear*12}}
+					{{displayMonthDate.year()+i-6+dShowSelYear*12}}
 				</div>
 			</div>
 		</div>
@@ -54,6 +54,14 @@ import moment from "moment";
 
 import "../global-style.css";
 
+const weekNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+interface DateBaseInfo{
+	display:number;
+	isPrevious:boolean;
+	isNext:boolean;
+	week:string;
+}
+
 @Options({
 	name:"su-calendar"
 })
@@ -67,55 +75,65 @@ export default class SuCalendar extends Vue {
 	public readonly displayMonth!:Date|string;
 	private dYear=0;
 	private dMonth=0;
-	private get displayMonthStartDate():moment.Moment{
+	private get displayMonthDate():moment.Moment{
 		let date=moment(this.displayMonth);
-		date.add(this.dYear,"y").add(this.dMonth,"M");
 		date.date(1);
+		date.add(this.dYear,"y").add(this.dMonth,"M");
 		return date;
 	}
 	@Prop({
 		type:Array,
 		default:()=>{
-			return ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+			return weekNames;
 		}
 	})
 	public readonly weekName!:string[];
 
-	private get displayHead():string[]{
-		return this.weekName;
-	}
-	private getMonthDate(month:number,year:number):number{
-		if(month==2){
-			if((year%100!=0&&year%4==0)||year%400==0) return 29;
-			else return 28;
+	@Prop({
+		type:Number,
+		default:0,
+		validator: (input:number): boolean=>{
+			return input>=0&&input<7
 		}
-		//if([1,3,5,7,8,10,12].)
-		let parity=month&1;
-		if(month<8?parity==1:parity==0) return 31;
-		return 30;
+	})
+	public weekOffect!:number;
+
+	private get displayHead():{
+		display:string;
+		week:string;
+	}[]{
+		const mList=this.weekName.map((item,index)=>({
+			display: item,
+			week:weekNames[index],
+		}))
+		return [
+			...mList.slice(this.weekOffect),
+			...mList.slice(0,this.weekOffect),
+		];
 	}
-	private get displayData():number[][]{
-		let res:number[][]=[[]];
+	private get displayData():DateBaseInfo[][]{
+		let res:DateBaseInfo[][]=[[]];
 		let now=res[0];
-		let month=this.displayMonthStartDate.month();
-		let year=this.displayMonthStartDate.year()
-		let lastMonthDay=this.displayMonthStartDate.day();
-		//计算上个月开始的位置
-		let lastMonthStart=this.getMonthDate(month==1?12:month-1,year)-lastMonthDay;
-		for(let i=0;i<lastMonthDay;i++){
-			now.push(lastMonthStart+i);
-		}
-		const nowMonthDay=this.getMonthDate(month,year);
-		for(let i=1;i<=nowMonthDay;i++){
+		
+		const nowDay = moment(this.displayMonthDate);
+		nowDay.set('date',1);
+		let reqPreviousDays=nowDay.day()-this.weekOffect;
+		if(reqPreviousDays<0) reqPreviousDays+=7;
+		nowDay.add(-reqPreviousDays,'days');
+		let isNotNext=true;
+		while(isNotNext||now.length<7){
 			if(now.length==7){
 				now=[];
 				res.push(now);
 			}
-			now.push(i);
-		}
-		let j=1;
-		while(now.length<7){
-			now.push(j++);
+			now.push({
+				display:nowDay.date(),
+				isPrevious:isNotNext&&this.displayMonthDate.month()!=nowDay.month(),
+				isNext:!isNotNext,
+				week:weekNames[nowDay.day()],
+			});
+			nowDay.add(1,'days');
+			isNotNext=this.displayMonthDate.year()>=nowDay.year()&&this.displayMonthDate.month()>=nowDay.month();
 		}
 		return res;
 	}
@@ -156,6 +174,12 @@ export default class SuCalendar extends Vue {
 .su-calendar--inner-cell{
 	border: 1px solid #e8eaec;
 	width: 42px
+}
+.su-calendar--inner-cell.su-calendar--Sat,.su-calendar--inner-cell.su-calendar--Sun{
+	color: #f00;
+}
+.su-calendar--inner-cell.su-calendar--previous,.su-calendar--inner-cell.su-calendar--next{
+	opacity: 0.5;
 }
 
 .star-ui-calendar--select{

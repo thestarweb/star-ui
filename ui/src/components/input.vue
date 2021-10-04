@@ -18,8 +18,8 @@ export default class SuInput extends Vue {
 		default:""
 	})
 	modelValue!:string|number;
-	$refs!:{
-		input:HTMLInputElement
+	declare $refs:{
+		input:HTMLInputElement,
 	};
 	@Prop({
 		type:String,
