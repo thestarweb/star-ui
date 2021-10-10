@@ -16,7 +16,10 @@
 				<th :class="`su-calendar--${item.week}`" v-for="(item,index) in displayHead" :key="index">{{item.display}}</th>
 			</tr>
 			<tr v-for="(row,index) in displayData" :key="index">
-				<td v-for="(day,index) in row" :key="index" :class="['su-calendar--inner-cell',`su-calendar--${day.week}`,{'su-calendar--previous':day.isPrevious,'su-calendar--next':day.isNext}]">{{day.display}}</td>
+				<td v-for="(day,index) in row" :key="index" :class="['su-calendar--inner-cell',`su-calendar--${day.week}`,{'su-calendar--previous':day.isPrevious,'su-calendar--next':day.isNext}]" @clcik="dateClick(day)">
+					{{day.display}}
+					<vnodes :func="locRenderCell" :args="[day]" />
+				</td>
 			</tr>
 		</table>
 		<div v-if="showSelYear" class="star-ui-calendar--select">
@@ -48,8 +51,9 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Prop } from "../reg";
+import { Prop, Emit } from "../reg";
 import moment from "moment";
+import CallRender from './call-render';
 
 
 import "../global-style.css";
@@ -60,10 +64,14 @@ interface DateBaseInfo{
 	isPrevious:boolean;
 	isNext:boolean;
 	week:string;
+	date:moment.Moment;
 }
 
 @Options({
-	name:"su-calendar"
+	name:"su-calendar",
+	components:{
+		vnodes: CallRender,
+	}
 })
 export default class SuCalendar extends Vue {
 	@Prop({
@@ -131,16 +139,31 @@ export default class SuCalendar extends Vue {
 				isPrevious:isNotNext&&this.displayMonthDate.month()!=nowDay.month(),
 				isNext:!isNotNext,
 				week:weekNames[nowDay.day()],
+				date:moment(nowDay),
 			});
 			nowDay.add(1,'days');
 			isNotNext=this.displayMonthDate.year()>=nowDay.year()&&this.displayMonthDate.month()>=nowDay.month();
 		}
 		return res;
 	}
+	@Prop({
+		type:Function,
+		default:undefined
+	})
+	public readonly renderCell!:(arg:DateBaseInfo)=>Vue;
+
+	public locRenderCell(arg:DateBaseInfo){
+		return null;
+	}
 
 	private showSelYear=false;
 	private dShowSelYear=0;
 	private showSelMonth=false;
+
+	@Emit()
+	private dateClick(data:DateBaseInfo):DateBaseInfo{
+		return data;
+	}
 }
 </script>
 

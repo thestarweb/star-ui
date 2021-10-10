@@ -24,6 +24,8 @@ while(task.length){
 			const base = path.join(srcDir, importFile_);
 			if(fs.existsSync(base+".ts")){
 				importFile_+=".ts";
+			}else if(fs.existsSync(base+".tsx")){
+				importFile_+=".tsx";
 			}else if(fs.existsSync(base+".d.ts")){
 				importFile_+=".d.ts";
 			}
