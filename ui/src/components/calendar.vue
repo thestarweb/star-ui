@@ -55,7 +55,7 @@
 import { Options, Vue } from 'vue-class-component';
 import { Prop, Emit } from "../reg";
 import moment from "moment";
-import CallRender from './call-render';
+import CallRender from "./call-render";
 
 
 import "../global-style.css";
