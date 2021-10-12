@@ -15,25 +15,6 @@ const HTMLEL = ["div","span","p"];
 	}
 })
 export default class RenderComponent extends Vue {
-	beforeCreate():void{
-		this.componentThis=new Proxy(this,{
-			get:(obj, prop)=>{
-				if(prop in obj.componentMethods){
-					return obj.componentMethods[prop as string];
-				}else if(prop in obj.componentData){
-					return this.componentData[prop as string];
-				}else if(obj.example.data&&(prop in obj.example.data)){
-					return obj.example.data[prop as string];
-				}else{
-					return undefined;
-				}
-			},
-			set:(obj, prop, value)=>{
-				obj.componentData[prop as string]=value;
-				return true;
-			}
-		}) as IObj;
-	}
 	private example!:example;
 
 	created():void{
@@ -48,19 +29,22 @@ export default class RenderComponent extends Vue {
 	}
 	//虚拟组件数据
 	public componentData:IObj={};
-	//虚拟组件this指向
-	public componentThis!:IObj;
 
 	//解析表达式（仅限简单表达式）
-	private analysis(expression:string){
+	private analysis(expression:string,locaVar:Record<string, unknown>={}){
 		// eslint-disable-next-line
-		let data=this.componentThis as any;
+		let data:any={
+			...this.example.data,
+			...this.componentData,
+			...this.componentMethods,
+			...locaVar,
+		};
 		expression.split(".").forEach((itemKey)=>{
 			data=data[itemKey];
 		})
 		return data;
 	}
-	private renderComponent(item:template):VNode{
+	private renderComponent(item:template,locaVar:Record<string, unknown>={}):VNode{
 		const props:IObj={};
 		if(item.props){
 			for(let key in item.props){
@@ -68,7 +52,7 @@ export default class RenderComponent extends Vue {
 				if(key.startsWith(":")||key.startsWith("v-bind:")){
 					key=key.substr(key.indexOf(":")+1);
 					if(typeof value == "string"){
-						value=this.analysis(value);
+						value=this.analysis(value, locaVar);
 					}
 				}else if(key.startsWith("@")){
 					props["on-"+key.substr(1)]=value;
@@ -76,8 +60,7 @@ export default class RenderComponent extends Vue {
 					props["on-"+key.substr(5)]=value;
 				}else if(key=="v-model"){
 					key="modelValue";
-					// eslint-disable-next-line
-					props["onUpdate:modelValue"]=(function(this:RenderComponent,value:string,inputValue:any){
+					props["onUpdate:modelValue"]=(function(this:RenderComponent,value:string,inputValue:unknown){
 											let data=this.componentData;
 											const path=value.split(".");
 											const last=path.pop();
@@ -86,7 +69,7 @@ export default class RenderComponent extends Vue {
 											});
 											data[last as string]=inputValue;
 										}).bind(this,value);
-					value=this.analysis(value);
+					value=this.analysis(value, locaVar);
 				}
 				props[key]=value;
 			}
@@ -94,12 +77,18 @@ export default class RenderComponent extends Vue {
 		const solt:IObj={};
 		if(item.slot){
 			item.slot.forEach((s)=>{
-				solt[s.name]=()=>{
+				solt[s.name]=(props:unknown)=>{
 					return s.data.map((template)=>{
 						if(template.isText){
-							return (template.text as string).replace(/\{\{(.+?)\}\}/g,(data,v)=>this.analysis(v));
+							return (template.text as string).replace(/\{\{(.+?)\}\}/g,(data,v)=>this.analysis(v, {
+								...locaVar,
+								[s.propName || '_soltProps']:props
+							}));
 						}
-						return this.renderComponent(template);
+						return this.renderComponent(template,{
+							...locaVar,
+							props
+						});
 					});
 				};
 			});

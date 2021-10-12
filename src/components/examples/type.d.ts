@@ -1,6 +1,7 @@
 interface slotType{
 	name:string,
 	data:template[],
+	propName?:string
 }
 export interface template{
 	isText:boolean,

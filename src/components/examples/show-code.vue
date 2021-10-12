@@ -22,12 +22,12 @@ import { example,template } from "./type.d";
 })
 export default class ShowCode extends Vue {
 	private example!:example;
-	private getTemplateStr(templ:template, indent:number):string{
+	private getTemplateStr(templ:template, indent:number, ex=""):string{
 		let outStr = "\t".repeat(indent);
 		if(templ.isText){
 			return outStr + (templ.text || "") + "\n";
 		}
-		outStr += "<" + templ.component;
+		outStr += "<" + ex + templ.component;
 		if(templ.props){
 			for(let key in templ.props){
 				outStr += " " + key + "=\"" + templ.props[key] + "\"";
@@ -35,12 +35,25 @@ export default class ShowCode extends Vue {
 		}
 		outStr += ">\n";
 		if(templ.slot){
-			for(var i = 0; i <templ.slot.length; i++){
-				const slot = templ.slot[i];
-				for(var j = 0; j < slot.data.length; j++){
-					outStr += this.getTemplateStr(slot.data[j], indent+1);
+			templ.slot.forEach((slot) => {
+				let showTem=false;
+				let str=''
+				if(slot.name!="default"||slot.propName){
+					str=" #"+slot.name+(slot.propName?`="${slot.propName}"`:"");
+					if(slot.data.length!=1||slot.data[0].isText){
+						showTem=true
+					}
 				}
-			}
+				if(showTem){
+					outStr+="\t".repeat(indent+1) + `<template${str}>\n`;
+				}
+				slot.data.forEach((item) => {
+					outStr += this.getTemplateStr(item,indent+(showTem?2:1),showTem?'':str);
+				});
+				if(showTem){
+					outStr+="\t".repeat(indent+1) + `</template>\n`;
+				}
+			})
 		}
 		outStr += "\t".repeat(indent) + "</" + templ.component + ">\n";
 		return outStr;

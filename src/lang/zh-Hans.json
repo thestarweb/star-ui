@@ -206,6 +206,14 @@
 					"weekName":{
 						"name":"周的显示",
 						"description":""
+					},
+					"weekOffect":{
+						"name":"起始星期",
+						"description":"如：设置为1，第一天显示周一"
+					},
+					"renderCell":{
+						"name":"渲染单元格",
+						"description":"注意：插槽/渲染函数/默认值只会显示一个，且插槽的优先度高于此函数"
 					}
 				}
 			},

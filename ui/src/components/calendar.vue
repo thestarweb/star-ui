@@ -17,8 +17,10 @@
 			</tr>
 			<tr v-for="(row,index) in displayData" :key="index">
 				<td v-for="(day,index) in row" :key="index" :class="['su-calendar--inner-cell',`su-calendar--${day.week}`,{'su-calendar--previous':day.isPrevious,'su-calendar--next':day.isNext}]" @clcik="dateClick(day)">
-					{{day.display}}
-					<vnodes :func="locRenderCell" :args="[day]" />
+					
+					<slot v-if="$slots['default']" v-bind="day" />
+					<vnodes v-else-if="renderCell" :func="renderCell" :args="[day]" />
+					<template v-else>{{day.display}}</template>
 				</td>
 			</tr>
 		</table>
@@ -150,11 +152,7 @@ export default class SuCalendar extends Vue {
 		type:Function,
 		default:undefined
 	})
-	public readonly renderCell!:(arg:DateBaseInfo)=>Vue;
-
-	public locRenderCell(arg:DateBaseInfo){
-		return null;
-	}
+	public readonly renderCell!:(arg:DateBaseInfo)=>unknown;
 
 	private showSelYear=false;
 	private dShowSelYear=0;
