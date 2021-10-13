@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./out/", 
+    "outDir": "./out/",
+    "paths": {
+      "@/*": [
+        "./out/*"
+      ]
+    }
+  },
+  "include": [
+    "out/**/*.ts",
+    "out/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

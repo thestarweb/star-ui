@@ -95,7 +95,7 @@ jobs:
       - name: build d.ts
         run: |
           cd ui
-          npx tsc
+          npm run tsc
       - name: setup release
         id: create_release
         uses: actions/create-release@v1

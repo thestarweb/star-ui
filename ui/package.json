@@ -1,10 +1,10 @@
 {
   "name": "@thestarweb/ui",
-  "version": "1.4.2",
+  "version": "1.4.2-fix-tsc",
   "description": "A UI lib",
   "scripts": {
     "build": "vue-cli-service build --target lib --name star-ui --dest dist/ src/main.ts",
-    "tsc": "node ./build-ts/main.js&&tsc ./out/main.ts -declaration -declarationDir ./types -lib DOM,ES2020,DOM.Iterable,ScriptHost --target ES5 --experimentalDecorators --esModuleInterop"
+    "tsc": "node ./build-ts/main.js&&tsc --p ./tsdconfig.json"
   },
   "author": "star_ss",
   "bugs": {
