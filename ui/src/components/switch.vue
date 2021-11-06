@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue } from 'vue-class-component';
 import { Watch } from "vue-property-decorator";
-import { Prop, Emit } from "../reg";
+import { Register, Prop, Emit } from "@ui-root/reg";
 import "../global-style.css";
 
-@Options({
+@Register({
 	name:"su-switch"
 })
 export default class SuInput extends Vue {

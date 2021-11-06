@@ -5,10 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import { InjectionKey } from 'vue';
+import { Vue } from 'vue-class-component';
 
-import { Prop } from "../reg";
+import { Register, Prop } from "@ui-root/reg";
 import { Provide } from "vue-property-decorator";
 
 import { ViewCtrlInfo } from "../types";
@@ -17,7 +16,7 @@ import "../global-style.css";
 type DeviceType='auto'|'mobile'|'pc';
 
 
-@Options({
+@Register({
 	name:"su-view-control",
 	watch:{
 		$isMobile(newValue){

@@ -13,15 +13,15 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import { Prop } from "../reg";
+import { Vue } from 'vue-class-component';
+import { Prop, Register } from "@ui-root/reg";
 import "../global-style.css";
 import VLayout from "./layout-v.vue";
 import HLayout from "./layout-h.vue";
 import SuMain from "./layout-main.vue";
 
 
-@Options({
+@Register({
 	name:"su-card",
 	components:{
 		VLayout,
@@ -30,7 +30,7 @@ import SuMain from "./layout-main.vue";
 	}
 })
 export default class SuCard extends Vue {
-	$refs!: {
+	declare $refs: {
 		body:HTMLDivElement
 		bodyInner:HTMLDivElement
 	};

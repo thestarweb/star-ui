@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import { Prop, Emit } from "../reg";
+import { Vue } from 'vue-class-component';
+import { Register, Prop, Emit } from "@ui-root/reg";
 import "../global-style.css";
 
-@Options({
+@Register({
 	name:"su-slider"
 })
 export default class SuSlider extends Vue {

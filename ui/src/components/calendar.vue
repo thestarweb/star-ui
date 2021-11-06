@@ -52,8 +52,8 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import { Prop, Emit } from "../reg";
+import { Vue } from 'vue-class-component';
+import { Register, Prop, Emit } from "@ui-root/reg";
 import moment from "moment";
 import CallRender from "./call-render";
 
@@ -69,7 +69,7 @@ interface DateBaseInfo{
 	date:moment.Moment;
 }
 
-@Options({
+@Register({
 	name:"su-calendar",
 	components:{
 		vnodes: CallRender,

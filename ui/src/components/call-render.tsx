@@ -1,8 +1,9 @@
-import { Options, Vue } from 'vue-class-component';
-import { Prop } from "../reg";
+import { Vue } from 'vue-class-component';
+import { Prop, Register } from "../reg";
 
-@Options({
+@Register({
     name:'call-render',
+	internalOnly: true,
 })
 export default class CallRender extends Vue {
 	@Prop({

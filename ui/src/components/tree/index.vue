@@ -11,14 +11,14 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import { Prop } from "../../reg";
+import { Vue } from 'vue-class-component';
+import { Register, Prop } from "@ui-root/reg";
 import treeItem from "./tree-item.vue"
 
 
 import "../../global-style.css";
 
-@Options({
+@Register({
 	name:"su-tree",
 	components:{
 		treeItem

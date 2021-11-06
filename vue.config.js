@@ -1,7 +1,10 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
 	configureWebpack: config => {
+		if(!config.resolve.alias) config.resolve.alias = {};
+		config.resolve.alias['@ui-root'] = path.resolve('./ui/src');
 		if(process.env.CDN_LIST && process.env.NODE_ENV == "production"){
 			const CDNList=process.env.CDN_LIST.split("|");
 			let CDNURLs={};
@@ -23,5 +26,5 @@ module.exports = {
 				}
 			});
 		}
-	}
+	},
 }

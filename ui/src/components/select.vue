@@ -26,10 +26,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue } from 'vue-class-component';
 import BasePopper from "./common/base-popper.vue";
 import { Inject } from "vue-property-decorator";
-import { Emit, Prop } from "../reg";
+import { Register, Emit, Prop } from "@ui-root/reg";
 import { ViewCtrlInfo } from "../types";
 import SuTree from "./tree/index.vue";
 import ViewControl from "./view-control.vue";
@@ -37,7 +37,7 @@ import ViewControl from "./view-control.vue";
 
 import "../global-style.css";
 
-@Options({
+@Register({
 	name:"su-select",
 	components:{
 		BasePopper,

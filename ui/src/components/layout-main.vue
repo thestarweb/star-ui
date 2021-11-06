@@ -5,10 +5,11 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue } from 'vue-class-component';
+import { Register } from '@ui-root/reg';
 import "../global-style.css";
 
-@Options({
+@Register({
 	name:"su-main",
 	props: {
 	}

@@ -1,14 +1,36 @@
-import { VueDecorator, PropOptions, createDecorator } from 'vue-class-component';
-import { reactive } from 'vue';
+import { VueDecorator, PropOptions, createDecorator, Vue, VueConstructor, VueBase } from 'vue-class-component';
+import { ComponentOptions, reactive } from 'vue';
 
+interface ComponentInfo{
+	hideInDoc?:boolean;
+	internalOnly?:boolean;
+	type?:'from'|'layout';
+}
 
 export const data = reactive({
 	//
 } as {[key:string]: {
 	props?:{
 		[key:string]: PropOptions
+	};
+	component?:VueConstructor<VueBase>;
+}&ComponentInfo});
+
+export type RegisterOptions<V> = ComponentOptions & ThisType<V> & ComponentInfo;
+export function Register<V extends Vue>({ hideInDoc, internalOnly, ...options }:RegisterOptions<V>):<VC extends VueConstructor<VueBase>>(target: VC) => VC{
+	return (Component) => {
+		if(options.name){
+			if(!data[options.name]) data[options.name] = {};
+			// eslint-disable-next-line
+			data[options.name].component = Component;
+			data[options.name].hideInDoc = hideInDoc;
+			data[options.name].internalOnly = internalOnly;
+		}
+		// eslint-disable-next-line
+		(Component as any).__o = options
+		return Component
 	}
-}});
+}
 
 const hyphenate = (str:string) => str.replace(/\B([A-Z])/g, '-$1').toLowerCase();
 // eslint-disable-next-line
@@ -62,7 +84,6 @@ export function Emit(event?:string, shouldEmit?:(res:any)=>boolean):VueDecorator
 export function Prop(propOptions:PropOptions):VueDecorator{
 	return createDecorator((componentOptions, key) => {
 		if(componentOptions.name){
-			// console.log(componentOptions.name);
 			if(!data[componentOptions.name]) data[componentOptions.name] = {};
 			if(!data[componentOptions.name].props) data[componentOptions.name].props={};
 			// eslint-disable-next-line
