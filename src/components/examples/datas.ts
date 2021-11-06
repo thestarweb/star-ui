@@ -13,6 +13,7 @@ import SuButton from "./button";
 import SuTable from "./table";
 import SuTree from "./tree";
 import SuCalendar from "./calendar";
+import SuHMenu from "./h-menu";
 
 import SuViewControl from "./view-control";
 import { example } from "./type.d";
@@ -37,4 +38,5 @@ export default {
 	"su-tree":SuTree,
 	"su-calendar":SuCalendar,
 	"su-view-control":SuViewControl,
+	"su-h-menu":SuHMenu,
 }as ExamplesObj;

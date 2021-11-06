@@ -1,0 +1,61 @@
+<template>
+	<div v-if="menu && menu.length>0" :class="['star-ui', 'star-ui-menu--chlild-box', `star-ui-menu--chlild-box-${direction}`]">
+		<component :is="itemComponent" v-for="item in menu" :key="item.path" :item="item">
+			<template v-slot="item">
+				<slot v-bind="item" />
+			</template>
+		</component>
+	</div>
+</template>
+
+<script lang="ts">
+import { Register, Prop } from "@ui-root/reg";
+import { Vue } from 'vue-class-component';
+import { MenuItem } from "./menu-h-item.vue";
+import '@ui-root/global-style.css';
+
+@Register({
+	name: 'su-h-menu-child',
+	internalOnly: true,
+	components:{
+		// SuHMenuItem,
+	},
+})
+export default class SuHMenuChild extends Vue {
+	@Prop({
+		type: Array,
+		required: true,
+	})
+	private menu!:MenuItem[];
+	@Prop({})
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	private itemComponent!:any;
+	@Prop({
+		type: String,
+	})
+	private direction!:'right'|'bottom';
+}
+
+</script>
+<style>
+.star-ui-menu--chlild-box{
+	position: absolute;
+	background-color: #FFF;
+	opacity: 0;
+	transition: opacity 0.5s;
+	pointer-events: none;
+}
+*:hover>.star-ui-menu--chlild-box{
+	display: block;
+	opacity: 1;
+	pointer-events: auto;
+}
+.star-ui-menu--chlild-box-right{
+	left: 100%;
+	top:0;
+}
+.star-ui-menu--chlild-box-left{
+	right: 100%;
+	top:0;
+}
+</style>

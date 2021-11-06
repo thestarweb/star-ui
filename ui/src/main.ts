@@ -19,6 +19,7 @@ export { default as SuCalendar } from "./components/calendar.vue";
 
 export { default as ViewControl } from "./components/view-control.vue";
 
+export * from "./components/menu";
 
 import { data } from './reg';
 
