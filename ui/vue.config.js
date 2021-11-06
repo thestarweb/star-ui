@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
 	css: { extract: false },
-	configureWebpack: (config) => {
+	configureWebpack: config => {
 		if(!config.resolve.alias) config.resolve.alias = {};
-		config.resolve.alias['@ui-root'] = path.resolve('./ui/src');
+		config.resolve.alias['@ui-root'] = path.resolve('./src');
 	}
 }
