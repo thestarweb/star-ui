@@ -1,0 +1,73 @@
+<template>
+	<component :is="menuComponent" :menu="menu">
+		<template v-slot="data">
+			<slot v-if="$slots['default']" v-bind="data" />
+			<component v-else :is="displayComponent" :[useedKey]="data.path">
+				{{data.title}}
+			</component>
+		</template>
+	</component>
+</template>
+
+<script lang="ts">
+import { Register, Prop } from "@ui-root/reg";
+import { ConcreteComponent, resolveComponent } from "vue";
+import { Vue } from 'vue-class-component';
+import HMenu from './menu-h/index.vue';
+import VMenu from './menu-v/index.vue';
+import '@ui-root/global-style.css';
+
+export interface MenuItem{
+	name?:string;
+	path:string;
+	title:string;
+	children?:MenuItem[];
+}
+
+@Register({
+	name: 'su-menu',
+})
+export default class SuHMenu extends Vue {
+	@Prop({
+		type: Array,
+		required: true,
+	})
+	private menu!:MenuItem[];
+	@Prop({
+		type: String,
+		required: true,
+		default: 'h'
+	})
+	private direction!:"h"|"v"|"row";
+	private get menuComponent(){
+		if (["h",'row','r'].includes(this.direction)){
+			return HMenu;
+		}
+		return VMenu;
+	}
+	@Prop({
+		type: [String,Function,Object],
+		default: undefined,
+	})
+	private component!:string|Vue|Record<string, unknown>|ConcreteComponent|undefined;
+	private get displayComponent():string|Vue|ConcreteComponent|Record<string, unknown>{
+		if(this.component) return this.component;
+		const vueRouterLink = resolveComponent('router-link');
+		if(typeof vueRouterLink != 'string') return vueRouterLink;
+		return 'a';
+	}
+	@Prop({
+		type: String,
+		default: ()=>"",
+	})
+	private key!:string;
+	private get useedKey():string{
+		if(this.component && this.key) return this.key;
+		if(this.displayComponent == "a") return 'href';
+		return 'to';
+	}
+}
+
+</script>
+<style>
+</style>

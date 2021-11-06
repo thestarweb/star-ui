@@ -19,11 +19,11 @@ export default class SuHLine extends Vue {
 <style>
 .su-h-line{
 	background-color:var(--star-ui-line-color);
-    width:100%;
-    height:var(--star-ui-line-width);
-    min-height:var(--star-ui-line-width);
-    max-height:var(--star-ui-line-width);
-    flex:0 0 var(--star-ui-line-width);
-    padding: 0;
+	width:100%;
+	height:var(--star-ui-line-width);
+	min-height:var(--star-ui-line-width);
+	max-height:var(--star-ui-line-width);
+	flex:0 0 var(--star-ui-line-width);
+	padding: 0;
 }
 </style>

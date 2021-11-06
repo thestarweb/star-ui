@@ -1,6 +1,6 @@
 <template>
-	<div class="star-ui star-ui-menu--item-box">
-		<div class="star-ui star-ui-menu--item-box-inner">
+	<div class="star-ui star-ui-menu--item-box star-ui-menu-h--item-box">
+		<div class="star-ui star-ui-menu--item star-ui-menu-h--item">
 			<slot v-bind="item" />
 		</div>
 		<su-h-menu-child :menu="item.children || []" :itemComponent="selfClass" :direction="childDirection">
@@ -49,3 +49,23 @@ export default class SuHMenuItem extends Vue {
 	private childDirection!:'right'|'bottom';
 }
 </script>
+<style>
+.star-ui-menu-h--item-box{
+	height: 100%;
+	overflow: visible;
+	position: relative;
+	padding: 0;
+	transition: background-color 0.5s;
+}
+.star-ui-menu-h--item-box:hover{
+	background-color: rgba(128,128,128,0.4);
+}
+.star-ui-menu-h--item{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center; 
+	height: 100%;
+	padding: 8px;
+}
+</style>

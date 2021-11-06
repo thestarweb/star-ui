@@ -19,7 +19,7 @@ import SuViewControl from "./view-control";
 import { example } from "./type.d";
 
 interface ExamplesObj {
-    [key: string]: example[],
+	[key: string]: example[],
 }
 
 export default {
@@ -38,5 +38,5 @@ export default {
 	"su-tree":SuTree,
 	"su-calendar":SuCalendar,
 	"su-view-control":SuViewControl,
-	"su-h-menu":SuHMenu,
+	"su-menu":SuHMenu,
 }as ExamplesObj;

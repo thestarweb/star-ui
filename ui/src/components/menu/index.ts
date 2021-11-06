@@ -1,1 +1,1 @@
-export {default as MenuH} from './menu-h.vue';
+export {default as Menu} from './index.vue';

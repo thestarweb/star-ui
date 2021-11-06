@@ -36,10 +36,24 @@ export default [
 		name:"基本用法（base）",
 		template:{
 			isText:false,
-			component:"su-h-menu",
+			component:"su-menu",
 			props:{
 				style:"width:100%;height:40px;",
 				":menu": "menu",
+			}
+		},
+		data:{
+			menu,
+		},
+	},
+	{
+		name:"基本用法（base）",
+		template:{
+			isText:false,
+			component:"su-menu",
+			props:{
+				":menu": "menu",
+				"direction": "v",
 			}
 		},
 		data:{
