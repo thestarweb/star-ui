@@ -242,6 +242,46 @@
 						"description":""
 					}
 				}
+			},
+			"su-menu":{
+				"name":"菜单",
+				"description":"普通的菜单控件。",
+				"props":{
+					"menu":{
+						"name":"菜单内容数组",
+						"description":"格式：{title:'菜单名',path:'路径',name:‘路由名称’,children?:'子节点数组'}"
+					},
+					"direction":{
+						"name":"方向",
+						"description":""
+					},
+					"component":{
+						"name":"节点渲染组件",
+						"description":"暂时不建议使用"
+					},
+					"key":{
+						"name":"自定义组件时路径传入参数",
+						"description":""
+					}
+				}
+			},
+			"su-page":{
+				"name":"整页组件",
+				"description":"这是一个带有简单响应式布局的页面组件",
+				"props":{
+					"title":{
+						"name":"网站名称",
+						"description":""
+					},
+					"logo":{
+						"name":"logo地址",
+						"description":""
+					},
+					"menu":{
+						"name":"菜单内容",
+						"description":"参考菜单"
+					}
+				}
 			}
 		}
 	}
