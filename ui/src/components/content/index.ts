@@ -1,0 +1,1 @@
+export { default as SuPage } from "./page.vue";

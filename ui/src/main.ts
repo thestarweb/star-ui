@@ -17,9 +17,10 @@ export { default as SuSlider } from "./components/slider.vue";
 
 export { default as SuCalendar } from "./components/calendar.vue";
 
-export { default as ViewControl } from "./components/view-control.vue";
+export { default as SuViewControl } from "./components/view-control.vue";
 
 export * from "./components/menu";
+export * from "./components/content";
 
 import { data } from './reg';
 

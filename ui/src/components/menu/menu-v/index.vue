@@ -1,7 +1,7 @@
 <template>
 	<div :class="['star-ui', 'star-ui-menu', 'star-ui-menu-v']">
 		<div>
-			<span @click="handlePathClick(0)">&gt;</span>
+			<span @click="handlePathClick(0)"><span class="star-ui-icon-font star-ui-icon-home" />&gt;</span>
 			<span v-for="(item,index) in path" :key="`${index}-${item.path||'nopath'}`" @click="handlePathClick(index+1)">
 				{{item.title}}&gt;
 			</span>
@@ -15,7 +15,7 @@
 <script lang="ts">
 import { Register, Prop } from "@ui-root/reg";
 import { Vue } from 'vue-class-component';
-import { MenuItem } from '../index.vue';
+import { MenuItem } from "@ui-root/types";
 import '@ui-root/global-style.css';
 
 @Register({

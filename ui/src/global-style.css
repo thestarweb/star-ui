@@ -1,6 +1,8 @@
 :root{
 	/*背景颜色*/
 	--star-ui-backgorund-color:#FFF;
+	/*背景颜色*/
+	--star-ui-font-color:#222;
 	/*表格头*/
 	--star-ui-table-head-color:#f8f8f9;
 	/*基础颜色*/

@@ -4,7 +4,7 @@ interface slotType{
 	propName?:string
 }
 export interface template{
-	isText:boolean,
+	isText?:boolean,
 	component?:class,
 	text?:string,
 	slot?:slotType[],

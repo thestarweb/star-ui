@@ -14,6 +14,7 @@ import SuTable from "./table";
 import SuTree from "./tree";
 import SuCalendar from "./calendar";
 import SuHMenu from "./h-menu";
+import SuPage from './page';
 
 import SuViewControl from "./view-control";
 import { example } from "./type.d";
@@ -39,4 +40,5 @@ export default {
 	"su-calendar":SuCalendar,
 	"su-view-control":SuViewControl,
 	"su-menu":SuHMenu,
+	"su-page":SuPage,
 }as ExamplesObj;

@@ -11,7 +11,7 @@
 <script lang="ts">
 import { Register, Prop } from "@ui-root/reg";
 import { Vue } from 'vue-class-component';
-import { MenuItem } from "./menu-h-item.vue";
+import { MenuItem } from "@ui-root/types";
 import '@ui-root/global-style.css';
 
 @Register({
@@ -40,7 +40,7 @@ export default class SuHMenuChild extends Vue {
 <style>
 .star-ui-menu-h--chlild-box{
 	position: absolute;
-	background-color: #FFF;
+	background-color: var(--star-ui-backgorund-color);
 	opacity: 0;
 	transition: opacity 0.5s;
 	pointer-events: none;
@@ -61,5 +61,14 @@ export default class SuHMenuChild extends Vue {
 .star-ui-menu-h--chlild-box-bottom{
 	left: 0;
 	top:100%;
+}
+.star-ui-menu-h--chlild-box{
+	border: solid 1px var(--star-ui-line-color);
+}
+.star-ui-menu-h--chlild-box>.star-ui-menu-h--item-box>.star-ui-menu-h--item{
+	border-bottom: solid 1px var(--star-ui-line-color);
+}
+.star-ui-menu-h--chlild-box>.star-ui-menu-h--item-box:last-child>.star-ui-menu-h--item{
+	border-bottom-width: 0;
 }
 </style>

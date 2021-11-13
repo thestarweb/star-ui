@@ -16,14 +16,8 @@ import { Register, Prop } from "@ui-root/reg";
 import { Vue } from 'vue-class-component';
 import SuHMenuChild from "./menu-h-child.vue";
 import isFocus from '@ui-root/directives/is-focus';
+import { MenuItem } from "@ui-root/types";
 import '@ui-root/global-style.css';
-
-export interface MenuItem{
-	name?:string;
-	path:string;
-	title:string;
-	children?:MenuItem[];
-}
 
 @Register({
 	name: 'su-h-menu-item',

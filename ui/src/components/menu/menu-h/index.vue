@@ -12,8 +12,9 @@
 import { Register, Prop } from "@ui-root/reg";
 import { Vue } from 'vue-class-component';
 import SuHMenuChild from "./menu-h-child.vue";
+import SuHMenuItem from "./menu-h-item.vue";
+import { MenuItem } from "@ui-root/types";
 import '@ui-root/global-style.css';
-import SuHMenuItem, { MenuItem } from "./menu-h-item.vue";
 
 @Register({
 	name: 'su-h-menu',
@@ -52,5 +53,14 @@ export default class SuHMenu extends Vue {
 	position: relative;
 	padding: 0;
 	white-space: nowrap;
+}
+.star-ui-menu-h>.star-ui-menu-h--item-box>.star-ui-menu-h--item a{
+	line-height: 2;
+	border: solid 2px transparent;
+	transition: border 0.5s;
+	padding: 2px;
+}
+.star-ui-menu-h>.star-ui-menu-h--item-box:hover>.star-ui-menu-h--item a{
+	border-bottom-color: var(--star-ui-base-color);
 }
 </style>
