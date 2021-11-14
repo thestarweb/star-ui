@@ -66,8 +66,8 @@ export default class SuHMenu extends Vue {
 		if (!["h",'row','r'].includes(this.direction) && data.children){
 			return;
 		}
-		if (this.$router) {
-			this.$router.push(data.path);
+		if ((this as any).$router) {
+			(this as any).$router.push(data.path);
 		} else {
 			history.pushState(null, '', data.path);
 		}
