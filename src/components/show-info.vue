@@ -17,8 +17,8 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import Examples from './examples/index.vue';
+import { Options, Vue } from "vue-class-component";
+import Examples from "./examples/index.vue";
 import { data } from "@/../ui/src/reg";
 import {components} from "@/../ui/src/main";
 

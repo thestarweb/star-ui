@@ -1,4 +1,4 @@
-import { Vue } from 'vue-class-component';
+import { Vue } from "vue-class-component";
 
 export function getParentNodeByClass(node:HTMLElement,className:string):HTMLElement|null{
 	let p:HTMLElement|null = node;

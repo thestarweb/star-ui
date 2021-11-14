@@ -6,7 +6,7 @@
 				{{item.title}}&gt;
 			</span>
 		</div>
-		<div v-for="item in current" :key="item.path" :item="item" @click.capture.stop="handleItemClick(item, $event)">
+		<div v-for="item in current" :key="item.path" @click="handleItemClick(item)">
 			<slot v-bind="item" />
 		</div>
 	</div>
@@ -46,8 +46,6 @@ export default class SuHMenu extends Vue {
 	private handleItemClick(item:MenuItem, ev:MouseEvent){
 		if(item.children && item.children.length > 0 && (this.path.length==0 || item!=this.path[this.path.length-1])){
 			this.path.push(item);
-			ev.stopImmediatePropagation();
-			ev.stopPropagation();
 		}
 	}
 }

@@ -1,6 +1,5 @@
-import { VueDecorator, PropOptions, createDecorator, Vue, VueConstructor, VueBase } from 'vue-class-component';
-import { ComponentOptions, reactive } from 'vue';
-
+import { VueDecorator, PropOptions, createDecorator, Vue, VueConstructor, VueBase } from "vue-class-component";
+import { ComponentOptions, reactive } from "vue";
 interface ComponentInfo{
 	hideInDoc?:boolean;
 	internalOnly?:boolean;

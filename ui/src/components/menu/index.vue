@@ -1,10 +1,12 @@
 <template>
 	<component :is="menuComponent" :menu="menu" class="su-menu">
 		<template v-slot="data">
-			<slot v-if="$slots['default']" v-bind="data" />
-			<component v-else :is="displayComponent" :[useedKey]="data.path" @click.>
-				{{data.title}}
-			</component>
+			<div @click="handleItemClick(data)">
+				<slot v-if="$slots['default']" v-bind="data" />
+				<component v-else :is="displayComponent" :[useedKey]="data.path" @click.prevent>
+					{{data.title}}
+				</component>
+			</div>
 		</template>
 	</component>
 </template>
@@ -12,9 +14,9 @@
 <script lang="ts">
 import { Register, Prop } from "@ui-root/reg";
 import { ConcreteComponent } from "vue";
-import { Vue } from 'vue-class-component';
-import HMenu from './menu-h/index.vue';
-import VMenu from './menu-v/index.vue';
+import { Vue } from "vue-class-component";
+import HMenu from "./menu-h/index.vue";
+import VMenu from "./menu-v/index.vue";
 import { MenuItem } from "@ui-root/types";
 import '@ui-root/global-style.css';
 
@@ -59,6 +61,16 @@ export default class SuHMenu extends Vue {
 		if(this.component && this.key) return this.key;
 		if(this.displayComponent == "a") return 'href';
 		return 'to';
+	}
+	private handleItemClick(data:MenuItem){debugger
+		if (!["h",'row','r'].includes(this.direction) && data.children){
+			return;
+		}
+		if (this.$router) {
+			this.$router.push(data.path);
+		} else {
+			history.pushState(null, '', data.path);
+		}
 	}
 }
 

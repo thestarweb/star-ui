@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Vue } from "vue-class-component";
 import { Register, Prop } from "@ui-root/reg";
 
 import "../global-style.css";

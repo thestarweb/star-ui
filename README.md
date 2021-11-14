@@ -6,8 +6,8 @@
 
 ## liblary
 ```typescript
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue"
+import App from "./App.vue"  
 import StarUi from "@thestarweb/ui";
 
 createApp(App).use(StarUi).mount('#app');

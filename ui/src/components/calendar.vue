@@ -52,7 +52,7 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
+import { Vue } from "vue-class-component";
 import { Register, Prop, Emit } from "@ui-root/reg";
 import moment from "moment";
 import CallRender from "./call-render";

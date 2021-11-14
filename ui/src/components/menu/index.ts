@@ -1,1 +1,1 @@
-export {default as SuMenu} from './index.vue';
+export {default as SuMenu} from "./index.vue";

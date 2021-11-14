@@ -22,9 +22,9 @@ export { default as SuViewControl } from "./components/view-control.vue";
 export * from "./components/menu";
 export * from "./components/content";
 
-import { data } from './reg';
+import { data } from "./reg";
 
-import { App, readonly } from 'vue';
+import { App, readonly } from "vue";
 
 // eslint-disable-next-line
 export const components:Record<string,any>={};

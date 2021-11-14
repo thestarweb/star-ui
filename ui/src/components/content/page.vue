@@ -19,13 +19,13 @@
 </template>
 
 <script lang="ts">
-import { Vue } from 'vue-class-component';
-import { Inject } from 'vue-property-decorator';
-import { Prop, Register } from '@ui-root/reg';
-import { SuViewControl } from '@ui-root/main';
-import { SuMenu } from '@ui-root/components/menu';
+import { Vue } from "vue-class-component";
+import { Inject } from "vue-property-decorator";
+import { Prop, Register } from "@ui-root/reg";
+import { SuViewControl } from "@ui-root/main";
+import { SuMenu } from "@ui-root/components/menu";
 import { MenuItem } from "@ui-root/types";
-import { ViewCtrlInfo } from '@ui-root/types';
+import { ViewCtrlInfo } from "@ui-root/types";
 import "@ui-root/global-style.css";
 
 @Register({
