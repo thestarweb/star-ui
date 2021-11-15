@@ -6,14 +6,28 @@
 			<img v-if="logo" :src="logo" alt="logo" />
 			<slot name="header"></slot>
 			<div v-if="!suControl.isMobile" class="su-page--menu-box">
-				<su-menu :menu="menu" direction="h"></su-menu>
+				<su-menu :menu="menu" direction="h">
+					<template v-if="$slots['menu']" v-slot="item">
+						<slot name="menu" v-bind="item" />
+					</template>
+					<template v-else-if="$slots['menu-text']" v-slot:menu-text="item">
+						<slot name="text" v-bind="item" />
+					</template>
+				</su-menu>
 			</div>
 		</header>
 		<main class="su-ui su-page--main">
 			<slot></slot>
 		</main>
 		<div v-if="suControl.isMobile" :class="['su-ui', 'su-page--mobile-menu-box', isOpenMenu ? 'su-page--mobile-menu-box-open' : 'su-page--mobile-menu-close']" @click="isOpenMenu=false">
-			<su-menu :menu="menu" direction="v" @click.stop></su-menu>
+			<su-menu :menu="menu" direction="v" @click.stop>
+				<template v-if="$slots['menu']" v-slot="item">
+					<slot name="menu" v-bind="item" />
+				</template>
+				<template v-else-if="$slots['menu-text']" v-slot:menu-text="item">
+					<slot name="text" v-bind="item" />
+				</template>
+			</su-menu>
 		</div>
 	</div>
 </template>
@@ -79,6 +93,7 @@ export default class SuMain extends Vue {
 .su-page--menu-box{
 	flex: 1;
 	height: 100%;
+	z-index: 999999;
 }
 .su-page--menu-box .star-ui-menu-h--chlild-box{
 	color: var(--star-ui-font-color);
@@ -113,5 +128,8 @@ export default class SuMain extends Vue {
 }
 .su-page--mobile-menu-close .star-ui-menu-v{
 	margin-left: -100%;
+}
+.su-page--main{
+	overflow: auto;
 }
 </style>
