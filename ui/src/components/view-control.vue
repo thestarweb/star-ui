@@ -8,9 +8,8 @@
 import { Vue } from 'vue-class-component';
 
 import { Register, Prop } from "@ui-root/reg";
+import { SuViewCtrlInjectKeyIsMobile } from "@ui-root/outher";
 import { Provide } from "vue-property-decorator";
-
-import { ViewCtrlInfo } from "../types";
 import "../global-style.css";
 
 type DeviceType='auto'|'mobile'|'pc';
@@ -20,27 +19,24 @@ type DeviceType='auto'|'mobile'|'pc';
 	name:"su-view-control",
 	watch:{
 		$isMobile(newValue){
-			this.sendData.isMobile = newValue;
+			//this.sendData.isMobile = newValue;
 		}
 	},
-	provide() {
-		return {
-			viewCtrlInfo: this.sendData
-		}
-	},
-	created(){
-		this.sendData.isMobile = this.$isMobile;
-	}
+	// provide() {
+	// 	return {
+	// 		viewCtrlInfo: this.sendData
+	// 	}
+	// },
+	// created(){
+	// 	this.sendData.isMobile = this.$isMobile;
+	// }
 })
 export default class SuViewControl extends Vue {
-	public static readonly injectSymbol=Symbol();
 	mounted():void{
 		this.$el._vue = this;
 	}
-	@Provide({to:SuViewControl.injectSymbol})
-	private sendData:ViewCtrlInfo={
-		isMobile:false
-	}
+	// @Provide({to:SuViewCtrlInjectKeyIsMobile})
+	// isMobile=false;
 	@Prop({
 		type: String,
 		default: "auto",
@@ -63,6 +59,7 @@ export default class SuViewControl extends Vue {
 		this.windowWidth = window.innerWidth;
 		this.windowHeight = window.innerHeight;
 	}
+	@Provide({to:SuViewCtrlInjectKeyIsMobile})
 	public get $isMobile():boolean{
 		switch (this.deviceType) {
 			case "mobile":
@@ -74,9 +71,17 @@ export default class SuViewControl extends Vue {
 			case "ua":
 				return navigator.userAgent.toLowerCase().indexOf("mobile")!=-1;
 			case "screen-width":
+				console.log(this.windowWidth);
 				return this.windowWidth < 1000;
 		}
 		return false;
+	}
+	beforeMount(){
+		this.checkWindowSize();
+		window.addEventListener("resize", this.checkWindowSize);
+	}
+	beforeUnmount(){
+		window.removeEventListener("resize", this.checkWindowSize);
 	}
 }
 </script>

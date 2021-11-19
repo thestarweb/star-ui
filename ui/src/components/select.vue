@@ -11,8 +11,8 @@
 		</div>
 		<!-- 选项弹窗 -->
 		<base-popper :from-item="$el" :visible="isFocused" @out-click="isFocused=false">
-			<div :class="['star-ui','star-ui-select--pooper',pooperClass]" :style="{width:suControl.isMobile?'100%':(width+'px')}">
-				<div class="star-ui star-ui-select--pooper-title" v-if="suControl.isMobile">请选择</div>
+			<div :class="['star-ui','star-ui-select--pooper',pooperClass]" :style="{width:isMobile?'100%':(width+'px')}">
+				<div class="star-ui star-ui-select--pooper-title" v-if="isMobile">请选择</div>
 				<div :class="['star-ui','star-ui-select--pooper-item-list','star-ui-size-'+size]">
 
 					<su-tree v-if="showAsTree" ref="tree" highlight-current :size="size" :treeData="options" :label="labelName" :value="valueName" :children="children" @node-click="haandleNodeClick"></su-tree>
@@ -28,11 +28,9 @@
 <script lang="ts">
 import { Vue } from 'vue-class-component';
 import BasePopper from "./common/base-popper.vue";
-import { Inject } from "vue-property-decorator";
 import { Register, Emit, Prop } from "@ui-root/reg";
-import { ViewCtrlInfo } from "../types";
+import { SuViewCtrlInjectIsMobile } from "@ui-root/outher";
 import SuTree from "./tree/index.vue";
-import ViewControl from "./view-control.vue";
 
 
 import "../global-style.css";
@@ -113,7 +111,7 @@ export default class SuSelect extends Vue {
 	})
 	readonly pooperClass!:string;
 	isFocused=false;
-	@Inject({from:ViewControl.injectSymbol,default:{}}) readonly suControl!: ViewCtrlInfo;
+	@SuViewCtrlInjectIsMobile readonly isMobile!: boolean;
 	get valueMap():Map<string|number,string>{
 		const map=new Map();
 		if(this.showAsTree){

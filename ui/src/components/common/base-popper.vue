@@ -1,7 +1,7 @@
 <template>
 	<teleport :to="'#'+id">
 		<div>
-			<div class="star-ui-popper-background" v-if="suControl.isMobile" @click="$emit('out-click')"></div>
+			<div class="star-ui-popper-background" v-if="isMobile" @click="$emit('out-click')"></div>
 			<slot></slot>
 		</div>
 	</teleport>
@@ -9,14 +9,9 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { Inject } from "vue-property-decorator";
-import { Emit, Prop } from "../../reg";
+import { SuViewCtrlInjectIsMobile } from "@ui-root/outher";
+import { Emit, Prop } from "@ui-root/reg";
 
-import { ViewCtrlInfo } from "../../types";
-
-
-
-// import { Vue } from "vue"
 import "../../global-style.css";
 let nowId=0;
 
@@ -55,7 +50,7 @@ export default class SuButton extends Vue {
 	private id!:string;
 	private updateType!:string;
 	private visible!:boolean;
-	@Inject({from:'viewCtrlInfo',default:{}}) readonly suControl!: ViewCtrlInfo;
+	@SuViewCtrlInjectIsMobile readonly isMobile!:false;
 	beforeCreate():void{
 		this.div=document.createElement("div");
 		document.body.append(this.div);
@@ -97,7 +92,7 @@ export default class SuButton extends Vue {
 	updatePos():void{
 		if(this.fromItem){
 			let dom=(this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el;
-			if(this.suControl.isMobile){
+			if(this.isMobile){
 				this.div.style.bottom="0";
 				this.div.style.left="0";
 				this.div.style.width="100%";

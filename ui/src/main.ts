@@ -23,6 +23,7 @@ export * from "./components/menu";
 export * from "./components/content";
 
 import { data } from "./reg";
+export * from "./outher";
 
 import { App, readonly } from "vue";
 

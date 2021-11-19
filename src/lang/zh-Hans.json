@@ -249,7 +249,7 @@
 				"props":{
 					"menu":{
 						"name":"菜单内容数组",
-						"description":"格式：{title:'菜单名',path:'路径',name:‘路由名称’,children?:'子节点数组'}"
+						"description":"格式：(title:'菜单名',path:'路径',name:‘路由名称’,children?:'子节点数组')"
 					},
 					"direction":{
 						"name":"方向",

@@ -1,11 +1,11 @@
 <template>
 	<div class="star-ui su-page">
 		<header class="su-ui su-page--header">
-			<span v-if="suControl.isMobile" class="star-ui-icon-font star-ui-icon-menu su-page--mobile-menu-open"  @click="isOpenMenu=true" />
+			<span v-if="isMobile" class="star-ui-icon-font star-ui-icon-menu su-page--mobile-menu-open"  @click="isOpenMenu=true" />
 			<h1 v-if="title">{{title}}</h1>
 			<img v-if="logo" :src="logo" alt="logo" />
 			<slot name="header"></slot>
-			<div v-if="!suControl.isMobile" class="su-page--menu-box">
+			<div v-if="!isMobile" class="su-page--menu-box">
 				<su-menu :menu="menu" direction="h">
 					<template v-if="$slots['menu']" v-slot="item">
 						<slot name="menu" v-bind="item" />
@@ -19,7 +19,7 @@
 		<main class="su-ui su-page--main">
 			<slot></slot>
 		</main>
-		<div v-if="suControl.isMobile" :class="['su-ui', 'su-page--mobile-menu-box', isOpenMenu ? 'su-page--mobile-menu-box-open' : 'su-page--mobile-menu-close']" @click="isOpenMenu=false">
+		<div v-if="isMobile" :class="['su-ui', 'su-page--mobile-menu-box', isOpenMenu ? 'su-page--mobile-menu-box-open' : 'su-page--mobile-menu-close']" @click="isOpenMenu=false">
 			<su-menu :menu="menu" direction="v" @click.stop>
 				<template v-if="$slots['menu']" v-slot="item">
 					<slot name="menu" v-bind="item" />
@@ -34,12 +34,10 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
-import { Inject } from "vue-property-decorator";
 import { Prop, Register } from "@ui-root/reg";
-import { SuViewControl } from "@ui-root/main";
+import { SuViewCtrlInjectIsMobile } from "@ui-root/outher";
 import { SuMenu } from "@ui-root/components/menu";
 import { MenuItem } from "@ui-root/types";
-import { ViewCtrlInfo } from "@ui-root/types";
 import "@ui-root/global-style.css";
 
 @Register({
@@ -49,7 +47,7 @@ import "@ui-root/global-style.css";
 	}
 })
 export default class SuMain extends Vue {
-	@Inject({from:SuViewControl.injectSymbol,default:{}}) readonly suControl!: ViewCtrlInfo;
+	@SuViewCtrlInjectIsMobile readonly isMobile!:boolean;
 	@Prop({
 		type: String,
 		default: '',
