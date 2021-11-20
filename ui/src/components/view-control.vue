@@ -1,5 +1,5 @@
 <template>
-	<div :class="['star-ui', 'su-view-control', $isMobile?'su-view-control-mobile':'su-view-control-pc']">
+	<div :class="['star-ui', className]">
 		<slot></slot>
 	</div>
 </template>
@@ -8,7 +8,7 @@
 import { Vue } from 'vue-class-component';
 
 import { Register, Prop } from "@ui-root/reg";
-import { SuViewCtrlInjectKeyIsMobile } from "@ui-root/outher";
+import { SuViewCtrlInjectKeyClassName, SuViewCtrlInjectKeyIsMobile } from "@ui-root/outher";
 import { Provide } from "vue-property-decorator";
 import "../global-style.css";
 
@@ -17,26 +17,11 @@ type DeviceType='auto'|'mobile'|'pc';
 
 @Register({
 	name:"su-view-control",
-	watch:{
-		$isMobile(newValue){
-			//this.sendData.isMobile = newValue;
-		}
-	},
-	// provide() {
-	// 	return {
-	// 		viewCtrlInfo: this.sendData
-	// 	}
-	// },
-	// created(){
-	// 	this.sendData.isMobile = this.$isMobile;
-	// }
 })
 export default class SuViewControl extends Vue {
 	mounted():void{
 		this.$el._vue = this;
 	}
-	// @Provide({to:SuViewCtrlInjectKeyIsMobile})
-	// isMobile=false;
 	@Prop({
 		type: String,
 		default: "auto",
@@ -75,6 +60,15 @@ export default class SuViewControl extends Vue {
 				return this.windowWidth < 1000;
 		}
 		return false;
+	}
+	@Provide({to:SuViewCtrlInjectKeyClassName})
+	public get className():string[]{
+		return [
+			'su-view-control',
+			'star-ui-view-control',
+			`star-ui-view-control-${this.$isMobile?'mobile':'pc'}`,
+			`su-view-control-${this.$isMobile?'mobile':'pc'}`
+		];
 	}
 	beforeMount(){
 		this.checkWindowSize();

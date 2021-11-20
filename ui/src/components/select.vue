@@ -1,5 +1,5 @@
 <template>
-	<div :class="['star-ui','star-ui-select',{'is-focus':isFocused}]" @click="isFocused=!isFocused">
+	<div :class="['star-ui', 'su-select','star-ui-select',{'is-focus':isFocused}]" @click="isFocused=!isFocused">
 		<!-- 原生组件 -->
 		<select :name="name" style="display: none"></select>
 		<input v-if="false" type="text" :value="1" class="star-ui star-ui-select--inner">
@@ -240,26 +240,26 @@ export default class SuSelect extends Vue {
 	font-weight: bold;
 	padding: var(--star-ui-default-padding);
 }
-.su-view-control-mobile .star-ui-select--pooper{
+.star-ui-view-control-mobile .star-ui-select--pooper{
 	width: 100%;
 }
-.su-view-control.su-view-control-mobile .star-ui-select--pooper{
+.star-ui-view-control.star-ui-view-control-mobile .star-ui-select--pooper{
 	border-radius: 0;
 	border-width: 0;
 }
-.su-view-control.su-view-control-mobile .star-ui-select--option{
+.star-ui-view-control.star-ui-view-control-mobile .star-ui-select--option{
 	border-radius: 0;
 	padding-left: 10px;
 	border-left: 5px solid transparent;
 	border-top: 1px solid var(--star-ui-input-border-color);
 	line-height: 1.5;
 }
-.su-view-control.su-view-control-mobile .star-ui-select--option-sel{
+.star-ui-view-control.star-ui-view-control-mobile .star-ui-select--option-sel{
 	background: initial;
 	color: var(--star-ui-base-color);
 	border-left: 5px solid var(--star-ui-base-color);
 }
-.su-view-control-mobile .star-ui-select--pooper-item-list.star-ui-size-medium{
+.star-ui-view-control-mobile .star-ui-select--pooper-item-list.star-ui-size-medium{
 	max-height: 50vh;
 }
 </style>

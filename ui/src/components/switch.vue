@@ -1,5 +1,5 @@
 <template>
-	<div :class="['star-ui','star-ui-switch','star-ui-size-'+size]">
+	<div :class="['star-ui', 'su-switch','star-ui-switch','star-ui-size-'+size]">
 		<label>
 			<input ref="input" type="checkbox" :name="name" :checked="modelValue" @change="handeleChange"/>
 			<div><span></span></div>

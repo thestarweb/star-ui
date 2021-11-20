@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui star-ui-calendar">
+	<div class="star-ui su-calendar star-ui-calendar">
 		<div class="star-ui-calendar--ctrl" :style="{opacity: showSelYear||showSelMonth?0:1}">
 			<div @click="dYear--">&lt;&lt;</div>
 			<div @click="dMonth--">&lt;</div>
@@ -12,11 +12,11 @@
 			<div @click="dYear++">&gt;&gt;</div>
 		</div>
 		<table cellspacing="0" cellpadding="0" :style="{opacity: showSelYear||showSelMonth?0:1}">
-			<tr class="su-calendar--inner-head">
-				<th :class="`su-calendar--${item.week}`" v-for="(item,index) in displayHead" :key="index">{{item.display}}</th>
+			<tr class="star-ui-calendar--inner-head">
+				<th :class="`star-ui-calendar--${item.week}`" v-for="(item,index) in displayHead" :key="index">{{item.display}}</th>
 			</tr>
 			<tr v-for="(row,index) in displayData" :key="index">
-				<td v-for="(day,index) in row" :key="index" :class="['su-calendar--inner-cell',`su-calendar--${day.week}`,{'su-calendar--previous':day.isPrevious,'su-calendar--next':day.isNext}]" @clcik="dateClick(day)">
+				<td v-for="(day,index) in row" :key="index" :class="['star-ui-calendar--inner-cell',`star-ui-calendar--${day.week}`,{'star-ui-calendar--previous':day.isPrevious,'star-ui-calendar--next':day.isNext}]" @clcik="dateClick(day)">
 					
 					<slot v-if="$slots['default']" v-bind="day" />
 					<vnodes v-else-if="renderCell" :func="renderCell" :args="[day]" />
@@ -189,17 +189,17 @@ export default class SuCalendar extends Vue {
 .star-ui-calendar th,.star-ui-calendar td{
 	padding: 5px 0;
 }
-.su-calendar--inner-head{
+.star-ui-calendar--inner-head{
 	background-color: var(--star-ui-table-head-color);
 }
-.su-calendar--inner-cell{
+.star-ui-calendar--inner-cell{
 	border: 1px solid #e8eaec;
 	width: 42px
 }
-.su-calendar--inner-cell.su-calendar--Sat,.su-calendar--inner-cell.su-calendar--Sun{
+.star-ui-calendar--inner-cell.star-ui-calendar--Sat,.star-ui-calendar--inner-cell.star-ui-calendar--Sun{
 	color: #f00;
 }
-.su-calendar--inner-cell.su-calendar--previous,.su-calendar--inner-cell.su-calendar--next{
+.star-ui-calendar--inner-cell.star-ui-calendar--previous,.star-ui-calendar--inner-cell.star-ui-calendar--next{
 	opacity: 0.5;
 }
 

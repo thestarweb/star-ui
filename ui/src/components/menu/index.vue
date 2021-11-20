@@ -1,5 +1,5 @@
 <template>
-	<component :is="menuComponent" :menu="menu" class="su-menu">
+	<component :is="menuComponent" :menu="menu" class="star-ui su-menu star-ui-menu">
 		<template v-slot="data">
 			<div @click="handleItemClick(data)">
 				<slot v-if="$slots['default']" v-bind="data" />
@@ -79,7 +79,7 @@ export default class SuHMenu extends Vue {
 
 </script>
 <style>
-.su-menu a{
+.star-ui-menu a{
 	color: inherit;
 	text-decoration: none;
 }

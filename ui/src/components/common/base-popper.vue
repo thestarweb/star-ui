@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import { SuViewCtrlInjectIsMobile } from "@ui-root/outher";
+import { SuViewCtrlInjectClassName, SuViewCtrlInjectIsMobile } from "@ui-root/outher";
 import { Emit, Prop } from "@ui-root/reg";
 
 import "../../global-style.css";
@@ -89,6 +89,8 @@ export default class SuButton extends Vue {
 			if(this.syncRequestId)cancelAnimationFrame(this.syncRequestId);
 		}
 	}
+	@SuViewCtrlInjectClassName
+	readonly ctrlClass!:string[];
 	updatePos():void{
 		if(this.fromItem){
 			let dom=(this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el;
@@ -97,9 +99,9 @@ export default class SuButton extends Vue {
 				this.div.style.left="0";
 				this.div.style.width="100%";
 				// this.div.style.height="100%";
-				this.div.className="star-ui su-view-control su-view-control-mobile";
+				this.div.className=this.ctrlClass.join(' ');
 			}else{
-				this.div.className="star-ui su-view-control su-view-control-pc";
+				this.div.className=this.ctrlClass.join(' ');
 				const height=dom.clientHeight;
 				let top=0,left=0;
 				while(dom&&dom!=document){

@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui su-v-layout">
+	<div class="star-ui su-v-layout star-ui-v-layout">
 		<slot></slot>
 	</div>
 </template>
@@ -19,7 +19,7 @@ export default class SuVLayout extends Vue {
 </script>
 
 <style>
-.su-v-layout{
+.star-ui-v-layout{
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -27,10 +27,10 @@ export default class SuVLayout extends Vue {
 	padding: 0;
 	overflow: hidden;
 }
-.su-v-layout>*{
+.star-ui-v-layout>*{
 	flex:0 0 auto;
 }
-.su-v-layout>.su-main{
+.star-ui-v-layout>.star-ui-main{
 	height: 0;
 }
 </style>

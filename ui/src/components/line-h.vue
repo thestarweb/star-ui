@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui su-h-line"></div>
+	<div class="star-ui su-h-line star-ui-h-line"></div>
 </template>
 
 <script lang="ts">
@@ -17,7 +17,7 @@ export default class SuHLine extends Vue {
 </script>
 
 <style>
-.su-h-line{
+.star-ui-h-line{
 	background-color:var(--star-ui-line-color);
 	width:100%;
 	height:var(--star-ui-line-width);

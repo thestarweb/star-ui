@@ -1,6 +1,7 @@
 <template>
 	<div :class="[
 		'star-ui',
+		'su-tree',
 		'star-ui-tree',
 		{
 			'star-ui-tree-highlight-current':highlightCurrent

@@ -1,5 +1,5 @@
 <template>
-	<div :class="['star-ui','star-ui-input',{'is-focus':isFocused}]">
+	<div :class="['star-ui', 'su-input','star-ui-input',{'is-focus':isFocused}]">
 		<input type="text" ref="input" :value="modelValue" :name="name" :class="['star-ui','star-ui-input--inner','star-ui-size-'+size]" @input.stop="handleInput" @focus="handleFocus" @blur="handleBlur">
 	</div>
 </template>

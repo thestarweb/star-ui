@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui su-main">
+	<div class="star-ui su-main star-ui-main">
 		<slot></slot>
 	</div>
 </template>
@@ -19,7 +19,7 @@ export default class SuMain extends Vue {
 </script>
 
 <style>
-.su-main{
+.star-ui-main{
 	flex: 1;
 }
 </style>

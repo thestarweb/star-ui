@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui su-h-layout">
+	<div class="star-ui su-h-layout star-ui-h-layout">
 		<slot></slot>
 	</div>
 </template>
@@ -17,7 +17,7 @@ export default class SuHLayout extends Vue {
 </script>
 
 <style>
-.su-h-layout{
+.star-ui-h-layout{
 	display: flex;
 	flex-direction: row;
 	width: 100%;
@@ -25,10 +25,10 @@ export default class SuHLayout extends Vue {
 	padding: 0;
 	overflow: hidden;
 }
-.su-h-layout>*{
+.star-ui-h-layout>*{
 	flex:0 0 auto;
 }
-.su-h-layout>.su-main{
+.star-ui-h-layout>.star-ui-main{
 	width: 0;
 }
 </style>

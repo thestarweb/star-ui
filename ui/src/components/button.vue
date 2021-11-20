@@ -1,5 +1,5 @@
 <template>
-	<button :class="['star-ui', 'star-ui-container', 'star-ui-button','star-ui-size-'+size]">
+	<button :class="['star-ui', 'su-container', 'star-ui-container', 'star-ui-button', 'star-ui-size-'+size]">
 		<slot></slot>
 	</button>
 </template>

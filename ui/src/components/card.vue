@@ -1,5 +1,5 @@
 <template>
-	<div class="star-ui star-ui-card">
+	<div class="star-ui su-card star-ui-card">
 		<div v-if="title!=''||collapsible||this.$slots.title" class="star-ui star-ui-container star-ui-card--inner-head">
 			<div class="star-ui star-ui-card--inner-title">{{title}}</div>
 			<button v-if="collapsible" :class="['star-ui','star-ui-card--inner-button-collapsible',isCollaps?'show':'hidden']" @click="collapsChange"></button>
