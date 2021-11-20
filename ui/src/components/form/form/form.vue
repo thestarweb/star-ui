@@ -1,5 +1,5 @@
 <template>
-	<form :class="`star-ui su-form star-ui-form`">
+	<form :class="`star-ui su-form star-ui-form ${allowAotoMobile?'star-ui-form--auto-mobile':''}`">
 		<slot></slot>
 	</form>
 </template>
@@ -30,6 +30,13 @@ export default class SuButton extends Vue {
 	})
 	@Provide({to:InjectLabelWidth})
 	readonly labelWidth!:number|undefined;
+	@Prop({
+		type: Boolean,
+		default:()=>{
+			return true
+		}
+	})
+	readonly allowAotoMobile!:boolean;
 }
 </script>
 <style>
@@ -37,5 +44,8 @@ export default class SuButton extends Vue {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+}
+.star-ui-view-control.star-ui-view-control-mobile .star-ui-form--auto-mobile>.star-ui-form-item{
+	width: 100%;
 }
 </style>
