@@ -76,5 +76,6 @@ export default class SuInput extends Vue {
 	flex:1;
 	color: unset;
 	background: unset;
+	width: 100%;
 }
 </style>
