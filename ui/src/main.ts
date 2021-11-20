@@ -8,6 +8,7 @@ export { default as SuVLine } from "./components/line-v.vue";
 export { default as SuCard } from "./components/card.vue";
 export { default as SuTree } from "./components/tree/index.vue";
 //表单
+export * from "./components/form";
 export { default as SuInput } from "./components/input.vue";
 export { default as SuSelect } from "./components/select.vue";
 export { default as SuButton } from "./components/button.vue";

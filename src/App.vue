@@ -11,9 +11,9 @@
             </div>
 
             <h4>{{$t("components.title")}}</h4>
-            <div v-for="item in allComponents" :key="item.name">
-              <router-link :to="{name:'show-component',params:{name:item.__o.name}}">
-                {{$t("components.types."+item.__o.name+".name")}}{{item.__o.name}}
+            <div v-for="(item, name) in allComponents" :key="name">
+              <router-link :to="{name:'show-component',params:{name:name}}">
+                {{$t("components.types."+name+".name")}}{{name}}
               </router-link>
             </div>
           </div>
@@ -32,15 +32,22 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
-import {components} from "@/../ui/src/main";
+import {infos} from "@/../ui/src/main";
 
 @Options({
   components:{
   }
 })
 export default class HelloWorld extends Vue {
-  private allComponents=components;
-  // eslint-disable-next-line
+  private get allComponents(){
+		let ret:Record<string,typeof infos[string]> = {};
+		Object.keys(infos).forEach(key => {
+			if(!infos[key].hideInDoc && !infos[key].internalOnly){
+				ret[key]=infos[key];
+			}
+		});
+		return ret;
+	}
   private isOpenMenu=false;
 }
 </script>

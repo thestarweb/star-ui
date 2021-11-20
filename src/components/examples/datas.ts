@@ -7,6 +7,7 @@ import SuCard from "./card";
 import SuInput from "./input";
 import SuSlider from "./slider"
 
+import SuForm from './form/form'
 import SuSelect from "./select";
 import SuSwitch from "./switch";
 import SuButton from "./button";
@@ -32,6 +33,7 @@ export default {
 	"su-card":SuCard,
 	"su-input":SuInput,
 	"su-slider":SuSlider,
+	"su-form":SuForm,
 	"su-select":SuSelect,
 	"su-button":SuButton,
 	"su-switch":SuSwitch,

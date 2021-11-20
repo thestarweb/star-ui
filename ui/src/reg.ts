@@ -1,9 +1,16 @@
 import { VueDecorator, PropOptions, createDecorator, Vue, VueConstructor, VueBase } from "vue-class-component";
-import { ComponentOptions, reactive } from "vue";
+import { ComponentOptions, PropType, reactive } from "vue";
 interface ComponentInfo{
 	hideInDoc?:boolean;
 	internalOnly?:boolean;
 	type?:'from'|'layout';
+}
+
+const AutoTypes = {
+	FormLabelAlign: {
+		allow: ['left','right','top'],
+		type: String,
+	}
 }
 
 export const data = reactive({
@@ -80,7 +87,18 @@ export function Emit(event?:string, shouldEmit?:(res:any)=>boolean):VueDecorator
 	});
 }
 
-export function Prop(propOptions:PropOptions):VueDecorator{
+interface RegPropOptions<T = any, D = T> extends PropOptions<T>{
+	autoType?: keyof typeof AutoTypes;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function checkPropInAllow(list:any[]){
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return function(value:any){
+		return list.includes(value);
+	}
+}
+export function Prop({ autoType , ...propOptions}:RegPropOptions):VueDecorator{
 	return createDecorator((componentOptions, key) => {
 		if(componentOptions.name){
 			if(!data[componentOptions.name]) data[componentOptions.name] = {};
@@ -88,7 +106,24 @@ export function Prop(propOptions:PropOptions):VueDecorator{
 			// eslint-disable-next-line
 			(data[componentOptions.name].props!)[key] = propOptions;
 		}
+		const eData:PropOptions = {};
+		if(autoType){
+			const autoTypeData = AutoTypes[autoType];
+			if(autoTypeData.type){
+				eData.type = autoTypeData.type;
+			}
+			const validator = [];
+			if(autoTypeData.allow){
+				validator.push(checkPropInAllow(autoTypeData.allow))
+			}
+			if(validator.length === 1){
+				eData.validator = validator[0];
+			}
+		}
 		if(!componentOptions.props) componentOptions.props={};
-		componentOptions.props[key] = propOptions;
+		componentOptions.props[key] = {
+			...eData,
+			...propOptions
+		};
 	});
 }

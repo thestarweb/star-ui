@@ -8,15 +8,16 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue } from 'vue-class-component';
 import { SuViewCtrlInjectClassName, SuViewCtrlInjectIsMobile } from "@ui-root/outher";
-import { Emit, Prop } from "@ui-root/reg";
+import { Emit, Prop, Register } from "@ui-root/reg";
 
 import "../../global-style.css";
 let nowId=0;
 
-@Options({
+@Register({
 	name:"su-base-popper",
+	internalOnly:true,
 	props: {
 		fromItem:{
 			type:Object
