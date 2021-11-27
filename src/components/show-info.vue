@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div v-if="component">
 		<h1 class="star-ui-container">{{$t("components.types."+component.__o.name+".name")}}{{component.__o.name}}</h1>
 		<h5 class="star-ui-container">{{$t("components.types."+component.__o.name+".description")}}</h5>
 		<su-h-line/>
@@ -14,11 +14,13 @@
 			</su-table>
 		</div>
 	</div>
+	<not-fount v-else />
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import Examples from "./examples/index.vue";
+import NotFount from './errors/404.vue';
 import { data } from "@/../ui/src/reg";
 import {components} from "@/../ui/src/main";
 
@@ -34,7 +36,8 @@ type PropInof={
 @Options({
 	name:"su-button",
 	components:{
-		Examples
+		Examples,
+		NotFount,
 	}
 })
 export default class SuButton extends Vue {
@@ -45,9 +48,7 @@ export default class SuButton extends Vue {
 				return components[i];
 			}
 		}
-		return {
-			__o:{}
-		}
+		return null;
 	}
 	public column=[
 		//{name:"名称"},

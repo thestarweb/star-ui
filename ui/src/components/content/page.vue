@@ -129,5 +129,6 @@ export default class SuMain extends Vue {
 }
 .su-page--main{
 	overflow: auto;
+	flex: 1;
 }
 </style>

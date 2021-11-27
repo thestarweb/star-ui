@@ -3,6 +3,10 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from "@/components/home.vue";
 
 const routes: Array<RouteRecordRaw> = [
+	{
+		path: '/:pathMatch(.*)*',
+		component: () => import("@/components/errors/404.vue"),
+	},
   {
     path: '/',
     name: 'home',
