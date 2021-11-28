@@ -20,6 +20,12 @@
 				"description":"纵向布局组件",
 				"props":{}
 			},
+			"su-auto-direction":{
+				"name":"自动方向容器",
+				"description":"在PC端展示为横向布局，移动端展示为纵向布局",
+				"props":{}
+
+			},
 			"su-main":{
 				"name":"布局主体",
 				"description":"自动填充满布局的剩余空间",

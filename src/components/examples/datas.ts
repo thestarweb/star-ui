@@ -1,5 +1,6 @@
 import SuHLayout from "./h-layout";
 import SuVLayout from "./v-layout";
+import SuAutoDirection from "./auto-direction";
 import SuMain from "./main";
 import SuHLine from "./h-line";
 import SuVLine from "./v-line";
@@ -27,6 +28,7 @@ interface ExamplesObj {
 export default {
 	"su-h-layout":SuHLayout,
 	"su-v-layout":SuVLayout,
+	"su-auto-direction":SuAutoDirection,
 	"su-main":SuMain,
 	"su-h-line":SuHLine,
 	"su-v-line":SuVLine,
