@@ -1,6 +1,6 @@
 <template>
-	<teleport :to="'#'+id">
-		<div>
+	<teleport to="body">
+		<div ref="root" :class="['star-ui-base-popper', ...ctrlClass]" :style="{visibility: visible ? '' : 'hidden', ...baseStyle, ...style}">
 			<div class="star-ui-popper-background" v-if="isMobile" @click="$emit('out-click')"></div>
 			<slot></slot>
 		</div>
@@ -38,11 +38,18 @@ let nowId=0;
 	watch:{
 		visible(){
 			this._updateVisible();
+		},
+		isMobile(){
+			if(this.syncRequestId)cancelAnimationFrame(this.syncRequestId);
+			this.updatePos();
 		}
 	},
 	// inject: ['$suControl']
 })
 export default class SuButton extends Vue {
+	declare $refs: {
+		root:HTMLDivElement;
+	};
 	@Prop({
 		type:Object
 	})
@@ -52,16 +59,6 @@ export default class SuButton extends Vue {
 	private updateType!:string;
 	private visible!:boolean;
 	@SuViewCtrlInjectIsMobile readonly isMobile!:false;
-	beforeCreate():void{
-		this.div=document.createElement("div");
-		document.body.append(this.div);
-		this.id="star-ui-popper-"+nowId++;
-		this.div.id=this.id;
-		this.div.style.position="fixed";
-	}
-	unmounted():void{
-		document.body.removeChild(this.div);
-	}
 	mounted():void{
 		window.addEventListener("click",this._clickCheck);
 		this._updateVisible();
@@ -73,7 +70,7 @@ export default class SuButton extends Vue {
 	_clickCheck(ev:MouseEvent):boolean{
 		var dom=ev.target;
 		while(dom&&dom!=document){
-			if(dom==this.div||(this.fromItem&&dom==((this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el))){
+			if(dom==this.$refs.root||(this.fromItem&&dom==((this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el))){
 				return false;
 			}
 			dom=(dom as HTMLElement).parentElement;
@@ -83,26 +80,24 @@ export default class SuButton extends Vue {
 	private syncRequestId!:number;
 	_updateVisible():void{
 		if(this.visible){
-			this.div.style.display="";
 			this.updatePos();
 		}else{
-			this.div.style.display="none";
 			if(this.syncRequestId)cancelAnimationFrame(this.syncRequestId);
 		}
 	}
 	@SuViewCtrlInjectClassName
 	readonly ctrlClass!:string[];
+	// eslint-disable-next-line
+	private baseStyle:Record<string, any>={};
 	updatePos():void{
 		if(this.fromItem){
+			this.baseStyle={};
 			let dom=(this.fromItem instanceof HTMLElement)?this.fromItem:this.fromItem.$el;
 			if(this.isMobile){
-				this.div.style.bottom="0";
-				this.div.style.left="0";
-				this.div.style.width="100%";
-				// this.div.style.height="100%";
-				this.div.className=this.ctrlClass.join(' ');
+				this.baseStyle.bottom="0";
+				this.baseStyle.left="0";
+				this.baseStyle.width="100%";
 			}else{
-				this.div.className=this.ctrlClass.join(' ');
 				const height=dom.clientHeight;
 				let top=0,left=0;
 				while(dom&&dom!=document){
@@ -111,8 +106,8 @@ export default class SuButton extends Vue {
 					dom=dom.offsetParent;
 				}
 				top+=height;
-				this.div.style.top=top+"px";
-				this.div.style.left=left+"px";
+				this.baseStyle.top=top+"px";
+				this.baseStyle.left=left+"px";
 				if(this.updateType=="v-sync"){
 					this.syncRequestId=requestAnimationFrame(this.updatePos);
 				}
@@ -123,6 +118,9 @@ export default class SuButton extends Vue {
 </script>
 
 <style>
+.star-ui-base-popper{
+	position: fixed;
+}
 .star-ui-popper-background{
 	position: fixed;
 	width: 100%;
