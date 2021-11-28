@@ -112,7 +112,7 @@ export default [
 				},
 			],
 			props:{
-				labelWidth: '50px',
+				':labelWidth': 50,
 			},
 		},
 		data:{

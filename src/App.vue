@@ -1,5 +1,5 @@
 <template>
-  <su-view-control>
+  <su-view-control checkFunction="screen-width">
     <su-v-layout>
       <header><div class="menu-button" @click="isOpenMenu=!isOpenMenu"></div> star-ui</header>
       <su-main>

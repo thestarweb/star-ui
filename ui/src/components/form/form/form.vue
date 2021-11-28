@@ -8,13 +8,19 @@
 import { Vue } from "vue-class-component";
 import { Register, Prop } from "@ui-root/reg";
 import type { TypeFormLabelAlign } from "@ui-root/outher";
+import { Provide } from "vue-property-decorator";
+import Item, { InjectEventBus, InjectLabelAlign, InjectLabelWidth } from "./form-item.vue";
 
 import "@ui-root/global-style.css";
-import { Provide } from "vue-property-decorator";
-import { InjectLabelAlign, InjectLabelWidth } from "./form-item.vue";
+
+export interface Bus{
+	addItem:(item:Item)=>void,
+	removeItem:(item:Item)=>void,
+	labelUpdate:(item:Item)=>void,
+}
 
 @Register({
-	name:"su-form"
+	name:"su-form",
 })
 export default class SuButton extends Vue {
 	@Prop({
@@ -23,12 +29,11 @@ export default class SuButton extends Vue {
 			return "right"
 		}
 	})
-	@Provide({to:InjectLabelAlign})
+	@Provide({to:InjectLabelAlign,reactive:true})
 	readonly labelAlign!:TypeFormLabelAlign;
 	@Prop({
 		type: Number
 	})
-	@Provide({to:InjectLabelWidth})
 	readonly labelWidth!:number|undefined;
 	@Prop({
 		type: Boolean,
@@ -37,6 +42,59 @@ export default class SuButton extends Vue {
 		}
 	})
 	readonly allowAotoMobile!:boolean;
+	@Provide({to:InjectEventBus,reactive:true})
+	private bus:Bus|undefined;
+	private items=new Set<Item>();
+	private addItem(item:Item):void{
+		this.items.add(item);
+		this.$nextTick(this.updateLabelWidth);
+	}
+	private removeItem(item:Item):void{
+		this.items.delete(item);
+		this.$nextTick(this.updateLabelWidth);
+	}
+	private updateLabelWidth(){
+		if(!this.isLoaded) return;
+		if(typeof this.labelWidth === 'undefined'){
+			this.sendLabelWidth = undefined;
+		}else if(this.labelWidth === 0){
+			this.sendLabelWidth=undefined;
+			this.$nextTick(() => {
+				let maxWidth = 0;
+				this.items.forEach((item => {
+					if((item.labelAlign||this.labelAlign) === 'top'){
+						return;
+					}
+					const width = item.$refs.labelDiv.offsetWidth;
+					if(width>maxWidth){
+						maxWidth=width;
+					}
+				}));
+				this.sendLabelWidth=maxWidth;
+			})
+		}else{
+			this.sendLabelWidth=this.labelWidth;
+		}
+	}
+	private isLoaded=false;
+	@Provide({to:InjectLabelWidth,reactive:true})
+	private sendLabelWidth:number|undefined=0;
+	created(){
+		this.bus={
+			addItem: this.addItem,
+			removeItem: this.removeItem,
+			labelUpdate: this.updateLabelWidth,
+		}
+	}
+	mounted(){
+		this.$nextTick(() => {
+			this.isLoaded=true;
+			this.updateLabelWidth();
+		});
+	}
+	beforeUnmount(){
+		this.isLoaded=false;
+	}
 }
 </script>
 <style>

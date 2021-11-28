@@ -1,6 +1,6 @@
 <template>
 	<div :class="`star-ui su-form-item star-ui-form-item star-ui-col-${col} star-ui-form--label-align-${labelAlign||pLabelAlign}`">
-		<div class="start-ui star-ui-container star-ui-form-item--label" :style="labelStyle">
+		<div ref="labelDiv" class="start-ui star-ui-container star-ui-form-item--label" :style="labelStyle">
 			{{label}}
 			<slot name="label"></slot>
 		</div>
@@ -15,17 +15,27 @@ import { Vue } from "vue-class-component";
 import { Inject } from "vue-property-decorator";
 import { Register, Prop } from "@ui-root/reg";
 import { TypeFormLabelAlign } from "@ui-root/outher";
+import { Bus } from "./form.vue";
 
 import "@ui-root/global-style.css";
 
 export const InjectLabelWidth = Symbol('InjectLabelWidth');
 export const InjectLabelAlign = Symbol('InjectLabelAlign');
+export const InjectEventBus = Symbol('InjectEventBus');
 
 @Register({
 	name:"su-form-item",
 	hideInDoc:true,
+	watch:{
+		label(this:SuButton){
+			this.bus?.labelUpdate(this);
+		}
+	}
 })
 export default class SuButton extends Vue {
+	declare $refs: {
+		labelDiv: HTMLDivElement
+	};
 	@Prop({
 		type:String,
 		default:()=>{
@@ -37,7 +47,7 @@ export default class SuButton extends Vue {
 		type:[String, Number],
 	})
 	readonly labelWidth!:string|number|undefined;
-	@Inject({from:InjectLabelWidth})
+	@Inject({from:InjectLabelWidth,default:undefined})
 	readonly pLabelWidth!:string|number|undefined;
 	@Prop({
 		autoType: "FormLabelAlign",
@@ -60,8 +70,18 @@ export default class SuButton extends Vue {
 		}
 		return ret;
 	}
+	@Inject({from:InjectEventBus})
+	readonly bus!:Bus|undefined;
 	created(){
-		console.log(this.col);
+		if(this.bus){
+			this.bus.addItem(this);
+		}
+		debugger
+	}
+	beforeUnmount(){
+		if(this.bus){
+			this.bus.removeItem(this);
+		}
 	}
 }
 </script>
@@ -75,6 +95,7 @@ export default class SuButton extends Vue {
 }
 .star-ui-form-item--label{
 	overflow: hidden;
+	box-sizing: border-box;
 }
 .star-ui-form-item--content{
 	flex: 1;

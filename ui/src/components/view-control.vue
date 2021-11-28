@@ -44,7 +44,7 @@ export default class SuViewControl extends Vue {
 		this.windowWidth = window.innerWidth;
 		this.windowHeight = window.innerHeight;
 	}
-	@Provide({to:SuViewCtrlInjectKeyIsMobile})
+	@Provide({to:SuViewCtrlInjectKeyIsMobile,reactive:true})
 	public get $isMobile():boolean{
 		switch (this.deviceType) {
 			case "mobile":
@@ -56,12 +56,11 @@ export default class SuViewControl extends Vue {
 			case "ua":
 				return navigator.userAgent.toLowerCase().indexOf("mobile")!=-1;
 			case "screen-width":
-				console.log(this.windowWidth);
 				return this.windowWidth < 1000;
 		}
 		return false;
 	}
-	@Provide({to:SuViewCtrlInjectKeyClassName})
+	@Provide({to:SuViewCtrlInjectKeyClassName,reactive:true})
 	public get className():string[]{
 		return [
 			'su-view-control',
