@@ -28,7 +28,7 @@ export const InjectEventBus = Symbol('InjectEventBus');
 	hideInDoc:true,
 	watch:{
 		label(this:SuButton){
-			this.bus?.labelUpdate(this);
+			this.bus&&this.bus.labelUpdate(this);
 		}
 	}
 })
