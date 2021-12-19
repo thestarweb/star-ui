@@ -76,7 +76,6 @@ export default class SuButton extends Vue {
 		if(this.bus){
 			this.bus.addItem(this);
 		}
-		debugger
 	}
 	beforeUnmount(){
 		if(this.bus){

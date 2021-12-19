@@ -24,6 +24,8 @@ export * from "./components/menu";
 export * from "./components/layout"
 export * from "./components/content";
 
+export * as func from './func';
+
 import { data } from "./reg";
 export * from "./outher";
 
