@@ -36,7 +36,7 @@
 import { Vue } from "vue-class-component";
 import { Prop, Register } from "@ui-root/reg";
 import { SuViewCtrlInjectIsMobile } from "@ui-root/outher";
-import { SuMenu } from "@ui-root/components/menu";
+import { SuMenu } from "@ui-root/main";
 import { MenuItem } from "@ui-root/types";
 import "@ui-root/global-style.css";
 

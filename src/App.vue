@@ -29,10 +29,10 @@
   </su-view-control>
 </template>
 
-<script lang="ts">
+<script lang="tsx">
 import { Options, Vue } from "vue-class-component";
 
-import {infos} from "@/../ui/src/main";
+import {func, infos} from "@/../ui/src/main";
 
 @Options({
   components:{

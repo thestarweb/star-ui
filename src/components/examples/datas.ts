@@ -16,6 +16,7 @@ import SuTable from "./table";
 import SuTree from "./tree";
 import SuCalendar from "./calendar";
 import SuHMenu from "./h-menu";
+import SuContextMenuBox from './context-menu-box';
 import SuPage from './page';
 import SuModal from './modal'
 
@@ -45,6 +46,7 @@ export default {
 	"su-calendar":SuCalendar,
 	"su-view-control":SuViewControl,
 	"su-menu":SuHMenu,
+	"su-context-menu-box":SuContextMenuBox,
 	"su-page":SuPage,
 	"su-modal":SuModal
 }as ExamplesObj;

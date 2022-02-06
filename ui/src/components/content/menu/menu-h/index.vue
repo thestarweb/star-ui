@@ -2,7 +2,9 @@
 	<div :class="['star-ui', 'star-ui-menu', 'star-ui-menu-h']">
 		<su-h-menu-item v-for="item in menu" :key="item.path" :item="item" childDirection="bottom">
 			<template v-slot="data">
-				<slot v-bind="data" />
+				<div class="star-ui star-ui-menu--item star-ui-menu-h--item">
+					<slot v-bind="data" />
+				</div>
 			</template>
 		</su-h-menu-item>
 	</div>

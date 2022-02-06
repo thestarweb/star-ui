@@ -7,3 +7,9 @@ export interface MenuItem{
 	title:string;
 	children?:MenuItem[];
 }
+export interface ContextMenuItem{
+	name?:string;
+	click?:() => unknown;
+	title:string;
+	children?:ContextMenuItem[];
+}

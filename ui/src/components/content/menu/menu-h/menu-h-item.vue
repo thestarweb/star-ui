@@ -1,8 +1,9 @@
 <template>
 	<div class="star-ui star-ui-menu--item-box star-ui-menu-h--item-box">
-		<div class="star-ui star-ui-menu--item star-ui-menu-h--item">
+		<!-- <div class="star-ui star-ui-menu--item star-ui-menu-h--item" @click="handleItemClick(item)">
 			<slot v-bind="item" />
-		</div>
+		</div> -->
+		<slot v-bind="item" />
 		<su-h-menu-child :menu="item.children || []" :itemComponent="selfClass" :direction="childDirection">
 			<template v-slot="item">
 				<slot v-bind="item" />
@@ -12,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { Register, Prop } from "@ui-root/reg";
+import { Register, Prop, Emit } from "@ui-root/reg";
 import { Vue } from "vue-class-component";
 import SuHMenuChild from "./menu-h-child.vue";
 import isFocus from "@ui-root/directives/is-focus";

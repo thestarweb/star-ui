@@ -39,6 +39,7 @@ import { SuViewCtrlInjectIsMobile } from '@ui-root/outher';
 export default class SuModalConfirm extends Vue {
 	@Prop({
 		type: Boolean,
+		default: undefined
 	})
 	private readonly visible!:boolean|undefined;
 	private locVisable = false;
@@ -50,9 +51,14 @@ export default class SuModalConfirm extends Vue {
 	public close():void{
 		if(typeof this.visible === 'undefined'){
 			this.locVisable = false;
-		} else {
-			this.updateVisable(false);
 		}
+		this.updateVisable(false);
+	}
+	public show():void{
+		if(typeof this.visible === 'undefined'){
+			this.locVisable = true;
+		}
+		this.updateVisable(true);
 	}
 	@Prop({
 		type: String,
@@ -64,9 +70,6 @@ export default class SuModalConfirm extends Vue {
 		}
 	}
 	@SuViewCtrlInjectIsMobile readonly isMobile!: boolean;
-	mounted(){
-		console.log(this.isMobile);
-	}
 }
 </script>
 

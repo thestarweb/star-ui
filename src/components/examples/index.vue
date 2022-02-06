@@ -43,6 +43,9 @@ export default class Examples extends Vue {
 		}
 		return [];
 	}
+	mounted(){
+		console.log((this as any)._)
+	}
 }
 </script>
 <style scoped>

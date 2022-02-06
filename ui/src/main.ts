@@ -20,7 +20,6 @@ export { default as SuCalendar } from "./components/calendar.vue";
 
 export { default as SuViewControl } from "./components/view-control.vue";
 
-export * from "./components/menu";
 export * from "./components/layout"
 export * from "./components/content";
 
@@ -53,5 +52,6 @@ export default {
 	components,
 	install(app:App):void{
 		registComponents(app)
+		app.config.globalProperties
 	}
 }
