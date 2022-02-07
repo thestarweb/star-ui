@@ -29,7 +29,8 @@ import { SuViewCtrlInjectIsMobile } from '@ui-root/outher';
 @Register({
 	name:"su-modal",
 	watch: {
-		visable(v){
+		visible(v){
+			console.log(v)
 			if (typeof v !== 'undefined') {
 				this.locVisable = v;
 			}
@@ -87,6 +88,7 @@ export default class SuModalConfirm extends Vue {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	background-color: var(--star-ui-mask-color);
 }
 .star-ui-modal--header,
 .star-ui-modal--body,

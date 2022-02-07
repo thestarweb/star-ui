@@ -22,6 +22,7 @@ import {SuButton} from "@ui-root/main";
 		SuModal,
 		SuButton
 	},
+	hideInDoc: true,
 })
 export default class SuModalConfirm extends Vue {
 	@Prop({

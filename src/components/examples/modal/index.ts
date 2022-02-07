@@ -3,6 +3,19 @@ import { example } from "../type.d";
 export default [
 	{
 		name:"base",
+		data: {
+			visible: false,
+		},
+		methods: {
+			// eslint-disable-next-line
+			handleShow(this: any) {
+				this.visible = true;
+			},
+			// eslint-disable-next-line
+			handleClose(this: any) {
+				this.visible = false;
+			},
+		},
 		template:{
 			isText:false,
 			component:"div",
@@ -11,9 +24,27 @@ export default [
 					name:"default",
 					data:[
 						{
-							component:"su-modal-confirm",
+							component:"su-button",
 							props:{
-								'visible':true
+								'@click': 'handleShow',
+							},
+							slot:[
+								{
+									name:"default",
+									data:[
+										{
+											isText: true,
+											text: 'open',
+										}
+									],
+								},
+							],
+						},
+						{
+							component:"su-modal",
+							props:{
+								':visible':'visible',
+								'@close': 'handleClose'
 							},
 							slot:[
 								{

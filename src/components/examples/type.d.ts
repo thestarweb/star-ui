@@ -8,10 +8,11 @@ export interface template{
 	component?:class,
 	text?:string,
 	slot?:slotType[],
-	props?:IObj
+	props?:IObj,
 }
 export interface example{
 	name:string,
 	template:template,
-	data?:Record<string, unknown>
+	data?:Record<string, unknown>,
+	methods?:Record<string, (this: Vue, ...reg: unknown[]) => unknown>,
 }
