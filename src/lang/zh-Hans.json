@@ -306,6 +306,30 @@
 						"description":"参考菜单"
 					}
 				}
+			},
+			"su-modal":{
+				"name":"弹窗",
+				"description":"弹出一个弹窗",
+				"props": {
+					"visible": {
+						"name": "是否可见",
+						"description":"受控方式设置可见状态"
+					},
+					"title": {
+						"name": "弹窗标题",
+						"description":""
+					}
+				}
+			},
+			"su-context-menu-box":{
+				"name":"上下文菜单框",
+				"description":"用于展示上下文菜单（PC通常是右键，移动端通常是长按",
+				"props": {
+					"menu": {
+						"name": "菜单",
+						"description":"可用函数获取到事件来动态设置菜单"
+					}
+				}
 			}
 		}
 	}
