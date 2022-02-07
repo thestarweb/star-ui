@@ -3,15 +3,15 @@
 		<slot />
 	</div>
 	<teleport to="body" v-if="isOpenMenu">
-		<div ref="mask" class="su-context-menu--mask star-ui-context-menu--mask" @click="handleMaskClick">
-			<MenuBox class="su-context-menu star-ui-context-menu" :style="`top: ${currentY}px; left: ${currentX}px;`" :menu="currentMenu" :itemComponent="itemComponent">
+		<div ref="mask" :class="['su-context-menu--mask', 'star-ui-context-menu--mask', ...ctrlClass]" @click="handleMaskClick">
+			<component :is="component" class="su-context-menu star-ui-context-menu" :style="isMobile ? '' : `top: ${currentY}px; left: ${currentX}px;`" :menu="currentMenu" :itemComponent="itemComponent">
 				<template v-slot="data">
 					<div class="su-context-menu--item star-ui-context-menu--item" @click="handleItemClick(data)">
 						<span class="star-ui-context-menu--text">{{data.title}}</span>
 						<span v-if="!data.click">&gt;</span>
 					</div>
 				</template>
-			</MenuBox>
+			</component>
 		</div>
 	</teleport>
 </template>
@@ -19,8 +19,9 @@
 <script lang="ts">
 import { Vue } from "vue-class-component";
 import { Prop, Register } from "@ui-root/reg";
-import { SuViewCtrlInjectIsMobile } from "@ui-root/outher";
+import { SuViewCtrlInjectClassName, SuViewCtrlInjectIsMobile } from "@ui-root/outher";
 import MenuBox from '../menu/menu-h/menu-h-child.vue';
+import MenuBoxMobile from '../menu/menu-v/index.vue';
 import MenuItem from '../menu/menu-h/menu-h-item.vue';
 import "@ui-root/global-style.css";
 import { ContextMenuItem } from "@ui-root/types";
@@ -29,6 +30,7 @@ import { ContextMenuItem } from "@ui-root/types";
 	name:"su-context-menu-box",
 	components: {
 		MenuBox,
+		MenuBoxMobile,
 	}
 })
 export default class SuMain extends Vue {
@@ -37,6 +39,13 @@ export default class SuMain extends Vue {
 		mask:HTMLDivElement,
 	};
 	@SuViewCtrlInjectIsMobile readonly isMobile!:boolean;
+	@SuViewCtrlInjectClassName readonly ctrlClass!:string[];
+	private get component(){
+		if(this.isMobile){
+			return MenuBoxMobile;
+		}
+		return MenuBox;
+	}
 	@Prop({
 		type: [Array, Function],
 		required: true,
@@ -94,5 +103,15 @@ export default class SuMain extends Vue {
 	}
 	.star-ui-context-menu--text{
 		flex: 1;
+	}
+	.star-ui-view-control-mobile.star-ui-context-menu--mask{
+		background: var(--star-ui-mask-color);
+	}
+	.star-ui-view-control-mobile .star-ui-context-menu{
+		width: 100%;
+		background-color: var(--star-ui-backgorund-color);
+		position: absolute;
+		bottom: 0;
+		left: 0;
 	}
 </style>
