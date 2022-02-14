@@ -23,7 +23,7 @@ export { default as SuViewControl } from "./components/view-control.vue";
 export * from "./components/layout"
 export * from "./components/content";
 
-export * as func from './func/index';
+export * as func from "./func/index";
 
 import { data } from "./reg";
 export * from "./outher";
