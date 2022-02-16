@@ -16,7 +16,6 @@ while(task.length){
 		outfile+=".ts";
 	}
 	fileData=fileData.replace(/(?:import|export) (?:.+?) from "(.+?)"/g,function(row,importFile){
-		console.log(row)
 		if(alias){
 			Object.keys(alias).find(key => {
 				const _key = key.replace("*","");

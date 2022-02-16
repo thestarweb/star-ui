@@ -20,9 +20,9 @@
 import { Vue } from "vue-class-component";
 import { Prop, Register } from "@ui-root/reg";
 import { SuViewCtrlInjectClassName, SuViewCtrlInjectIsMobile } from "@ui-root/outher";
-import MenuBox from '../menu/menu-h/menu-h-child.vue';
-import MenuBoxMobile from '../menu/menu-v/index.vue';
-import MenuItem from '../menu/menu-h/menu-h-item.vue';
+import MenuBox from "../menu/menu-h/menu-h-child.vue";
+import MenuBoxMobile from "../menu/menu-v/index.vue";
+import MenuItem from "../menu/menu-h/menu-h-item.vue";
 import "@ui-root/global-style.css";
 import { ContextMenuItem } from "@ui-root/types";
 
