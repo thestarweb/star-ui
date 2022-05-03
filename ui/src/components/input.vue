@@ -46,11 +46,19 @@ export default class SuInput extends Vue {
 		}
 		// return "";
 	}
-	handleFocus():void{
+	@Emit("focus")
+	private  handleFocus():void{
 		this.isFocused=true;
 	}
-	handleBlur():void{
+	@Emit("blur")
+	private handleBlur():void{
 		this.isFocused=false;
+	}
+	public focus():void{
+		this.$refs.input.focus();
+	}
+	public blur():void{
+		this.$refs.input.blur();
 	}
 }
 </script>

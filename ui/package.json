@@ -1,9 +1,9 @@
 {
   "name": "@thestarweb/ui",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A UI lib",
   "scripts": {
-    "build": "vue-cli-service build --target lib --name star-ui --dest dist/ src/main.ts",
+    "build": "vue-cli-service build --modern --target lib --name star-ui --dest dist/ src/main.ts",
     "tsc": "node ./build-ts/main.js&&tsc --p ./tsdconfig.json"
   },
   "author": "star_ss",
